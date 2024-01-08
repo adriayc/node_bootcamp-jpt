@@ -9,3 +9,14 @@
 - Código de JavaScript (ES6+).
 - NPM con una gran cantidad de paquetes.
 - Apps Monolíticas, Micro Servicios o API's.
+
+## ¿Que es Express?
+- Es un Framework para Node.js, muy minimalista y con una serie de opciones que son comunes para crear sitios web y aplicaciones móviles.
+- Su Principal ventaja es que puedes intalar los paquetes  que vas necesitando en tu aplicacion y no tiene un gran cantidad de herramientas ya incluidas.
+
+### ¿Qué incluye Express?
+- Routing y Redireccionamiento.
+- Middleware.
+- Manejo de Errores.
+- Soporte a los diferentes Métodos HTTP.
+- Soporte de Template Engines.
