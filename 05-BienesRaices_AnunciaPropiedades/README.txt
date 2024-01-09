@@ -17,3 +17,9 @@
         # npm install express
         # npm install --save-dev express  (Modo desarrollo)
         # npm install -D express (Modo desarrollo)
+      + Nodemon
+        # npm install -D nodemon
+    - Run app
+      # npm run start
+      # npm start
+      # npm run dev
