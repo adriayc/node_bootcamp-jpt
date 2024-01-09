@@ -31,3 +31,8 @@ Apps que utilizan Node.js:
 - Walmart
 - Medium
 - Nasa
+
+## Instalar Node.js en Windows
+- Ir la pagina de [Node.js](https://nodejs.org/en/)
+- Descargar la version LTS
+- Instalar la app de Node.js
