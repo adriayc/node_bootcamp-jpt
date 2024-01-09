@@ -12,3 +12,8 @@
             > license: (ISC) ENTER
             Is this OK? (yes) yes
         # npm init -y
+    - Instalar dependencias
+      + Express
+        # npm install express
+        # npm install --save-dev express  (Modo desarrollo)
+        # npm install -D express (Modo desarrollo)
