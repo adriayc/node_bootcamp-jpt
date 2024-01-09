@@ -1,5 +1,7 @@
-// OLD
-const express = require('express');
+// OLD - CommonJS
+// const express = require('express');
+// NEW - ECMAScript modules
+import express from 'express';
 
 // Crear la app
 const app = express();
