@@ -36,3 +36,15 @@ Apps que utilizan Node.js:
 - Ir la pagina de [Node.js](https://nodejs.org/en/)
 - Descargar la version LTS
 - Instalar la app de Node.js
+
+## Routing y Métodos HTTP
+
+## ¿Qué es el Routing?
+- El Routing es por donde van a transitar los usuarios de nuestro sitio web o aplicación.
+- Con diferentes Rutas, nuestros usuarios podrán navegar a lo largo de diferentes secciones del sitio web  o llenar diferentes formularios.
+
+### Métodos HTTP
+- GET - Utilizado para mostrar información.
+- POST - Utilizado para enviar información.
+- PUT / PATCH - Utilizado para actualizar información.
+- DELETE - Utilizado para eliminar información.

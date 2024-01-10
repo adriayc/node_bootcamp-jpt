@@ -2,20 +2,15 @@
 // const express = require('express');
 // NEW - ECMAScript modules
 import express from 'express';
+// Customs routes
+import usuarioRoutes from './routes/usuarioRoutes.js';
 
 // Crear la app
 const app = express();
 
 // Routing
-app.get('/', function (req, res) {
-    res.send('Hola mundo desde Express!');
-    // res.json({msg: 'Hola mundo desde Express!'});
-    // res.render({msg: 'Hola mundo desde Express!'});
-});
-
-app.get('/nosotros', function (req, res) {
-    res.send('Desde pagina de Nosotros');
-});
+// app.get('/', usuarioRoutes);     // Busca un ruta especifica
+app.use('/', usuarioRoutes);
 
 // Definir un puerto y arrancar el proyecto
 const port = 3000;
