@@ -4,6 +4,13 @@ const formularioLogin = (req, res) => {
     });
 };
 
+const formularioRegistro = (req, res) => {
+    res.render('auth/registro', {
+
+    });
+};
+
 export {
-    formularioLogin
+    formularioLogin,
+    formularioRegistro
 };
