@@ -1,7 +1,12 @@
 import { Sequelize } from 'sequelize';
+// Dotenv
+import dotenv from 'dotenv';
+dotenv.config({path: '.env'});
 
-const db = new Sequelize('bienesraices_node_app', 'root', 'root123', {
-    host: 'localhost',
+// console.log(process);
+// console.log(process.env.DB_NOMBRE);
+const db = new Sequelize(process.env.DB_NOMBRE, process.env.DB_USER, process.env.DB_PASSWORD ?? '', {
+    host: process.env.DB_HOST,
     port: 3306,
     dialect: 'mysql',
     define: {
@@ -13,7 +18,7 @@ const db = new Sequelize('bienesraices_node_app', 'root', 'root123', {
         acquire: 30000, // Tiempo antes de marcar un error
         idle: 10000     // Tiempo que debe transcurrir para finalizar la conexion (liberar espacio)
     },
-    operatorsAliases: false
+    // operatorsAliases: false      // NOTE: Deprecado!
 });
 
 export default db;
