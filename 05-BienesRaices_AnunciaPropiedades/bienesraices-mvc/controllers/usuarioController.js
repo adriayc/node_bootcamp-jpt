@@ -1,3 +1,6 @@
+// Models
+import Usuario from '../models/Usuario.js';
+
 const formularioLogin = (req, res) => {
     res.render('auth/login', {
         pagina: 'Iniciar Sesión'
@@ -10,9 +13,14 @@ const formularioRegistro = (req, res) => {
     });
 };
 
-const registrar = (req, res) => {
+const registrar = async (req, res) => {
     // console.log('Registrando...');
-    console.log(req.body);
+    // console.log(req.body);
+
+    const usuario = await Usuario.create(req.body);
+
+    res.json(usuario);
+    // return res.json(usuario);
 };
 
 const formularioOlvidePassword = (req, res) => {
