@@ -30,6 +30,8 @@
           > CREATE DATABASE bienenesraices_node_app;
       + Dotenv
         # npm install dotenv
+      + Express Validator
+        # npm install express-validator
     - Run app
       # npm run start
       # npm start

@@ -1,3 +1,4 @@
+import { check, validationResult } from 'express-validator';
 // Models
 import Usuario from '../models/Usuario.js';
 
@@ -16,6 +17,13 @@ const formularioRegistro = (req, res) => {
 const registrar = async (req, res) => {
     // console.log('Registrando...');
     // console.log(req.body);
+
+    // Validación
+    await check('nombre').notEmpty().withMessage('El nombre es obligatorio').run(req);
+
+    let resultado = validationResult(req);
+
+    res.json(resultado.array());
 
     const usuario = await Usuario.create(req.body);
 
