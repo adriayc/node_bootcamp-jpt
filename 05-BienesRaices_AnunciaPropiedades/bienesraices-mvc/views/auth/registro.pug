@@ -19,10 +19,10 @@ block contenido
                 form.space-y-5(method="POST" action="/auth/registro" novalidate)
                     div 
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="nombre") Tu Nombre
-                        input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="text" name="nombre" placeholder="Tu Nombre")
+                        input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="text" name="nombre" placeholder="Tu Nombre" value= usuario ? usuario.nombre : '')
                     div 
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="email") Email de Registro
-                        input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="email" name="email" placeholder="Tu Email")
+                        input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="email" name="email" placeholder="Tu Email" value= usuario ? usuario.email : '')
                     div 
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="password") Password
                         input#password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="password" name="password" placeholder="Tu Password")
