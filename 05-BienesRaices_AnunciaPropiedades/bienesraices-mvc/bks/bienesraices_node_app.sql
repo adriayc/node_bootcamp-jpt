@@ -32,7 +32,7 @@ CREATE TABLE `usuarios` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Adriano','adriano@correo.com','adriano123',NULL,NULL,'2024-01-16 22:27:03','2024-01-16 22:27:03');
+INSERT INTO `usuarios` VALUES (1,'Adriano','adriano@correo.com','$2b$10$FftNNBOOMrA/TrBj6.hVIuiU.jRSe5mJU86RCDZ7BbahRrIyw6wia','0s3fr1kttv81hkcm91j2',NULL,'2024-01-17 21:47:14','2024-01-17 21:47:14'),(2,'Daniela','daniela@correo.com','$2b$10$5xwdUOn4FqalspLeyBaEred8bTceUKYmChJYFUbvI2LD/sEflNCa6','l97afr690io1hkcmc8rb',NULL,'2024-01-17 21:49:00','2024-01-17 21:49:00');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-16 18:27:24
+-- Dump completed on 2024-01-17 18:28:54
