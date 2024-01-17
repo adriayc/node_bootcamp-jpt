@@ -32,6 +32,8 @@
         # npm install dotenv
       + Express Validator
         # npm install express-validator
+      + BCrypt
+        # npm install bcrypt
     - Run app
       # npm run start
       # npm start
