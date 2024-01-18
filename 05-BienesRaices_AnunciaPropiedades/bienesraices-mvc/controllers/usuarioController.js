@@ -105,6 +105,7 @@ const confirmar = async (req, res, next) => {
     // Verificar si el token es válido
     const usuario = await Usuario.findOne({where: {token}});
     // console.log(usuario);
+    // console.log(usuario.token);
     if (!usuario) {
         return res.render('auth/confirmar-cuenta', {
             pagina: 'Error al confirmar tu cuenta',
@@ -114,6 +115,14 @@ const confirmar = async (req, res, next) => {
     }
 
     // Confirmar la cuenta
+    usuario.token = null;
+    usuario.confirmado = true;
+    await usuario.save();       // Persistir los datos
+
+    res.render('auth/confirmar-cuenta', {
+        pagina: 'Cuenta confirmada',
+        mensaje: 'La cuenta se confirmó correctamente'
+    });
 
     // next();     // Ir al siguiente middleware
 };
