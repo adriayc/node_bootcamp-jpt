@@ -17,6 +17,8 @@ block contenido
             .bg-white.py-8.px-4.shadow
                 //- Remover la validacion de HTML5
                 form.space-y-5(method="POST" action="/auth/registro" novalidate)
+                    //- Protección CSRF
+                    input(type="hidden", name="_csrf" value= csrfToken)
                     div 
                         label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="nombre") Tu Nombre
                         input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="text" name="nombre" placeholder="Tu Nombre" value= usuario ? usuario.nombre : '')

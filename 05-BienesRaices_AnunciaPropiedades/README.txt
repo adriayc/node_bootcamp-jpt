@@ -36,6 +36,10 @@
         # npm install bcrypt
       + Nodemailer
         # npm install nodemailer
+      + CSurf
+        # npm install csurf     // Protección CSRF de los formularios (Deprecado!)
+      + Cookie Parser
+        # npm install cookie-parser
     - Run app
       # npm run start
       # npm start

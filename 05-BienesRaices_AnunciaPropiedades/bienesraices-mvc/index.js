@@ -2,6 +2,10 @@
 // const express = require('express');
 // NEW - ECMAScript modules
 import express from 'express';
+// CSurf - Protección CSRF
+import csrf from 'csurf';
+// Cookie Parser
+import cookieParser from 'cookie-parser';
 // DBs
 import db from './config/db.js';
 // Customs routes
@@ -12,6 +16,12 @@ const app = express();
 
 // Habilitar lectura de datos de formularios
 app.use(express.urlencoded({extended: true}));
+
+// Habilitar Cookie Parser
+app.use(cookieParser());
+
+// Habilitar CSRF
+app.use(csrf({cookie: true}));
 
 // Conexión a la base de datos
 try {
