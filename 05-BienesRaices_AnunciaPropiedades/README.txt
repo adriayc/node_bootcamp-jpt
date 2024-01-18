@@ -34,6 +34,8 @@
         # npm install express-validator
       + BCrypt
         # npm install bcrypt
+      + Nodemailer
+        # npm install nodemailer
     - Run app
       # npm run start
       # npm start

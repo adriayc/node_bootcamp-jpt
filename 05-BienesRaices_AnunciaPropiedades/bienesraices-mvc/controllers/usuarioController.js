@@ -2,7 +2,7 @@ import { check, validationResult } from 'express-validator';
 // Models
 import Usuario from '../models/Usuario.js';
 // Helpers
-import { generarId } from '../helpers/token.js';
+import { generarId } from '../helpers/tokens.js';
 
 const formularioLogin = (req, res) => {
     res.render('auth/login', {
