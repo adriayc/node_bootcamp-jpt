@@ -208,10 +208,14 @@ const comprobarToken = async (req, res, next) => {
     }
 
     // Mostrar el formulario para modificar el password
+    res.render('auth/reset-password', {
+        pagina: 'Reestablece tu Password',
+        csrfToken: req.csrfToken()
+    });
 };
 
 const nuevoPassword = (req, res) => {
-
+    console.log('Guardando password...');
 };
 
 export {
