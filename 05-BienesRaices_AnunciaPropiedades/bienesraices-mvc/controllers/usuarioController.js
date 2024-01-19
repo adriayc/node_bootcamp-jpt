@@ -78,7 +78,16 @@ const autenticar = async (req, res) => {
         id: usuario.id,
         nombre: usuario.nombre
     });
-    console.log(token);
+    // console.log(token);
+
+    // Almacenar en un cookee
+    return res.cookie('_token', token, {
+        // Evitar ataques cross-site (XSS)
+        httpOnly: true,
+        // Permitir en conexiones seguras (SSL)
+        // secure: true,
+        // sameSite: true
+    }).redirect('/mis-propiedades');
 };
 
 const formularioRegistro = (req, res) => {
