@@ -1,12 +1,10 @@
 import { check, validationResult } from 'express-validator';
 // BCrypt
 import bcrypt from 'bcrypt';
-// JSON Web Token
-import jwt from 'jsonwebtoken';
 // Models
 import Usuario from '../models/Usuario.js';
 // Helpers
-import { generarId } from '../helpers/tokens.js';
+import { generarId, generarJWT } from '../helpers/tokens.js';
 import { emailRegistro, emailOlvidePassword } from '../helpers/emails.js';
 
 const formularioLogin = (req, res) => {
@@ -68,14 +66,18 @@ const autenticar = async (req, res) => {
     }
 
     // Autenticar al usuario
-    const token = jwt.sign({
-        nombre: 'Adriano',
-        empresa: 'AACSoft SRL',
-        tecnologias: 'Node.js'
-    }, 'palabrasupersecreta', {
-        expiresIn: '1d'
-    });
+    // const token = jwt.sign({
+    //     nombre: 'Adriano',
+    //     empresa: 'AACSoft SRL',
+    //     tecnologias: 'Node.js'
+    // }, 'palabrasupersecreta', {
+    //     expiresIn: '1d'
+    // });
 
+    const token = generarJWT({
+        id: usuario.id,
+        nombre: usuario.nombre
+    });
     console.log(token);
 };
 
