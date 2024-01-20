@@ -2,7 +2,8 @@ const admin = (req, res) => {
     // res.send('Mis propiedades...');
 
     res.render('propiedades/admin', {
-        pagina: 'Mis Propiedades'
+        pagina: 'Mis Propiedades',
+        barra: true
     });
 };
 
