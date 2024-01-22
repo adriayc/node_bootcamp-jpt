@@ -15,3 +15,14 @@ block contenido
                     div
                         label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold(for="titulo") Titulo de Anuncio
                         input#titulo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="text" name="titulo" placeholder="Titulo Propiedad, ej. Casa en la Playa")
+
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+                        div(class="md:w-1/2")
+                            label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold(for="categoria") Categoria
+                            select#categoria.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="categoria")
+                                option(value="") - Seleccione -
+                                
+                        div(class="md:w-1/2")
+                            label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold(for="precio") Precio
+                            select#precio.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(name="precio")
+                                option(value="") - Seleccione -
