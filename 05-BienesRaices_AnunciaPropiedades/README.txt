@@ -42,6 +42,8 @@
         # npm install cookie-parser
       + JSON Web Token
         # npm install jsonwebtoken
+      + Webpack
+        # npm install -D webpack webpack-cli
     - Run app
       # npm run start
       # npm start
