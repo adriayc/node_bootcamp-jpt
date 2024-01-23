@@ -25,4 +25,17 @@
     })
     .addTo(mapa);
 
+    // Detectar el movimiento del Pin
+    marker.on('moveend', function (e) {
+        marker = e.target;
+        // console.log(marker);
+
+        // Obtner la posicion (Lat y Lng)
+        const posicion = marker.getLatLng();
+        // console.log(posicion);
+
+        // Centrar el map en la posicion
+        mapa.panTo(new L.LatLng(posicion.lat, posicion.lng));
+    });
+
 })();
