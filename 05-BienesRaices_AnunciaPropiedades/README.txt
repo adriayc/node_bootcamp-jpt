@@ -44,6 +44,8 @@
         # npm install jsonwebtoken
       + Webpack
         # npm install -D webpack webpack-cli
+      + Concurrently
+        # npm install -D concurrently
     - Run app
       # npm run start
       # npm start
