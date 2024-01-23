@@ -47,6 +47,12 @@
 
             // Agregar al ubicacion al dar clic en el Pin
             marker.bindPopup(resultado.address.LongLabel);
+
+            // Llenar los campos
+            document.querySelector('.calle').textContent = resultado?.address?.Address ?? '';
+            document.querySelector('#calle').value = resultado?.address?.Address ?? '';
+            document.querySelector('#lat').value = resultado?.latlng?.lat ?? '';
+            document.querySelector('#lng').value = resultado?.latlng?.lng ?? '';
         });
     });
 
