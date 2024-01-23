@@ -10,9 +10,19 @@
     const lat = -17.377221;
     const lng = -66.1570064;
     const mapa = L.map('mapa').setView([lat, lng ], 16); 
+    let marker;
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(mapa);
+
+    // El Pin
+    marker = new L.marker([lat, lng], {
+        // Mover el Pin
+        draggable: true,
+        // Mover el Pin tambien el mapa
+        autoPan: true
+    })
+    .addTo(mapa);
 
 })();
