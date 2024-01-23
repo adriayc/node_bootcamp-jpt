@@ -16,7 +16,7 @@
   \************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\nconsole.log('Soy el mapa...');\n\n//# sourceURL=webpack://bienesraices-mvc/./src/js/mapa.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n// console.log('Soy el mapa...');\n\n(function() {\n    // Copiar la lat y lng de la URL de google maps\n    // https://www.google.com/maps/place/Nadine+Import+SRL+Konica+Minolta/@-17.377221,-66.1570064,3a,75y,92.01h,92.97t\n\n    // const lat = 20.67444163271174;\n    // const lng = -103.38739216304566;\n    // Nuestra posicion\n    const lat = -17.377221;\n    const lng = -66.1570064;\n    const mapa = L.map('mapa').setView([lat, lng ], 16); \n\n    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\n        attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'\n    }).addTo(mapa);\n\n})();\n\n//# sourceURL=webpack://bienesraices-mvc/./src/js/mapa.js?");
 
 /***/ })
 
