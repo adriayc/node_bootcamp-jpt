@@ -24,7 +24,7 @@ const importarDatos = async () => {
             Categoria.bulkCreate(categorias), 
             Precio.bulkCreate(precios)
         ]);
-        
+
         console.log('Datos importados correctamente');
         exit();
         // exit(0);        // 0 - Finalizo correctamente
@@ -38,7 +38,32 @@ const importarDatos = async () => {
     }
 };
 
+const eliminarDatos = async () => {
+    try {
+        // Option #1
+        // await Promise.all([
+        //     Categoria.destroy({where: {}, truncate: true}),
+        //     Precio.destroy({where: {}, truncate: true}),
+        // ]);
+
+        // Option #2
+        await db.sync({force: true});
+
+        console.log('Datos eliminados correctamente');
+        exit();
+
+    } catch (error) {
+        console.log(error);
+        exit(1);
+    }
+};
+
 // Validar que argumento en posicion 2 sea igual a '-i' ("db:importar": node ./seed/seeker.js -i")
 if (process.argv[2] === '-i') {
     importarDatos();
+}
+
+// Eliminar el argumento para eliminar los registros
+if (process.argv[2] === '-e') {
+    eliminarDatos();
 }
