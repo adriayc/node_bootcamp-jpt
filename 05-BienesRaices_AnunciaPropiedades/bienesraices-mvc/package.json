@@ -9,7 +9,8 @@
     "dev": "nodemon index.js",
     "css": "postcss public/css/tailwind.css -o public/css/app.css --watch",
     "js": "webpack --watch",
-    "dev-views": "concurrently \"npm run css\" \"npm run js\""
+    "dev-views": "concurrently \"npm run css\" \"npm run js\"",
+    "db:importar": "node ./seed/seeder.js -i"
   },
   "keywords": [
     "MVC",

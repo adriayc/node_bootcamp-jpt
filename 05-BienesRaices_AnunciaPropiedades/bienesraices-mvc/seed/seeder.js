@@ -28,3 +28,8 @@ const importarDatos = async () => {
         exit(1);        // 1 - Finalizo incorrectamente
     }
 };
+
+// Validar que argumento en posicion 2 sea igual a '-i' ("db:importar": node ./seed/seeker.js -i")
+if (process.argv[2] === '-i') {
+    importarDatos();
+}
