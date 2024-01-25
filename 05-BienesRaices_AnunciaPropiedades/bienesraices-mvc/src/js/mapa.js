@@ -7,8 +7,11 @@
     // const lat = 20.67444163271174;
     // const lng = -103.38739216304566;
     // Nuestra posicion
-    const lat = -17.377221;
-    const lng = -66.1570064;
+    // const lat = -17.377221;
+    const lat = document.querySelector('#lat').value || -17.377221;     // Logical OR (||) - Valida el truthy o falsy. Si el 1er valor es vacio obtiene el 2do valor por defecto
+    // const lat = document.querySelector('#lat').value ?? -17.377221;     // Nullish coalescing operator (??) - Valida NULL o undefined (NOTA: No nos sirve)
+    // const lng = -66.1570064;
+    const lng = document.querySelector('#lng').value || -66.1570064;
     // [latitud, longitud], zoom
     const mapa = L.map('mapa').setView([lat, lng ], 16); 
     let marker;
