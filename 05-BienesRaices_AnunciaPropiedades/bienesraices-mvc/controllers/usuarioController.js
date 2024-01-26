@@ -84,6 +84,7 @@ const autenticar = async (req, res) => {
     return res.cookie('_token', token, {
         // Evitar ataques cross-site (XSS)
         httpOnly: true,
+        // expires: 9000,
         // Permitir en conexiones seguras (SSL)
         // secure: true,
         // sameSite: true
