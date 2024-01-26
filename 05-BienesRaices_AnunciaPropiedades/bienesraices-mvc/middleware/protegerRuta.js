@@ -19,14 +19,24 @@ const protegerRuta = async (req, res, next) => {
         const decoded = jwt.verify(_token, process.env.JWT_SECRET);
         // console.log(decoded);
 
-        const usuario = await Usuario.findByPk(decoded.id);
+        // const usuario = await Usuario.findByPk(decoded.id);
+        // Agregar el custom scope que excluye campos
+        const usuario = await Usuario.scope('eliminarPassword').findByPk(decoded.id);
         // console.log(usuario);
+
+        // Almacenar el usuario al req
+        if (usuario) {
+            req.usuario = usuario;
+        } else {
+            return res.redirect('/auth/login');
+        }
+        return next();
         
     } catch (error) {
         return res.clearCookie('_token').redirect('/auth/login');
     }
 
-    next();
+    // next();
 };
 
 export default protegerRuta;
