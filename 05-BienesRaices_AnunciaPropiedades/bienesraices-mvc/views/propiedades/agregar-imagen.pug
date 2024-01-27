@@ -2,6 +2,8 @@ extends ../layout/admin
 
 block styles 
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css")   
+    //- Agregar el token csrf en el meta del header
+    meta(name="csrf-token" content= csrfToken)
 
 block contenido
     .py-10
