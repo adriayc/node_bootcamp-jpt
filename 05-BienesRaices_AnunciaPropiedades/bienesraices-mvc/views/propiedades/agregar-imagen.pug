@@ -10,7 +10,7 @@ block contenido
         h2.text-center.text-2xl.font-extrabold= pagina
 
         div(class="bg-white shadow px-4 py-8 rounded mx-auto max-w-4xl my-10 md:px-10")
-            form(method="POST" action="/propiedades/crear" class="dropzone border-dashed border-2 w-full min:h-96 h-auto rounded flex-col justify-center items-center")
+            form(method="POST" action=`/propiedades/agregar-imagen/${propiedad.id}` id="imagen" class="dropzone border-dashed border-2 w-full min:h-96 h-auto rounded flex-col justify-center items-center")
                 //- Protección CSRF
                 input(type="hidden", name="_csrf" value= csrfToken)
 
