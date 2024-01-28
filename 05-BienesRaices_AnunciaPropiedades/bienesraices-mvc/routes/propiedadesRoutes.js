@@ -2,6 +2,7 @@ import express from 'express';
 import { body } from 'express-validator';
 // Middlewares
 import protegerRuta from '../middleware/protegerRuta.js';
+import upload from '../middleware/subirImagen.js';
 // Controllers
 import { admin, crear, guardar, agregarImagen } from '../controllers/propiedadController.js';
 
@@ -25,8 +26,9 @@ router.post('/propiedades/crear',
     guardar
 );
 router.get('/propiedades/agregar-imagen/:id', protegerRuta, agregarImagen);
-router.post('/propiedades/agregar-imagen/:id', (req, res) => {
-    console.log('Subiendo imagen...');
-});
+// Multiple imagenes
+// router.post('/propiedades/agregar-imagen/:id', upload.array('imagen'));
+// Una sola imagen
+router.post('/propiedades/agregar-imagen/:id', upload.single('imagen'));
 
 export default router;
