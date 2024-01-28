@@ -20,7 +20,7 @@ Dropzone.options.imagen = {
     // Cantida de archivos que estamos soportanto (Misma cantidad que maxFiles)
     parallelUploads: 1,
     // Inhabilita la subida de forma automatico (true: automatico y false: manual - presionando un btn)
-    autoProcessQueue: true,
+    autoProcessQueue: false,
     // Agregar la opcion de eliminar
     addRemoveLinks: true,
     // Modificar el texto de la opcion de eliminar
@@ -33,5 +33,22 @@ Dropzone.options.imagen = {
         'CSRF-Token': token,
     },
 
-    paramName: 'imagen'
+    paramName: 'imagen',
+    init: function () {
+        const dropzone = this;
+        const btnPublicar = document.querySelector('#publicar');
+
+        btnPublicar.addEventListener('click', function () {
+            dropzone.processQueue()
+        });
+
+        // Eventos propios de dropzone (Queue completado)
+        dropzone.on('queuecomplete', function () {
+            // Validar que no exista archivos en cola
+            if (dropzone.getActiveFiles().length == 0) {
+                // Redirigir por JS a una pagina
+                window.location.href = '/mis-propiedades';
+            } 
+        });
+    }
 };

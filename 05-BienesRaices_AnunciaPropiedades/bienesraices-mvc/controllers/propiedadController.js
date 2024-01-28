@@ -122,7 +122,7 @@ const agregarImagen = async (req, res) => {
     });
 };
 
-const almacenarImagen = async (req, res) => {
+const almacenarImagen = async (req, res, next) => {
     const { id } = req.params; 
 
     // Validar que la propiedad exista
@@ -146,6 +146,12 @@ const almacenarImagen = async (req, res) => {
 
         // Guardar los cambios de la propiedad
         await propiedad.save();
+
+        // Redirigir a una pagina
+        // return res.redirect('/mis-propiedades');     // Error, no funciona la redireccion
+
+        // Redirige al siguiente middleware
+        next();
 
     } catch (error) {
         console.log(error);

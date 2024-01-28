@@ -107,7 +107,7 @@ CREATE TABLE `propiedades` (
 
 LOCK TABLES `propiedades` WRITE;
 /*!40000 ALTER TABLE `propiedades` DISABLE KEYS */;
-INSERT INTO `propiedades` VALUES ('b6ff7ce7-6f57-45e4-88cd-ecfd022854dc','Casa en la Playa','Casa en la playa totalmente nueva.',4,2,2,'Luis Quintín Vila','-17.381970889201','-66.146832578485','',0,'2024-01-26 15:44:43','2024-01-26 15:44:43',6,1,1);
+INSERT INTO `propiedades` VALUES ('b6ff7ce7-6f57-45e4-88cd-ecfd022854dc','Casa en la Playa','Casa en la playa totalmente nueva.',4,2,2,'Luis Quintín Vila','-17.381970889201','-66.146832578485','gjrgihbpc0g1hl70rujm.jpg',1,'2024-01-26 15:44:43','2024-01-28 03:12:35',6,1,1);
 /*!40000 ALTER TABLE `propiedades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,4 +150,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-26 11:46:22
+-- Dump completed on 2024-01-27 23:14:09
