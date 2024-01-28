@@ -122,9 +122,40 @@ const agregarImagen = async (req, res) => {
     });
 };
 
+const almacenarImagen = async (req, res) => {
+    const { id } = req.params; 
+
+    // Validar que la propiedad exista
+    const propiedad = await Propiedad.findByPk(id);
+
+    if (!propiedad) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    // Validar que la propiedad no este publicada
+    if (propiedad.publicado) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    try {
+        // console.log(req.file.filename);
+
+        // Almacenar la imagen y publicar la propiedad
+        propiedad.imagen = req.file.filename;
+        propiedad.publicado = 1;
+
+        // Guardar los cambios de la propiedad
+        await propiedad.save();
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export {
     admin,
     crear,
     guardar,
-    agregarImagen
+    agregarImagen,
+    almacenarImagen
 };
