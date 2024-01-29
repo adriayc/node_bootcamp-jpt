@@ -4,11 +4,17 @@ import { validationResult } from 'express-validator';
 // import Precio from '../models/Precio.js';
 import { Categoria, Precio, Propiedad } from '../models/index.js';
 
-const admin = (req, res) => {
+const admin = async (req, res) => {
     // res.send('Mis propiedades...');
 
+    const { id } = req.usuario;
+    // console.log(id);
+
+    const propiedades = await Propiedad.findAll({where: { usuarioId: id }})
+
     res.render('propiedades/admin', {
-        pagina: 'Mis Propiedades'
+        pagina: 'Mis Propiedades',
+        propiedades
     });
 };
 
