@@ -11,6 +11,7 @@ const admin = async (req, res) => {
     // console.log(id);
 
     const propiedades = await Propiedad.findAll({where: { usuarioId: id }})
+    console.log(propiedades);
 
     res.render('propiedades/admin', {
         pagina: 'Mis Propiedades',
