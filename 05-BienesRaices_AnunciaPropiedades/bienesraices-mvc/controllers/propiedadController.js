@@ -172,10 +172,29 @@ const almacenarImagen = async (req, res, next) => {
     }
 };
 
+const editar = async (req, res) => {
+    // console.log(req.params);
+
+    // Consultar Modelo de Precio y Categoria
+    const [categorias, precios] = await Promise.all([
+        Categoria.findAll(),
+        Precio.findAll()
+    ]);
+
+    res.render('propiedades/editar', {
+        pagina: 'Editar Propiedad',
+        csrfToken: req.csrfToken(),
+        categorias,
+        precios,
+        datos: {}
+    });
+};
+
 export {
     admin,
     crear,
     guardar,
     agregarImagen,
-    almacenarImagen
+    almacenarImagen,
+    editar
 };
