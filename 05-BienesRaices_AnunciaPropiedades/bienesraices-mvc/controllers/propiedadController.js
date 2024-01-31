@@ -14,7 +14,8 @@ const admin = async (req, res) => {
         where: { usuarioId: id },
         // JOIN (Cruzar multiples modelos)
         include: [
-            {model: Categoria, as: 'categoria'}
+            {model: Categoria, as: 'categoria'},
+            {model: Precio, as: 'precio'}
         ]
     });
     // console.log(propiedades);
