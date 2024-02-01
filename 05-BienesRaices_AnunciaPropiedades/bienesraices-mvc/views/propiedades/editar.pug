@@ -15,7 +15,9 @@ block contenido
                     p.bg-red-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold= error.msg
 
         div(class="bg-white shadow px-4 py-8 rounded mx-auto max-w-4xl my-10 md:px-10")
-            form.space-y-8(method="POST" action="/propiedades/crear")
+            //- form.space-y-8(method="POST" action=`/propiedades/editar/${propiedad.id}`)
+            //- Si no agregamos el ACTION asume del anterior verbo GET
+            form.space-y-8(method="POST")
                 //- Protección CSRF
                 input(type="hidden", name="_csrf" value= csrfToken)
 
