@@ -96,7 +96,7 @@ const guardar = async (req, res) => {
         const { id } = propiedadGuardada;
 
         // Redirigir
-        res.redirect('/propiedades/agregar-imagen/${id}');
+        res.redirect(`/propiedades/agregar-imagen/${id}`);
         
     } catch (error) {
         console.log(error);
@@ -258,6 +258,31 @@ const guardarCambios = async (req, res) => {
     }
 
     // Reescribir el objeto y actualizarlo
+    console.log(propiedad);
+
+    try {
+        const {titulo, descripcion, categoria: categoriaId, precio: precioId, habitaciones, estacionamiento, wc, calle, lat, lng } = req.body;
+
+        propiedad.set({
+            titulo,
+            descripcion,
+            categoriaId,
+            precioId,
+            habitaciones,
+            estacionamiento,
+            wc,
+            calle,
+            lat,
+            lng
+        });
+
+        await propiedad.save();
+
+        res.redirect('/mis-propiedades');
+
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 export {
