@@ -4,7 +4,7 @@ import { body } from 'express-validator';
 import protegerRuta from '../middleware/protegerRuta.js';
 import upload from '../middleware/subirImagen.js';
 // Controllers
-import { admin, crear, guardar, agregarImagen, almacenarImagen, editar, guardarCambios } from '../controllers/propiedadController.js';
+import { admin, crear, guardar, agregarImagen, almacenarImagen, editar, guardarCambios, eliminar } from '../controllers/propiedadController.js';
 
 const router = express.Router();
 
@@ -32,6 +32,7 @@ router.get('/propiedades/agregar-imagen/:id', protegerRuta, agregarImagen);
 // Una sola imagen
 router.post('/propiedades/agregar-imagen/:id', protegerRuta, upload.single('imagen'), almacenarImagen);
 router.get('/propiedades/editar/:id', protegerRuta, editar);
+// router.update();     // Error no soporta el navegador
 router.post('/propiedades/editar/:id',
     protegerRuta,
     // Validacion de los campos
@@ -47,5 +48,7 @@ router.post('/propiedades/editar/:id',
     body('lat').notEmpty().withMessage('Ubica la propiedad en el mapa'),
     guardarCambios
 );
+// router.delete();     // Error no soporta el navegador
+router.post('/propiedades/eliminar/:id', protegerRuta, eliminar);
 
 export default router;
