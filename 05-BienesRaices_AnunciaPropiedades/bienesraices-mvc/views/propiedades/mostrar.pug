@@ -2,3 +2,6 @@ extends ../layout/app
 
 block contenido 
     h1 Mostrando Propiedad
+
+    //- Mostrar los datos de propiedad formateado
+    pre= JSON.stringify(propiedad, undefined, 2)
