@@ -4,7 +4,17 @@ import { body } from 'express-validator';
 import protegerRuta from '../middleware/protegerRuta.js';
 import upload from '../middleware/subirImagen.js';
 // Controllers
-import { admin, crear, guardar, agregarImagen, almacenarImagen, editar, guardarCambios, eliminar } from '../controllers/propiedadController.js';
+import { 
+    admin, 
+    crear, 
+    guardar, 
+    agregarImagen, 
+    almacenarImagen, 
+    editar, 
+    guardarCambios, 
+    eliminar, 
+    mostrarPropiedad 
+} from '../controllers/propiedadController.js';
 
 const router = express.Router();
 
@@ -50,5 +60,8 @@ router.post('/propiedades/editar/:id',
 );
 // router.delete();     // Error no soporta el navegador
 router.post('/propiedades/eliminar/:id', protegerRuta, eliminar);
+
+// Area Publica
+router.get('/propiedad/:id', mostrarPropiedad);
 
 export default router;
