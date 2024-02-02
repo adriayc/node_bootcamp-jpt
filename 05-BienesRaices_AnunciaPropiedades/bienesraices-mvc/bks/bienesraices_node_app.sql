@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.35, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: bienesraices_node_app
 -- ------------------------------------------------------
--- Server version	8.0.35-0ubuntu0.22.04.1
+-- Server version	8.0.36-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -107,7 +107,7 @@ CREATE TABLE `propiedades` (
 
 LOCK TABLES `propiedades` WRITE;
 /*!40000 ALTER TABLE `propiedades` DISABLE KEYS */;
-INSERT INTO `propiedades` VALUES ('b6ff7ce7-6f57-45e4-88cd-ecfd022854dc','Casa en la Playa','Casa en la playa totalmente nueva.',4,2,2,'Luis Quintín Vila','-17.381970889201','-66.146832578485','gjrgihbpc0g1hl70rujm.jpg',1,'2024-01-26 15:44:43','2024-01-28 03:12:35',6,1,1);
+INSERT INTO `propiedades` VALUES ('1d8ffc78-4083-49ce-9ffc-c6b2163ef884','Terreno Frente a la Plaza','Hermoso terreno frente a la plaza',2,1,1,'Pasaje Guadalquivir','-17.374524638849','-66.158299404344','',0,'2024-02-01 22:25:47','2024-02-01 22:25:47',5,4,1),('aee41666-bf0c-42cb-921c-08dd53007b3c','Casa en la playa Updated','Casa nueva en la playa a extrenar ',4,2,2,'J. Crisóstomo Carrillo','-17.384459551059','-66.152049993115','6kc4ngud5jg1hljccsu1.jpg',1,'2024-02-01 22:24:33','2024-02-01 22:36:30',6,1,1);
 /*!40000 ALTER TABLE `propiedades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,4 +150,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-27 23:14:09
+-- Dump completed on 2024-02-01 23:46:02
