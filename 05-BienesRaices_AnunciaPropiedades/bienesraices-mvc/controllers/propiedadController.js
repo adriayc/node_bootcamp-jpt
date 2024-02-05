@@ -13,7 +13,7 @@ const admin = async (req, res) => {
     const { pagina: paginaActual } = req.query;
 
     // Definimos una expresion regular
-    const expresion = /[0-9]/;
+    const expresion = /^[0-9]$/;
     // Validar que no se cumpla la expresion regular
     if (!expresion.test(paginaActual)) {
         return res.redirect('/mis-propiedades?pagina=1');
