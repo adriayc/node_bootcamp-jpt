@@ -28,23 +28,30 @@ const admin = async (req, res) => {
         const limit = 5;
         const offset = ((paginaActual * limit) - limit);
     
-        const propiedades = await Propiedad.findAll({
-            // limit: limit,
-            limit,
-            offset,
-            where: { usuarioId: id },
-            // JOIN (Cruzar multiples modelos)
-            include: [
-                {model: Categoria, as: 'categoria'},
-                {model: Precio, as: 'precio'}
-            ]
-        });
+    const [propiedades, total] = await Promise.all([
+            Propiedad.findAll({
+                // limit: limit,
+                limit,
+                offset,
+                where: { usuarioId: id },
+                // JOIN (Cruzar multiples modelos)
+                include: [
+                    {model: Categoria, as: 'categoria'},
+                    {model: Precio, as: 'precio'}
+                ]
+            }),
+            Propiedad.count({
+                where: { usuarioId: id }
+            })
+        ]);
         // console.log(propiedades);
+        // console.log(total);
     
         res.render('propiedades/admin', {
             pagina: 'Mis Propiedades',
             csrfToken: req.csrfToken(),
-            propiedades
+            propiedades,
+            paginas: Math.ceil(total / limit)
         });
 
     } catch (error) {
