@@ -19,24 +19,37 @@ const admin = async (req, res) => {
         return res.redirect('/mis-propiedades?pagina=1');
     }
 
-    const { id } = req.usuario;
-    // console.log(id);
+    try {
+        const { id } = req.usuario;
+        // console.log(id);
 
-    const propiedades = await Propiedad.findAll({
-        where: { usuarioId: id },
-        // JOIN (Cruzar multiples modelos)
-        include: [
-            {model: Categoria, as: 'categoria'},
-            {model: Precio, as: 'precio'}
-        ]
-    });
-    // console.log(propiedades);
+        // Limites y Offset para el paginador
+        // const limit = 10;
+        const limit = 5;
+        const offset = ((paginaActual * limit) - limit);
+    
+        const propiedades = await Propiedad.findAll({
+            // limit: limit,
+            limit,
+            offset,
+            where: { usuarioId: id },
+            // JOIN (Cruzar multiples modelos)
+            include: [
+                {model: Categoria, as: 'categoria'},
+                {model: Precio, as: 'precio'}
+            ]
+        });
+        // console.log(propiedades);
+    
+        res.render('propiedades/admin', {
+            pagina: 'Mis Propiedades',
+            csrfToken: req.csrfToken(),
+            propiedades
+        });
 
-    res.render('propiedades/admin', {
-        pagina: 'Mis Propiedades',
-        csrfToken: req.csrfToken(),
-        propiedades
-    });
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 // Formulario para crear una nueva propiedad
