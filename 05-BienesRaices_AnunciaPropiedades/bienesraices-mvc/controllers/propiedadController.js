@@ -9,7 +9,15 @@ const admin = async (req, res) => {
     // res.send('Mis propiedades...');
 
     // Leer QueryString de la URL (http://localhost:3000/mis-propiedades?pagina=1)
-    console.log(req.query);
+    // console.log(req.query.pagina);
+    const { pagina: paginaActual } = req.query;
+
+    // Definimos una expresion regular
+    const expresion = /[0-9]/;
+    // Validar que no se cumpla la expresion regular
+    if (!expresion.test(paginaActual)) {
+        return res.redirect('/mis-propiedades?pagina=1');
+    }
 
     const { id } = req.usuario;
     // console.log(id);
