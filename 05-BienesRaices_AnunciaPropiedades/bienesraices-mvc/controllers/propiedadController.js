@@ -8,6 +8,9 @@ import { Categoria, Precio, Propiedad } from '../models/index.js';
 const admin = async (req, res) => {
     // res.send('Mis propiedades...');
 
+    // Leer QueryString de la URL (http://localhost:3000/mis-propiedades?pagina=1)
+    console.log(req.query);
+
     const { id } = req.usuario;
     // console.log(id);
 
