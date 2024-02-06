@@ -11,6 +11,7 @@ import db from './config/db.js';
 // Customs routes
 import usuarioRoutes from './routes/usuarioRoutes.js';
 import propiedadesRoutes from './routes/propiedadesRoutes.js';
+import appRoutes from './routes/appRoutes.js'
 
 // Crear la app
 const app = express();
@@ -42,11 +43,11 @@ app.set('views', './views');
 app.use(express.static('public'));
 
 // Routing
+app.use('/', appRoutes);
 // app.get('/', usuarioRoutes);     // Busca un ruta especifica
 // app.use('/', usuarioRoutes);
 app.use('/auth', usuarioRoutes);
 app.use('/', propiedadesRoutes);
-
 
 // Definir un puerto y arrancar el proyecto
 const port = process.env.PORT || 3000;
