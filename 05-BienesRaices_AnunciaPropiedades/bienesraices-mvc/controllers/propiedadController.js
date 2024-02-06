@@ -24,11 +24,11 @@ const admin = async (req, res) => {
         // console.log(id);
 
         // Limites y Offset para el paginador
-        // const limit = 10;
-        const limit = 5;
+        const limit = 10;
+        // const limit = 5;
         const offset = ((paginaActual * limit) - limit);
     
-    const [propiedades, total] = await Promise.all([
+        const [propiedades, total] = await Promise.all([
             Propiedad.findAll({
                 // limit: limit,
                 limit,
@@ -52,7 +52,10 @@ const admin = async (req, res) => {
             csrfToken: req.csrfToken(),
             propiedades,
             paginas: Math.ceil(total / limit),
-            paginaActual
+            paginaActual,
+            total,
+            offset,
+            limit
         });
 
     } catch (error) {
