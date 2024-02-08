@@ -7,6 +7,8 @@
 
     let markers = new L.FeatureGroup().addTo(mapa);
 
+    let propiedades =[];
+
     // Filtros
     const filtros = {
         categoria: '',
@@ -23,10 +25,16 @@
 
         // +valor_string convierte el string en number
         filtros.categoria = +e.target.value;
+
+        // Filtar
+        filtrarPropiedades();
     });
 
     precioSelect.addEventListener('change', e => {
         filtros.precio = +e.target.value;
+        
+        // Filtrar
+        filtrarPropiedades();
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -39,7 +47,8 @@
             // URL de la peticion (no requiere http://localhost:3000 o https://dominio por que se encuentra en el mismo host)
             const url = '/api/propiedades';
             const respuesta = await fetch(url);
-            const propiedades = await respuesta.json();
+            // const propiedades = await respuesta.json();
+            propiedades = await respuesta.json();
             // console.log(respuesta);
             // console.log(propiedades);
 
@@ -74,5 +83,21 @@
             markers.addLayer(marker);
         });
     }
+
+    const filtrarPropiedades = () => {
+        // console.log('Filtrando...');
+        // console.log(propiedades);
+
+        const resultado = propiedades.filter(filtrarCategoria);
+        console.log(resultado);
+    };
+
+    // const filtrarCategoria = propiedad => {
+    //     // console.log(propiedad);
+
+    //     // Retornar si existe un valor en categorio en el objeto filtros
+    //     return filtros.categoria ? propiedad.categoriaId === filtros.categoria : propiedad;
+    // };
+    const filtrarCategoria = propiedad => filtros.categoria ? propiedad.categoriaId === filtros.categoria : propiedad;
 
 })();
