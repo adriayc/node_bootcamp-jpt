@@ -88,7 +88,8 @@
         // console.log('Filtrando...');
         // console.log(propiedades);
 
-        const resultado = propiedades.filter(filtrarCategoria);
+        // chaining de filters (array methods)
+        const resultado = propiedades.filter(filtrarCategoria).filter(filtrarPrecio);
         console.log(resultado);
     };
 
@@ -99,5 +100,7 @@
     //     return filtros.categoria ? propiedad.categoriaId === filtros.categoria : propiedad;
     // };
     const filtrarCategoria = propiedad => filtros.categoria ? propiedad.categoriaId === filtros.categoria : propiedad;
+
+    const filtrarPrecio = propiedad => filtros.precio ? propiedad.precioId === filtros.precio : propiedad;
 
 })();
