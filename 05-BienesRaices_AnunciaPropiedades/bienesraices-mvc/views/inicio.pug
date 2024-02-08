@@ -27,6 +27,13 @@ block contenido
         //- Agregando clases con valores arbitrarios (soporte para la version 3 para adelante)
         div(id="mapa-inicio" class="h-[600px] mt-5")
 
+        section(class="py-5")
+            h2(class="text-center text-4xl font-extrabold pt-10") Casas en Venta
+
+            //- Mostrar la data formateada en JSON
+            //- pre= JSON.stringify(casas, undefined, 2)
+            pre= JSON.stringify(departamentos, undefined, 2)
+
 block scripts
     script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")
     //- Llamar archivos JS
