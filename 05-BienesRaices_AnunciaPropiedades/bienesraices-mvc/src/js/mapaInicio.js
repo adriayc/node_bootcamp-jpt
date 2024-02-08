@@ -6,6 +6,7 @@
     const mapa = L.map('mapa-inicio').setView([lat, lng], 13);
 
     let markers = new L.FeatureGroup().addTo(mapa);
+    // console.log(markers);
 
     let propiedades =[];
 
@@ -64,6 +65,9 @@
     const mostrarPropiedades = propiedades => {
         // console.log(propiedades);
 
+        // Limpiar los markers previos
+        markers.clearLayers();
+
         propiedades.forEach(propiedad => {
             // console.log(propiedad);
             // Agregar los pines
@@ -90,7 +94,9 @@
 
         // chaining de filters (array methods)
         const resultado = propiedades.filter(filtrarCategoria).filter(filtrarPrecio);
-        console.log(resultado);
+        // console.log(resultado);
+
+        mostrarPropiedades(resultado);
     };
 
     // const filtrarCategoria = propiedad => {
