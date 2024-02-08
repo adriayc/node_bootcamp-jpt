@@ -1,6 +1,18 @@
-const inicio = (req, res) => {
+// Models
+import { Categoria, Precio, Propiedad } from '../models/index.js';
+
+const inicio = async (req, res) => {
+    const [categorias, precios] = await Promise.all([
+        // Formato raw
+        Categoria.findAll({raw: true}),
+        Precio.findAll({raw: true})
+    ]);
+    console.log(categorias);
+
     res.render('inicio', {
-        pagina: 'Inicio'
+        pagina: 'Inicio',
+        categorias,
+        precios
     });
 };
 
