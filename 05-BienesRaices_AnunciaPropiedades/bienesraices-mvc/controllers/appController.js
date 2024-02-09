@@ -36,6 +36,7 @@ const inicio = async (req, res) => {
 
     res.render('inicio', {
         pagina: 'Inicio',
+        csrfToken: req.csrfToken(),
         categorias,
         precios,
         casas,
@@ -67,13 +68,15 @@ const categoria = async (req, res) => {
 
     res.render('categoria', {
         pagina: `${categoria.nombre}s en Venta`,
+        csrfToken: req.csrfToken(),
         propiedades
     });
 };
 
 const noEncontrado = (req, res) => {
     res.render('404', {
-        pagina: 'No Encontrada'
+        pagina: 'No Encontrada',
+        csrfToken: req.csrfToken()
     });
 };
 
