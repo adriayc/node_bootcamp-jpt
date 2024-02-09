@@ -83,6 +83,7 @@ const noEncontrado = (req, res) => {
 
 const buscador = async (req, res) => {
     const { termino } = req.body;
+    // console.log(termino);
 
     if (!termino) {
         // Redirige a la pagina donde se encontraba
@@ -100,7 +101,13 @@ const buscador = async (req, res) => {
             {model: Precio, as: 'precio'}
         ]
     });
-    console.log(propiedades);
+    // console.log(propiedades);
+
+    res.render('busqueda', {
+        pagina: 'Resultados de la Búsquedas',
+        csrfToken: req.csrfToken(),
+        propiedades,
+    });
 };
 
 export {
