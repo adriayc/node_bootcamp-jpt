@@ -13,6 +13,8 @@ const identificarUsuario = async (req, res, next) => {
     }
 
     // Comprobar el token
+
+    // next();
 };
 
 export default identificarUsuario;

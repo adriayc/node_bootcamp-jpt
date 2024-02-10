@@ -352,8 +352,8 @@ const eliminar = async (req, res) => {
 
 // Mostrar una propiedad
 const mostrarPropiedad = async (req, res) => {
-    console.log(req.usuario);
-    
+    // console.log(req.usuario);
+
     const { id } = req.params;
 
     // Validar que la propiedad exista
@@ -369,7 +369,8 @@ const mostrarPropiedad = async (req, res) => {
     res.render('propiedades/mostrar', {
         pagina: propiedad.titulo,
         csrfToken: req.csrfToken(),
-        propiedad
+        propiedad,
+        usuario: req.usuario
     });
 };
 
