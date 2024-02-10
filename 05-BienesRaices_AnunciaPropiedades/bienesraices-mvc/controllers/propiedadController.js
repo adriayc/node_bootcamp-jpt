@@ -352,6 +352,8 @@ const eliminar = async (req, res) => {
 
 // Mostrar una propiedad
 const mostrarPropiedad = async (req, res) => {
+    console.log(req.usuario);
+    
     const { id } = req.params;
 
     // Validar que la propiedad exista
