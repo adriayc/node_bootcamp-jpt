@@ -3,7 +3,7 @@ import { body, validationResult } from 'express-validator';
 // Models
 // import Categoria from '../models/Categoria.js';
 // import Precio from '../models/Precio.js';
-import { Categoria, Precio, Propiedad } from '../models/index.js';
+import { Categoria, Precio, Propiedad, Mensaje } from '../models/index.js';
 // Helpers
 import { esVendedor } from '../helpers/index.js';
 
@@ -413,16 +413,33 @@ const enviarMensaje = async (req, res) => {
         });
     }
 
-    // Almacenar el mensaje
+    // console.log(req.body);
+    // console.log(req.params);
+    // console.log(req.usuario);
+    // return;
 
-    res.render('propiedades/mostrar', {
-        pagina: propiedad.titulo,
-        csrfToken: req.csrfToken(),
-        propiedad,
-        usuario: req.usuario,
-        esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
-        enviado:true
+    const { mensaje } = req.body;   
+    const { id: propiedadId } = req.params;
+    const { id: usuarioId } = req.usuario;
+
+    // Almacenar el mensaje
+    await Mensaje.create({
+        mensaje,
+        propiedadId,
+        usuarioId
     });
+
+    // res.render('propiedades/mostrar', {
+    //     pagina: propiedad.titulo,
+    //     csrfToken: req.csrfToken(),
+    //     propiedad,
+    //     usuario: req.usuario,
+    //     esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
+    //     enviado:true
+    // });
+
+    // Redirigir a la pagina principal
+    res.redirect('/');
 };
 
 export {
