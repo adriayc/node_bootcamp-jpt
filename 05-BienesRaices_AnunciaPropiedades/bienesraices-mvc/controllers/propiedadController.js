@@ -4,6 +4,8 @@ import { body, validationResult } from 'express-validator';
 // import Categoria from '../models/Categoria.js';
 // import Precio from '../models/Precio.js';
 import { Categoria, Precio, Propiedad } from '../models/index.js';
+// Helpers
+import { esVendedor } from '../helpers/index.js';
 
 const admin = async (req, res) => {
     // res.send('Mis propiedades...');
@@ -366,11 +368,19 @@ const mostrarPropiedad = async (req, res) => {
         return res.redirect('/404');
     }
 
+    /**
+     * Optional Chaining (?.) accede a la propiedad de un objeto o llama a una función. Si el objeto al que se accede o la 
+     * funcion llamada usando este operador no está definido o es nulo, la expresion produce un cortocircuito y se evalúa como 
+     * indefinido en lugar de generar un error.
+     */
+    // console.log(esVendedor(req.usuario?.id, propiedad.usuarioId));
+
     res.render('propiedades/mostrar', {
         pagina: propiedad.titulo,
         csrfToken: req.csrfToken(),
         propiedad,
-        usuario: req.usuario
+        usuario: req.usuario,
+        esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId)
     });
 };
 
