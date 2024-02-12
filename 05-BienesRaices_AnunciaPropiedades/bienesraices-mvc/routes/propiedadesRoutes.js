@@ -65,4 +65,6 @@ router.post('/propiedades/eliminar/:id', protegerRuta, eliminar);
 // Area Publica
 router.get('/propiedad/:id', identificarUsuario, mostrarPropiedad);
 
+// Almacenar los mensajes
+
 export default router;
