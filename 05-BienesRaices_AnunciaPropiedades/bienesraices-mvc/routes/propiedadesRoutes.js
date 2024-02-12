@@ -14,7 +14,8 @@ import {
     editar, 
     guardarCambios, 
     eliminar, 
-    mostrarPropiedad 
+    mostrarPropiedad,
+    enviarMensaje
 } from '../controllers/propiedadController.js';
 
 const router = express.Router();
@@ -66,5 +67,11 @@ router.post('/propiedades/eliminar/:id', protegerRuta, eliminar);
 router.get('/propiedad/:id', identificarUsuario, mostrarPropiedad);
 
 // Almacenar los mensajes
+router.post('/propiedad/:id',
+    identificarUsuario,
+    // Validacion de los campos
+    body('mensaje').isLength({min: 20}).withMessage('El mensaje es requerido o es muy corto'),
+    enviarMensaje
+);
 
 export default router;

@@ -384,6 +384,47 @@ const mostrarPropiedad = async (req, res) => {
     });
 };
 
+const enviarMensaje = async (req, res) => {
+    // console.log('Enviando mensaje...');
+
+    const { id } = req.params;
+
+    // Validar que la propiedad exista
+    const propiedad = await Propiedad.findByPk(id, {include: [
+        {model: Categoria, as: 'categoria'},
+        {model: Precio, as: 'precio'}
+    ]});
+
+    if (!propiedad) {
+        return res.redirect('/404');
+    }
+
+    // Validacion
+    let resultado = validationResult(req);
+
+    if (!resultado.isEmpty()) {
+        return res.render('propiedades/mostrar', {
+            pagina: propiedad.titulo,
+            csrfToken: req.csrfToken(),
+            propiedad,
+            usuario: req.usuario,
+            esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
+            errores: resultado.array()
+        });
+    }
+
+    // Almacenar el mensaje
+
+    res.render('propiedades/mostrar', {
+        pagina: propiedad.titulo,
+        csrfToken: req.csrfToken(),
+        propiedad,
+        usuario: req.usuario,
+        esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
+        enviado:true
+    });
+};
+
 export {
     admin,
     crear,
@@ -393,5 +434,6 @@ export {
     editar,
     guardarCambios,
     eliminar,
-    mostrarPropiedad
+    mostrarPropiedad,
+    enviarMensaje
 };
