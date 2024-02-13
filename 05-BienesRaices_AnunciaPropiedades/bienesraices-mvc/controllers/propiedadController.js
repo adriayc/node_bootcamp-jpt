@@ -3,7 +3,7 @@ import { body, validationResult } from 'express-validator';
 // Models
 // import Categoria from '../models/Categoria.js';
 // import Precio from '../models/Precio.js';
-import { Categoria, Precio, Propiedad, Mensaje } from '../models/index.js';
+import { Usuario, Categoria, Precio, Propiedad, Mensaje } from '../models/index.js';
 // Helpers
 import { esVendedor } from '../helpers/index.js';
 
@@ -452,7 +452,8 @@ const verMensaje = async (req, res) => {
     // Validar que la propiedad exista
     const propiedad = await Propiedad.findByPk(id,{
         include: [
-            {model: Mensaje, as: 'mensajes'}
+            // Incluye en el Usuario a modelo de Mensaje
+            {model: Mensaje, as: 'mensajes', include: [{model: Usuario.scope('eliminarPassword'), as: 'usuario'}]}
         ]
     });
 
