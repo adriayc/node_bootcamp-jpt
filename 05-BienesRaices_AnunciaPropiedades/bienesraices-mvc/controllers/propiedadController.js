@@ -5,7 +5,7 @@ import { body, validationResult } from 'express-validator';
 // import Precio from '../models/Precio.js';
 import { Usuario, Categoria, Precio, Propiedad, Mensaje } from '../models/index.js';
 // Helpers
-import { esVendedor } from '../helpers/index.js';
+import { esVendedor, formatearFecha } from '../helpers/index.js';
 
 const admin = async (req, res) => {
     // res.send('Mis propiedades...');
@@ -468,7 +468,8 @@ const verMensaje = async (req, res) => {
 
     res.render('propiedades/mensajes', {
         pagina: 'Mensajes',
-        mensajes: propiedad.mensajes
+        mensajes: propiedad.mensajes,
+        formatearFecha
     });
 }
 
