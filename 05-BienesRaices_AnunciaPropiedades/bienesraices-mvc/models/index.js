@@ -15,8 +15,12 @@ Propiedad.belongsTo(Categoria,  {foreignKey: 'categoriaId'});
 // Una Propiedad tiene un Usuario
 // Usuario.hasOne(Propiedad);
 Propiedad.belongsTo(Usuario, {foreignKey: 'usuarioId'})
+// Una Propiedad puede tener muchos Mensajes
+Propiedad.hasMany(Mensaje, {foreignKey: 'propiedadId'});
 
+// Un Mensaje tiene una Propiedad
 Mensaje.belongsTo(Propiedad, {foreignKey: 'propiedadId'});
+// Un Mensaje tiene un Usuario
 Mensaje.belongsTo(Usuario, {foreignKey: 'usuarioId'});
 
 export {

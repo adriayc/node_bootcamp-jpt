@@ -40,7 +40,8 @@ const admin = async (req, res) => {
                 // JOIN (Cruzar multiples modelos)
                 include: [
                     {model: Categoria, as: 'categoria'},
-                    {model: Precio, as: 'precio'}
+                    {model: Precio, as: 'precio'},
+                    {model: Mensaje, as: 'mensajes'}
                 ]
             }),
             Propiedad.count({
