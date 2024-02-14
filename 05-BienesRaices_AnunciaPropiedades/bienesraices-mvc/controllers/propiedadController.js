@@ -213,6 +213,11 @@ const almacenarImagen = async (req, res, next) => {
     }
 };
 
+// Modificar el estado de la propiedad
+const cambiarEstado = async (req, res) => {
+    console.log('Cambiando estado...');
+};
+
 const editar = async (req, res) => {
     // console.log(req.params);
     const { id } = req.params;
@@ -479,6 +484,7 @@ export {
     guardar,
     agregarImagen,
     almacenarImagen,
+    cambiarEstado,
     editar,
     guardarCambios,
     eliminar,

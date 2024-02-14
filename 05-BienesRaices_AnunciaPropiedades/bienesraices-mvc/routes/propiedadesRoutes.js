@@ -11,6 +11,7 @@ import {
     guardar, 
     agregarImagen, 
     almacenarImagen, 
+    cambiarEstado, 
     editar, 
     guardarCambios, 
     eliminar, 
@@ -44,6 +45,8 @@ router.get('/propiedades/agregar-imagen/:id', protegerRuta, agregarImagen);
 // router.post('/propiedades/agregar-imagen/:id', upload.array('imagen'));
 // Una sola imagen
 router.post('/propiedades/agregar-imagen/:id', protegerRuta, upload.single('imagen'), almacenarImagen);
+// Fetch API soporta el verbo PUT (Solicitud desde la vista)
+router.put('/propiedades/:id', protegerRuta, cambiarEstado);
 router.get('/propiedades/editar/:id', protegerRuta, editar);
 // router.update();     // Error no soporta el navegador
 router.post('/propiedades/editar/:id',

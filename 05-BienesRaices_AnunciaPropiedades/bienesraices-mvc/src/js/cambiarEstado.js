@@ -7,12 +7,25 @@
         boton.addEventListener('click', cambiarEstadoPropiedad);
     });
 
-    function cambiarEstadoPropiedad (e) {
+    async function cambiarEstadoPropiedad (e) {
         // console.log('Presionando boton...');
         // console.log(e.target.dataset);
 
         const { propiedadId: id } = e.target.dataset;
-        console.log(id);
+        // console.log(id);
+
+        try {
+            const url = `/propiedades/${id}`;
+
+            // Fetch API - PUT
+            const respuesta = await fetch(url, {
+                method: 'PUT'
+            });
+            console.log(respuesta);
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 })();
