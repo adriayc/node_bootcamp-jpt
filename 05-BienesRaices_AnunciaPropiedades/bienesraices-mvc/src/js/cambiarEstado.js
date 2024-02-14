@@ -27,7 +27,9 @@
                     'CSRF-Token': token
                 }
             });
-            console.log(respuesta);
+            // console.log(respuesta);         // La repuesta puede ser: JSON o Text
+            const resultado = await respuesta.json();
+            console.log(resultado);
 
         } catch (error) {
             console.log(error);

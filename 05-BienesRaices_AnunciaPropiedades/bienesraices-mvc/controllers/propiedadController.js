@@ -215,7 +215,34 @@ const almacenarImagen = async (req, res, next) => {
 
 // Modificar el estado de la propiedad
 const cambiarEstado = async (req, res) => {
-    console.log('Cambiando estado...');
+    // console.log('Cambiando estado...');
+
+    const { id } = req.params;
+    
+    // Validar que la propiedad exista
+    const propiedad = await Propiedad.findByPk(id);
+
+    if (!propiedad) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    // Revisar que quien visito la URL, es quien creo la propiedad
+    if (propiedad.usuarioId.toString() !== req.usuario.id.toString()) {
+       return res.redirect('/mis-propiedades'); 
+    }
+
+    // console.log(propiedad);
+
+    // Actualizar el estado de la propiedad
+    // if (propiedad.publicado) {
+    //     propiedad.publicado = 0;
+    // } else {
+    //     propiedad.publicado = 1;
+    // }
+    propiedad.publicado = !propiedad.publicado;
+    await propiedad.save();
+
+    res.json({ resultado: true });
 };
 
 const editar = async (req, res) => {
