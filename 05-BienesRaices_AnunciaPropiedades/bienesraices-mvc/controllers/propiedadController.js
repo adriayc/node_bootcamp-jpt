@@ -397,7 +397,7 @@ const mostrarPropiedad = async (req, res) => {
         {model: Precio, as: 'precio'}
     ]});
 
-    if (!propiedad) {
+    if (!propiedad || !propiedad.publicado) {
         return res.redirect('/404');
     }
 
