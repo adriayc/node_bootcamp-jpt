@@ -55,3 +55,20 @@
       # npm run start
       # npm start
       # npm run dev
+
+    - Deployment de la App:
+      + Exportar la DB de nuestra aplicacion por Workbench o Terminal (nombre_db.sql)
+      + Crear e ingresar a la cuenta de GitHub (https://github.com/)
+      + Crear e ingresar a la cuenta de Fl0 (https://www.fl0.com/) con la cuenta de GitHub
+      + Crear e ingresar a la cuenta de Filess (https://filess.io/)
+        > Click en el boton "New Database"
+          * Database indentifier: bienenesraices
+          * Databse motor: MySQL v8.0.29 y el resto lo dejamos por defecto
+          * Click en el boton "Create"
+        > Ir a "Databases" -> Seleccionamos nuestra DB -> Muestra la configuracion de la DB
+          * Click en boton "Web Client"
+            > Click en boton '+' para abrir una 'New Query'
+              - Abrir la DB de la app (archivo nombre_db.sql) en un editor y copiar todo el contenido
+              - Pegar el contenido SQL a 'New Query'
+              - Click en boton 'Execute'
+            > Refrescar la pantalla para ver la importacion de la DB y verficar los registros de las tablas
