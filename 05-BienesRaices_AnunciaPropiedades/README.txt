@@ -55,3 +55,38 @@
       # npm run start
       # npm start
       # npm run dev
+
+    - Deployment de la App:
+      + Exportar la DB de nuestra aplicacion por Workbench o Terminal (nombre_db.sql)
+      + Crear e ingresar a la cuenta de GitHub (https://github.com/)
+        > Click en el boton 'New' para crear un nuevo repositorio
+          * Resposity name: bienenesraices_node_mvc
+          * Description: Deployment del Proyecto con Node, Express, Autenticacion, TailwindCSS, Mapas y más
+          * Click en 'Create resposity'
+        > Subir la proyecto 'bienenesraices' del local al reposotio GitHub
+      + Crear e ingresar a la cuenta de Fl0 (https://www.fl0.com/) con la cuenta de GitHub
+        > Click en 'New project'
+          * Create new project: bienenesraices-node
+          * Click 'Deploy code with GitHub'
+            - Click 'Connect your GitHub repo'
+            - Click 'Conect' para conectar el repositorio de BinesRaices
+              > Give your web application a name: bienenesraicesnodemvc
+              > Select a brach to deploy: main
+              > Select a regio to deploy to: United States (East)
+              > Click 'Add new variable' y pegamos las variables de entorno del proyecto (Modificamos los 'env' de DB apuntando a filess.io)
+              > Click 'Deploy your app'
+          * Ingresamos a nuesta app creada en 'fl0.com':
+            > Podemos revisar los Logs, Enviroments variables, etc
+            > Copiamos la URL que esta debajo del nombre y lo copiamos en navegador para ver nuesta app de 'BienesRaices'
+      + Crear e ingresar a la cuenta de Filess (https://filess.io/)
+        > Click en el boton "New Database"
+          * Database indentifier: bienenesraices
+          * Databse motor: MySQL v8.0.29 y el resto lo dejamos por defecto
+          * Click en el boton "Create"
+        > Ir a "Databases" -> Seleccionamos nuestra DB -> Muestra la configuracion de la DB
+          * Click en boton "Web Client"
+            > Click en boton '+' para abrir una 'New Query'
+              - Abrir la DB de la app (archivo nombre_db.sql) en un editor y copiar todo el contenido
+              - Pegar el contenido SQL a 'New Query'
+              - Click en boton 'Execute'
+            > Refrescar la pantalla para ver la importacion de la DB y verficar los registros de las tablas
