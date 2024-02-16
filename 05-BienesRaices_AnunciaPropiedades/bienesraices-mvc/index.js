@@ -2,11 +2,22 @@
 // const express = require('express');
 // NEW - ECMAScript modules
 import express from 'express';
+// DBs
+import db from './config/db.js';
 // Customs routes
 import usuarioRoutes from './routes/usuarioRoutes.js';
 
 // Crear la app
 const app = express();
+
+// Conexión a la base de datos
+try {
+    await db.authenticate();
+    console.log('Conexión correcta a la Base de Datos')
+
+} catch (error) {
+    console.log(error);
+}
 
 // Habilitar Pug
 app.set('view engine', 'pug');

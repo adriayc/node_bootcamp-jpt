@@ -94,3 +94,21 @@ Apps que utilizan Node.js:
 ### Router en MVC
 - Es el encargado de registrar todas las URL's o Endpoints que va a soportar nuestra aplicación.
 - Ejemplo: Si el Usuario accede a /clientes el router ya tiene registrada esa ruta y un controlador con una función que sabe que Modelo debe llamar y que vista mostrar cuando el usuario visita esa URL.
+
+## ¿Qué es ORM?
+- ORM son las iniciales de Object Relational Mapping.
+- Es una técnica que se utiliza donde los datos de una base de datos son tratados como Objetos, utilizando un paradigma de Programación Orientado a Objectos.
+- Node.js tiene una gran cantidad de ORM's que se instalan como librería.
+- En MVC, un ORM se relaciona bastante con el Modelo.
+
+### Ventajas de un ORM
+- Comenzar a crear aplicaciones que utilicen bases de datos, sin necesidad de escribir código SQL y tampoco saber sobre modelado de bases de datos.
+- Velocidad en desarrollo ya que tiene un gran cantidad de métodos para crear, listar, actualizar o eliminar datos.
+- La mayoría cuentan con todas las medidas de seguridad.
+
+### Ejemplos de ORM
+- Prisma
+- Sequealize
+- Bookshelf.js
+- Mongoose
+- TypeORM

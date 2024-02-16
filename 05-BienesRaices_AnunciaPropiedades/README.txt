@@ -24,6 +24,12 @@
       + TailwindCSS
         # npm install -D tailwindcss autoprefixer postcss postcss-cli
         # npx tailwindcss init
+      + Sequelize (ORM)
+        # npm install sequelize mysql2
+        Crear database:
+          > CREATE DATABASE bienenesraices_node_app;
+      + Dotenv
+        # npm install dotenv
     - Run app
       # npm run start
       # npm start
