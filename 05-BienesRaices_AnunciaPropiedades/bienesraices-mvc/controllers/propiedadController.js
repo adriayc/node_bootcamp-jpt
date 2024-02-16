@@ -8,8 +8,7 @@ const admin = (req, res) => {
     // res.send('Mis propiedades...');
 
     res.render('propiedades/admin', {
-        pagina: 'Mis Propiedades',
-        barra: true
+        pagina: 'Mis Propiedades'
     });
 };
 
@@ -23,7 +22,6 @@ const crear = async (req, res) => {
 
     res.render('propiedades/crear', {
         pagina: 'Crear Propiedad',
-        barra: true,
         csrfToken: req.csrfToken(),
         categorias,
         precios,
@@ -44,7 +42,6 @@ const guardar = async (req, res) => {
 
         return res.render('propiedades/crear', {
             pagina: 'Crear Propiedad',
-            barra: true,
             csrfToken: req.csrfToken(),
             categorias,
             precios,
@@ -93,8 +90,78 @@ const guardar = async (req, res) => {
 
 };
 
+const agregarImagen = async (req, res) => {
+    // res.send('Agregando imagen...');
+    const { id } = req.params; 
+
+    // Validar que la propiedad exista
+    const propiedad = await Propiedad.findByPk(id);
+
+    if (!propiedad) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    // Validar que la propiedad no este publicada
+    if (propiedad.publicado) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    // Validar que la propiedad pertenece a quien visita esta página
+    // console.log(req.usuario.id);
+    // console.log(typeof req.usuario.id.toString());
+    // console.log(propiedad.usuarioId);
+    // console.log(typeof propiedad.usuarioId.toString());
+    if (req.usuario.id.toString() !== propiedad.usuarioId.toString()) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    res.render('propiedades/agregar-imagen', {
+        pagina: `Agregar Imagen: ${propiedad.titulo}`,
+        csrfToken: req.csrfToken(),
+        propiedad
+    });
+};
+
+const almacenarImagen = async (req, res, next) => {
+    const { id } = req.params; 
+
+    // Validar que la propiedad exista
+    const propiedad = await Propiedad.findByPk(id);
+
+    if (!propiedad) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    // Validar que la propiedad no este publicada
+    if (propiedad.publicado) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    try {
+        // console.log(req.file.filename);
+
+        // Almacenar la imagen y publicar la propiedad
+        propiedad.imagen = req.file.filename;
+        propiedad.publicado = 1;
+
+        // Guardar los cambios de la propiedad
+        await propiedad.save();
+
+        // Redirigir a una pagina
+        // return res.redirect('/mis-propiedades');     // Error, no funciona la redireccion
+
+        // Redirige al siguiente middleware
+        next();
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export {
     admin,
     crear,
-    guardar
+    guardar,
+    agregarImagen,
+    almacenarImagen
 };

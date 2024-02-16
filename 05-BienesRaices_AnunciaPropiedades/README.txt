@@ -46,6 +46,11 @@
         # npm install -D webpack webpack-cli
       + Concurrently
         # npm install -D concurrently
+      + Dropzone
+        # npm install dropzone            # Current version
+        # npm install dropzone@5.9.3      # Old version (App)
+      + Multer
+        # npm install multer
     - Run app
       # npm run start
       # npm start
