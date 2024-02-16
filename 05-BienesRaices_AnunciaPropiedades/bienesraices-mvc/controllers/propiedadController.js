@@ -1,3 +1,4 @@
+import { unlink } from 'node:fs/promises';      // Funcion propia de node.js para eliminar archivos
 import { body, validationResult } from 'express-validator';
 // Models
 // import Categoria from '../models/Categoria.js';
@@ -22,6 +23,7 @@ const admin = async (req, res) => {
 
     res.render('propiedades/admin', {
         pagina: 'Mis Propiedades',
+        csrfToken: req.csrfToken(),
         propiedades
     });
 };
@@ -285,6 +287,33 @@ const guardarCambios = async (req, res) => {
     }
 };
 
+const eliminar = async (req, res) => {
+    // console.log('Eliminando...');
+
+    const { id } = req.params;
+    
+    // Validar que la propiedad exista
+    const propiedad = await Propiedad.findByPk(id);
+    
+    if (!propiedad) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    // Revisar que quien visita la URL, es quien creo la propiedad
+    if (propiedad.usuarioId.toString() !== req.usuario.id.toString()) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    // Eliminar la imagen
+    await unlink(`public/uploads/${propiedad.imagen}`);
+    console.log(`Se eliminó la imagen ${propiedad.imagen}`);
+
+    // Eliminar la propiedad
+    await propiedad.destroy();
+
+    res.redirect('/mis-propiedades');
+};
+
 export {
     admin,
     crear,
@@ -292,5 +321,6 @@ export {
     agregarImagen,
     almacenarImagen,
     editar,
-    guardarCambios
+    guardarCambios,
+    eliminar
 };
