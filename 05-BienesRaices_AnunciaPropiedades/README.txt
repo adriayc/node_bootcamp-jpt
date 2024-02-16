@@ -19,6 +19,11 @@
         # npm install -D express (Modo desarrollo)
       + Nodemon
         # npm install -D nodemon
+      + Pug
+        # npm install pug
+      + TailwindCSS
+        # npm install -D tailwindcss autoprefixer postcss postcss-cli
+        # npx tailwindcss init
     - Run app
       # npm run start
       # npm start
