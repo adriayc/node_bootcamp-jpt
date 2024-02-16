@@ -40,6 +40,8 @@
         # npm install csurf     // Protección CSRF de los formularios (Deprecado!)
       + Cookie Parser
         # npm install cookie-parser
+      + JSON Web Token
+        # npm install jsonwebtoken
     - Run app
       # npm run start
       # npm start
