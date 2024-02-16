@@ -3,6 +3,7 @@ import { body } from 'express-validator';
 // Middlewares
 import protegerRuta from '../middleware/protegerRuta.js';
 import upload from '../middleware/subirImagen.js';
+import identificarUsuario from '../middleware/identificarUsuario.js';
 // Controllers
 import { 
     admin, 
@@ -13,7 +14,9 @@ import {
     editar, 
     guardarCambios, 
     eliminar, 
-    mostrarPropiedad 
+    mostrarPropiedad,
+    enviarMensaje,
+    verMensaje
 } from '../controllers/propiedadController.js';
 
 const router = express.Router();
@@ -62,6 +65,16 @@ router.post('/propiedades/editar/:id',
 router.post('/propiedades/eliminar/:id', protegerRuta, eliminar);
 
 // Area Publica
-router.get('/propiedad/:id', mostrarPropiedad);
+router.get('/propiedad/:id', identificarUsuario, mostrarPropiedad);
+
+// Almacenar los mensajes
+router.post('/propiedad/:id',
+    identificarUsuario,
+    // Validacion de los campos
+    body('mensaje').isLength({min: 20}).withMessage('El mensaje es requerido o es muy corto'),
+    enviarMensaje
+);
+
+router.get('/mensajes/:id', protegerRuta, verMensaje);
 
 export default router;

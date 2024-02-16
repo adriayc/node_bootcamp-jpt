@@ -3,7 +3,9 @@ import { body, validationResult } from 'express-validator';
 // Models
 // import Categoria from '../models/Categoria.js';
 // import Precio from '../models/Precio.js';
-import { Categoria, Precio, Propiedad } from '../models/index.js';
+import { Usuario, Categoria, Precio, Propiedad, Mensaje } from '../models/index.js';
+// Helpers
+import { esVendedor, formatearFecha } from '../helpers/index.js';
 
 const admin = async (req, res) => {
     // res.send('Mis propiedades...');
@@ -38,7 +40,8 @@ const admin = async (req, res) => {
                 // JOIN (Cruzar multiples modelos)
                 include: [
                     {model: Categoria, as: 'categoria'},
-                    {model: Precio, as: 'precio'}
+                    {model: Precio, as: 'precio'},
+                    {model: Mensaje, as: 'mensajes'}
                 ]
             }),
             Propiedad.count({
@@ -352,6 +355,8 @@ const eliminar = async (req, res) => {
 
 // Mostrar una propiedad
 const mostrarPropiedad = async (req, res) => {
+    // console.log(req.usuario);
+
     const { id } = req.params;
 
     // Validar que la propiedad exista
@@ -364,12 +369,109 @@ const mostrarPropiedad = async (req, res) => {
         return res.redirect('/404');
     }
 
+    /**
+     * Optional Chaining (?.) accede a la propiedad de un objeto o llama a una función. Si el objeto al que se accede o la 
+     * funcion llamada usando este operador no está definido o es nulo, la expresion produce un cortocircuito y se evalúa como 
+     * indefinido en lugar de generar un error.
+     */
+    // console.log(esVendedor(req.usuario?.id, propiedad.usuarioId));
+
     res.render('propiedades/mostrar', {
         pagina: propiedad.titulo,
         csrfToken: req.csrfToken(),
-        propiedad
+        propiedad,
+        usuario: req.usuario,
+        esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId)
     });
 };
+
+const enviarMensaje = async (req, res) => {
+    // console.log('Enviando mensaje...');
+
+    const { id } = req.params;
+
+    // Validar que la propiedad exista
+    const propiedad = await Propiedad.findByPk(id, {include: [
+        {model: Categoria, as: 'categoria'},
+        {model: Precio, as: 'precio'}
+    ]});
+
+    if (!propiedad) {
+        return res.redirect('/404');
+    }
+
+    // Validacion
+    let resultado = validationResult(req);
+
+    if (!resultado.isEmpty()) {
+        return res.render('propiedades/mostrar', {
+            pagina: propiedad.titulo,
+            csrfToken: req.csrfToken(),
+            propiedad,
+            usuario: req.usuario,
+            esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
+            errores: resultado.array()
+        });
+    }
+
+    // console.log(req.body);
+    // console.log(req.params);
+    // console.log(req.usuario);
+    // return;
+
+    const { mensaje } = req.body;   
+    const { id: propiedadId } = req.params;
+    const { id: usuarioId } = req.usuario;
+
+    // Almacenar el mensaje
+    await Mensaje.create({
+        mensaje,
+        propiedadId,
+        usuarioId
+    });
+
+    // res.render('propiedades/mostrar', {
+    //     pagina: propiedad.titulo,
+    //     csrfToken: req.csrfToken(),
+    //     propiedad,
+    //     usuario: req.usuario,
+    //     esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
+    //     enviado:true
+    // });
+
+    // Redirigir a la pagina principal
+    res.redirect('/');
+};
+
+// Ver los mensajes recibidos
+const verMensaje = async (req, res) => {
+    // res.send('Mensajes aquí...');
+
+    const { id } = req.params;
+
+    // Validar que la propiedad exista
+    const propiedad = await Propiedad.findByPk(id,{
+        include: [
+            // Incluye en el Usuario a modelo de Mensaje
+            {model: Mensaje, as: 'mensajes', include: [{model: Usuario.scope('eliminarPassword'), as: 'usuario'}]}
+        ]
+    });
+
+    if (!propiedad) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    // Revisar que quien visita la URL, es quien creo la propiedad
+    if (propiedad.usuarioId.toString() !== req.usuario.id.toString()) {
+        return res.redirect('/mis-propiedades');
+    }
+
+    res.render('propiedades/mensajes', {
+        pagina: 'Mensajes',
+        mensajes: propiedad.mensajes,
+        formatearFecha
+    });
+}
 
 export {
     admin,
@@ -380,5 +482,7 @@ export {
     editar,
     guardarCambios,
     eliminar,
-    mostrarPropiedad
+    mostrarPropiedad,
+    enviarMensaje,
+    verMensaje
 };
