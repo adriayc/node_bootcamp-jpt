@@ -1,0 +1,9 @@
+import express, { Router } from 'express';
+// Controllers
+import { propiedades } from '../controllers/apiController.js';
+
+const router = express.Router();
+
+router.get('/propiedades', propiedades);
+
+export default router;
