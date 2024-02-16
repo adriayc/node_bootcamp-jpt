@@ -8,24 +8,60 @@ import { Categoria, Precio, Propiedad } from '../models/index.js';
 const admin = async (req, res) => {
     // res.send('Mis propiedades...');
 
-    const { id } = req.usuario;
-    // console.log(id);
+    // Leer QueryString de la URL (http://localhost:3000/mis-propiedades?pagina=1)
+    // console.log(req.query.pagina);
+    const { pagina: paginaActual } = req.query;
 
-    const propiedades = await Propiedad.findAll({
-        where: { usuarioId: id },
-        // JOIN (Cruzar multiples modelos)
-        include: [
-            {model: Categoria, as: 'categoria'},
-            {model: Precio, as: 'precio'}
-        ]
-    });
-    // console.log(propiedades);
+    // Definimos una expresion regular
+    // const expresion = /^[0-9]$/;
+    const expresion = /^[1-9]$/;
+    // Validar que no se cumpla la expresion regular
+    if (!expresion.test(paginaActual)) {
+        return res.redirect('/mis-propiedades?pagina=1');
+    }
 
-    res.render('propiedades/admin', {
-        pagina: 'Mis Propiedades',
-        csrfToken: req.csrfToken(),
-        propiedades
-    });
+    try {
+        const { id } = req.usuario;
+        // console.log(id);
+
+        // Limites y Offset para el paginador
+        const limit = 10;
+        // const limit = 5;
+        const offset = ((paginaActual * limit) - limit);
+    
+        const [propiedades, total] = await Promise.all([
+            Propiedad.findAll({
+                // limit: limit,
+                limit,
+                offset,
+                where: { usuarioId: id },
+                // JOIN (Cruzar multiples modelos)
+                include: [
+                    {model: Categoria, as: 'categoria'},
+                    {model: Precio, as: 'precio'}
+                ]
+            }),
+            Propiedad.count({
+                where: { usuarioId: id }
+            })
+        ]);
+        // console.log(propiedades);
+        // console.log(total);
+    
+        res.render('propiedades/admin', {
+            pagina: 'Mis Propiedades',
+            csrfToken: req.csrfToken(),
+            propiedades,
+            paginas: Math.ceil(total / limit),
+            paginaActual: Number(paginaActual),
+            total,
+            offset,
+            limit
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 // Formulario para crear una nueva propiedad
