@@ -1,9 +1,11 @@
 import { check, validationResult } from 'express-validator';
+// BCrypt
+import bcrypt from 'bcrypt';
 // Models
 import Usuario from '../models/Usuario.js';
 // Helpers
 import { generarId } from '../helpers/tokens.js';
-import { emailRegistro } from '../helpers/emails.js';
+import { emailRegistro, emailOlvidePassword } from '../helpers/emails.js';
 
 const formularioLogin = (req, res) => {
     res.render('auth/login', {
@@ -134,7 +136,121 @@ const confirmar = async (req, res, next) => {
 
 const formularioOlvidePassword = (req, res) => {
     res.render('auth/olvide-password', {
-        pagina: 'Recupera tu acceso a Bienes Raices'
+        pagina: 'Recupera tu acceso a Bienes Raices',
+        csrfToken: req.csrfToken()
+    });
+};
+
+const resetPassword = async (req, res) => {
+    // console.log('Reset password...')
+
+    // Validación
+    await check('email').isEmail().withMessage('El email es invalido').run(req);
+
+    let resultado = validationResult(req);
+
+    // Verificar que el resultado no este vacio
+    if (!resultado.isEmpty()) {
+        // Errores
+        return res.render('auth/olvide-password', {
+            pagina: 'Recupera tu acceso a Bienes Raices',
+            csrfToken: req.csrfToken(),
+            errores: resultado.array()
+        })
+    }
+
+    const { email } = req.body;
+
+    // Buscar el usuario
+    const usuario = await Usuario.findOne({where: {email}})
+    // console.log(usuario);
+
+    if (!usuario) {
+        return res.render('auth/olvide-password', {
+            pagina: 'Recupera tu acceso a Bienes Raices',
+            csrfToken: req.csrfToken(),
+            errores: [{msg: 'El email no pertenece a ningún usuario'}]
+        })
+    }
+
+    // Generar un token
+    usuario.token = generarId();
+    usuario.save();
+
+    // Enviar un email
+    emailOlvidePassword({
+        nombre: usuario.nombre,
+        email: usuario.email,
+        token: usuario.token
+    });
+
+    // Renderizar un mensaje
+    res.render('templates/mensaje', {
+        pagina: 'Restablece tu Password',
+        mensaje: 'Hemos enviado un email con las instrucciones'
+    });
+};
+
+const comprobarToken = async (req, res, next) => {
+    // Enviar al siguiente middleware
+    // next();
+
+    const { token } = req.params;
+
+    const usuario = await Usuario.findOne({where: {token}});
+    // console.log(usuario);
+
+    // Validar si el usuario no existe 
+    if (!usuario) {
+        return res.render('auth/confirmar-cuenta', {
+            pagina: 'Restablece tu Password',
+            mensaje: 'Hubo un error al validar tu información, intenta de nuevo',
+            error: true
+        });
+    }
+
+    // Mostrar el formulario para modificar el password
+    res.render('auth/reset-password', {
+        pagina: 'Reestablece tu Password',
+        csrfToken: req.csrfToken()
+    });
+};
+
+const nuevoPassword = async (req, res) => {
+    // console.log('Guardando password...');
+
+    // Validar el password
+    await check('password').isLength({min: 6}).withMessage('El password debe contener al menos 6 caracteres').run(req);
+
+    let resultado = validationResult(req);
+
+    // Varificar el resultado de la validacion
+    if (!resultado.isEmpty()) {
+        // Errores
+        return res.render('auth/reset-password', {
+            pagina: 'Reestablece tu Password',
+            csrfToken: req.csrfToken(),
+            errores: resultado.array()
+        });
+    }
+
+    const { token } = req.params;
+    const { password } = req.body;
+
+    // Identificar quien hace el cambio
+    const usuario = await Usuario.findOne({where: {token}});
+
+    // Hashear el nuevo password
+    const salt = await bcrypt.genSalt(10);
+    usuario.password = await bcrypt.hash(password, salt);
+    usuario.token = null;
+
+    // Persistir los cambios
+    await usuario.save();
+
+    res.render('auth/confirmar-cuenta', {
+        pagina: 'Password Reestablecido',
+        mensaje: 'El password se guardó correctamente'
     });
 };
 
@@ -143,5 +259,8 @@ export {
     formularioRegistro,
     registrar,
     confirmar,
-    formularioOlvidePassword
+    formularioOlvidePassword,
+    resetPassword,
+    comprobarToken,
+    nuevoPassword
 };
