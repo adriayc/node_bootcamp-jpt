@@ -30,6 +30,16 @@
           > CREATE DATABASE bienenesraices_node_app;
       + Dotenv
         # npm install dotenv
+      + Express Validator
+        # npm install express-validator
+      + BCrypt
+        # npm install bcrypt
+      + Nodemailer
+        # npm install nodemailer
+      + CSurf
+        # npm install csurf     // Protección CSRF de los formularios (Deprecado!)
+      + Cookie Parser
+        # npm install cookie-parser
     - Run app
       # npm run start
       # npm start
