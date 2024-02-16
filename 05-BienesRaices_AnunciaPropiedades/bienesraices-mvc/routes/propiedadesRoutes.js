@@ -1,13 +1,16 @@
 import express from 'express';
 import { body } from 'express-validator';
+// Middlewares
+import protegerRuta from '../middleware/protegerRuta.js';
 // Controllers
 import { admin, crear, guardar } from '../controllers/propiedadController.js';
 
 const router = express.Router();
 
-router.get('/mis-propiedades', admin);
-router.get('/propiedades/crear', crear);
+router.get('/mis-propiedades', protegerRuta, admin);
+router.get('/propiedades/crear', protegerRuta, crear);
 router.post('/propiedades/crear', 
+    protegerRuta,
     // Validacion de los campos en el router
     body('titulo').notEmpty().withMessage('El titulo es obligatorio'),
     body('descripcion')
