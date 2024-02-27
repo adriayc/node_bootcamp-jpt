@@ -11,7 +11,7 @@
             > author: Adriano Ayala
             > license: (ISC) ENTER
             Is this OK? (yes) yes
-        # npm start 
+        # npm start
     - Instalar dependencias
         + Express y Handlebars (Template engine)
             # npm install ---save express express-handlebars
