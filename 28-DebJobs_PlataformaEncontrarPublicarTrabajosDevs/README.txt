@@ -17,8 +17,10 @@
             # npm install ---save express express-handlebars
         + Nodemon
             # npm install --save-dev nodemon
-        + Dotenv, Connect-Mongo, Mongoose, Short-Id, Slug, Session y Cookie-Parser
+        + Dotenv, Connect-Mongo, Mongoose, Short-Id, Slug y Cookie-Parser
             # npm install --save dotenv connect-mongo mongoose shortid slug session cookie-parser
+        + Express session
+            # npm install --save express-session
     - Instalar Mongo Compass
         + Descargar e instalar Mongo Compass https://www.mongodb.com/try/download/shell
         + Configurar MongoDB Atlas
