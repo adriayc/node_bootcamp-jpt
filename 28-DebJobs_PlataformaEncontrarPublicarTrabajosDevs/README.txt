@@ -17,6 +17,8 @@
             # npm install ---save express express-handlebars
         + Nodemon
             # npm install --save-dev nodemon
+        + Dotenv, Connect-Mongo, Mongoose, Short-Id, Slug, Session y Cookie-Parser
+            # npm install --save dotenv connect-mongo mongoose shortid slug session cookie-parser
     - Instalar Mongo Compass
         + Descargar e instalar Mongo Compass https://www.mongodb.com/try/download/shell
         + Configurar MongoDB Atlas
@@ -27,6 +29,10 @@
             > Ir a 'SECURITY' | 'Database Access' -> 'Database Users' -> click en 'Edit' (Actualizar el password)
             > Ir a 'DEPLOYMENT' | 'Data Services' -> click en 'Connect' -> 'Compass'
               > Copiar la cadena de conexion 'mongodb+srv://root:<password>@cluster0.l7xwuum.mongodb.net/' para crear una nueva conexion con MongoDB Compass
+            > Ir Ir a 'DEPLOYMENT' | 'Data Services' -> click en 'Connect' -> 'Drivers'
+              > Driver: Nodo.js
+              > Version: 5.5 or later
+              > Copiar la cadena de conexion 'mongodb+srv://root:<password>@cluster0.l7xwuum.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0' para conectar a la app
         + MongoDB Compass
           - Configurar una nueva conexion
             > URI: Pegar la cadena de conexion 'mongodb+srv://root:<password>@cluster0.l7xwuum.mongodb.net/' de Mongo Atlas y click en 'Connect' (Ingresar el password de authenticacion)
