@@ -17,3 +17,5 @@
             # npm install ---save express express-handlebars
         + Nodemon
             # npm install --save-dev nodemon
+    - Instalar Mongo Compass
+        + Descargar e instalar Mongo Compass https://www.mongodb.com/try/download/shell
