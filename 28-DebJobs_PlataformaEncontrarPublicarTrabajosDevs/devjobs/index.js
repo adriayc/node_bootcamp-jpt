@@ -25,7 +25,9 @@ const app = express();
 app.engine('handlebars', 
     // exphbs({         // Error!
     exphbs.engine({
-        defaultLayout: 'layout'
+        defaultLayout: 'layout',
+        // Agregar los hepers
+        helpers: require('./helpers/handlebars')
     })
 );
 app.set('view engine', 'handlebars');
