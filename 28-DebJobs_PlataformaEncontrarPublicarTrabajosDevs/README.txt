@@ -42,3 +42,5 @@
             > Database Name: devjobs
             > Collection Name: vacantes
             > Click en 'Create Database'
+      - Integrar Trix Editor
+        + Ir a la pagina 'https://trix-editor.org/' y descargarlo del su repositorio.
