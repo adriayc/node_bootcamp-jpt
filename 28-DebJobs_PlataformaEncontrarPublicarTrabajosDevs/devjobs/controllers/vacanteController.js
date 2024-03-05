@@ -44,7 +44,8 @@ exports.mostrarVacante = async (req, res, next) => {
 
 // Editar una vacante
 exports.formEditarVacante = async (req, res) => {
-    const vacante = await Vacante.findOne({url: req.params.url});
+    // const vacante = await Vacante.findOne({url: req.params.url});
+    const vacante = await Vacante.findOne({url: req.params.url}).lean();
 
     if (!vacante) return next();
 
