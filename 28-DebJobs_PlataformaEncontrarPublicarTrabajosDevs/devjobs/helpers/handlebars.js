@@ -11,5 +11,15 @@ module.exports = {
         })
 
         return opciones.fn().html = html;
+    },
+    tipoContrato: (seleccionado, opciones) => {
+        // console.log(seleccionado);
+        // console.log(opciones.fn());
+        // console.log(opciones.fn(this));
+
+        return opciones.fn(this).replace(
+            // Inyecta el select en valor que esta seleccionado
+            new RegExp(`value="${seleccionado}"`), '$& selected="selected"'
+        );
     }
 };
