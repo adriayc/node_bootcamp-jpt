@@ -25,7 +25,7 @@ module.exports = () => {
 
     // Crear cuentas
     router.get('/crear-cuenta', usuarioController.formCrearCuenta);
-    router.post('/crear-cuenta', usuarioController.crearUsuario);
+    router.post('/crear-cuenta', usuarioController.validarRegistro,  usuarioController.crearUsuario);
 
     return router;
 };

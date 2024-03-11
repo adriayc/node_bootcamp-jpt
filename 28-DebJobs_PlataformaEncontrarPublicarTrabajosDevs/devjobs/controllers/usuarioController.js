@@ -10,6 +10,14 @@ exports.formCrearCuenta = (req, res) => {
     })
 };
 
+exports.validarRegistro = (req, res, next) => {
+    req.checkBody('nombre', 'El nombre es obligatorio').notEmpty();
+    const errores = req.validationErrors();
+    console.log(errores);
+
+    return;
+};
+
 exports.crearUsuario = async (req, res, next) => {
     // console.log(req.body);
     // Crear el usuario

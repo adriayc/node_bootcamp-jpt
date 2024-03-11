@@ -27,6 +27,9 @@
             # npm install --save concurrently
         + Bcrypt (Hashear los passowords)
             # npm install --save bcrypt
+        + Connect-Flash y Express-Validator
+            # npm install --save connect-flash express-validator                (Last version)
+            # npm install --save connect-flash express-validator@5.3.0          (App version)
     - Instalar Mongo Compass
         + Descargar e instalar Mongo Compass https://www.mongodb.com/try/download/shell
         + Configurar MongoDB Atlas
