@@ -25,6 +25,8 @@
             # npm install --save-dev @babel/core @babel/preset-env babel-loader webpack webpack-cli
         + Concurrently (Ejecutar varios comandos simultaneamente)
             # npm install --save concurrently
+        + Bcrypt (Hashear los passowords)
+            # npm install --save bcrypt
     - Instalar Mongo Compass
         + Descargar e instalar Mongo Compass https://www.mongodb.com/try/download/shell
         + Configurar MongoDB Atlas
