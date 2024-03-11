@@ -58,19 +58,19 @@ app.use(session({
     store: MongoStore.create({mongoUrl: process.env.DATABASE})
 }));
 
+// Habilitar flash (Alertas) - Debe ir antes del router o rutas
+app.use(flash());
+
 // app.use('/', (req, res) => {
 //     res.send('Hola Mundo NodeJS!');
 // });
 app.use('/', router());
 
-// Habilitar flash (Alertas)
-app.use(flash());
-
 // Crear nuestro middleware
-app.use((req, res, next) => {
-    res.locals.mensaje = req.flash();
-    next();
-});
+// app.use((req, res, next) => {
+//     res.locals.mensaje = req.flash();
+//     next();
+// });
 
 // Puerto
 // app.listen(5000);
