@@ -11,11 +11,31 @@ exports.formCrearCuenta = (req, res) => {
 };
 
 exports.validarRegistro = (req, res, next) => {
-    req.checkBody('nombre', 'El nombre es obligatorio').notEmpty();
-    const errores = req.validationErrors();
-    console.log(errores);
+    // Sanitizar los valores
+    req.sanitizeBody('nombre').escape();
+    req.sanitizeBody('email').escape();
+    req.sanitizeBody('password').escape();
+    req.sanitizeBody('repetir-password').escape();
+    // console.log(req.body);
 
-    return;
+    // Validar los valores
+    req.checkBody('nombre', 'El nombre es obligatorio').notEmpty();
+    req.checkBody('email', 'El email debe ser valido').isEmail();
+    req.checkBody('password', 'El password es obligatorio').notEmpty();
+    req.checkBody('repetir-password', 'Confirmar password es obligatorio').notEmpty();
+    req.checkBody('repetir-password', 'El password es diferente').equals(req.body.password);
+
+    const errores = req.validationErrors();
+    // console.log(errores);
+    // return;
+
+    // Si hay errores
+    if (errores) {
+        
+    }
+
+    // Si toda la validacion es correcta
+    next();
 };
 
 exports.crearUsuario = async (req, res, next) => {
