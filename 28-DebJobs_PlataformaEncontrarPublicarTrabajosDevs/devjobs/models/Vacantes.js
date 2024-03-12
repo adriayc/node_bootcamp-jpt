@@ -42,7 +42,12 @@ const vacantesSchema = new mongoose.Schema({
         nombre: String,
         email: String,
         cv: String
-    }]
+    }],
+    autor: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Usuarios',
+        required: 'El autor es obligatorio'
+    }
 });
 // Definir middleware antes de guardar
 vacantesSchema.pre('save', function (next) {
