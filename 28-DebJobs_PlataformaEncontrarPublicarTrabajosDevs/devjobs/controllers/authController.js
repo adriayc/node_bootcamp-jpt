@@ -1,4 +1,9 @@
 const passport = require('passport');
+const mongoose = require('mongoose');
+// Models
+const Vacante = mongoose.model('Vacante');
+// const Vacante = require('../models/Vacantes');
+
 
 exports.autenticarUsuario = passport.authenticate('local', {
     // successRedirect: '/ok',
@@ -22,9 +27,14 @@ exports.verificarUsuario = (req, res, next) => {
     res.redirect('/iniciar-sesion');
 };
 
-exports.mostrarPanel = (req, res) => {
+exports.mostrarPanel = async (req, res) => {
+    // Obtener las vacantes
+    // const vacantes = await Vacante.find({autor: req.user._id});
+    const vacantes = await Vacante.find({autor: req.user._id}).lean();
+
     res.render('administracion', {
         nombrePagina: 'Panel de Admistración',
-        tagline: 'Crear y Adminstra tus vacantes desde aquí'
+        tagline: 'Crear y Adminstra tus vacantes desde aquí',
+        vacantes
     });
 };
