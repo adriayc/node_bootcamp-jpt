@@ -29,8 +29,11 @@ module.exports = () => {
     router.post('/crear-cuenta', usuarioController.validarRegistro,  usuarioController.crearUsuario);
 
     // Autenticar usuarios
-    router.get('/iniciar-sesion', usuarioController.formIniciarSesion)
-    router.post('/iniciar-sesion', authController.autenticarUsuario)
+    router.get('/iniciar-sesion', usuarioController.formIniciarSesion);
+    router.post('/iniciar-sesion', authController.autenticarUsuario);
+
+    // Panel de admistracion
+    router.get('/administracion', authController.mostrarPanel);
 
     return router;
 };
