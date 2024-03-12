@@ -37,6 +37,15 @@ usuariosSchema.pre('save', async function(next) {
 
     // Termina de ejecutar la funcion y avancer al siguiente middleware
     next();
-})
+});
+usuariosSchema.post('save', function (error, doc, next) {
+    // Validar erroes de la DB (unique)
+    // if (error.name === 'MongoError' && error.code === 11000) {
+    if (error.name === 'MongoServerError' && error.code === 11000) {
+        next('Ese correo ya esta registrado');
+    } else {
+        next(error);
+    }
+});
 
 module.exports = mongoose.model('Usuarios', usuariosSchema);

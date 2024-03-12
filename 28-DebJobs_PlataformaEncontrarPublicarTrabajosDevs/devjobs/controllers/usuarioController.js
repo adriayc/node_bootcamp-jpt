@@ -52,9 +52,29 @@ exports.crearUsuario = async (req, res, next) => {
     // Crear el usuario
     const usuario = new Usuario(req.body);
     // console.log(usuario);
-    const nuevoUsuario = await usuario.save();
+    // const nuevoUsuario = await usuario.save();
 
     // if (!nuevoUsuario) return next();
 
-    res.redirect('/iniciar-sesion');
+    // res.redirect('/iniciar-sesion');
+
+    try {
+        await usuario.save();
+        // Redirigir
+        res.redirect('/iniciar-sesion');
+
+    } catch (error) {
+        // console.log(error);
+        // return;
+        req.flash('error', error);
+        // Redirigir
+        // res.redirect('/crear-cuenta');       // Error!
+
+        res.render('crear-cuenta', {
+            nombrePagina: 'Crea tu cuenta en devJobs',
+            tagline: 'Comienza a publicar tus vacantes gratis, solo debes crear una cuenta',
+            mensajes: req.flash()
+        })
+        return;
+    }
 };
