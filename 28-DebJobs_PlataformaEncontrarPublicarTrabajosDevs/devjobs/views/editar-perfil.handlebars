@@ -1,0 +1,22 @@
+<div class="contenedor">
+    <form action="/editar-perfil" method="POST" class="default-form">
+        <div class="campo">
+            <div style="color:white">{{usuario}}</div>
+        </div>
+        <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" value="{{usuario.nombre}}" placeholder="Tu Nombre" required>
+        </div>
+        <div class="campo">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" id="email" value="{{usuario.email}}" placeholder="Tu E-mail" required>
+        </div>
+        <div class="campo">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Tu Password">
+        </div>
+        <div class="campo">
+            <input type="submit" value="Guardar Cambios " class="btn btn-azul">
+        </div>
+    </form>
+</div>

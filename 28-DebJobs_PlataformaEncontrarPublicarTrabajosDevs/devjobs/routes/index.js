@@ -35,5 +35,8 @@ module.exports = () => {
     // Panel de admistracion
     router.get('/administracion', authController.verificarUsuario, authController.mostrarPanel);
 
+    // Editar perfil
+    router.get('/editar-perfil', authController.verificarUsuario, usuarioController.fromEditarPerfil)
+
     return router;
 };

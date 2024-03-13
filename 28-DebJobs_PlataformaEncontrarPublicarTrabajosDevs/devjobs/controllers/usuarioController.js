@@ -85,3 +85,16 @@ exports.formIniciarSesion = (req, res) => {
         nombrePagina: 'Iniciar Sesión debJobs'
     });
 };
+
+// Formulario para editar el perfil
+exports.fromEditarPerfil = (req, res) => {
+    // console.log(req.user instanceof mongoose.Model);            // true
+    // console.log(req.user instanceof mongoose.Document);         // true
+    // return;
+
+    res.render('editar-perfil', {
+        nombrePagina: 'Editar tu perfil en devJobs',
+        // usuario: req.user                           // Error!
+        usuario: req.user.toObject()                // Convert document to object
+    })
+};
