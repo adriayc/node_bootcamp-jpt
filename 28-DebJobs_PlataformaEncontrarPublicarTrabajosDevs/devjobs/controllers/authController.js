@@ -35,6 +35,8 @@ exports.mostrarPanel = async (req, res) => {
     res.render('administracion', {
         nombrePagina: 'Panel de Admistración',
         tagline: 'Crear y Adminstra tus vacantes desde aquí',
+        nombre: req.user.nombre,
+        cerrarSesion: true,
         vacantes
     });
 };

@@ -94,6 +94,8 @@ exports.fromEditarPerfil = (req, res) => {
 
     res.render('editar-perfil', {
         nombrePagina: 'Editar tu perfil en devJobs',
+        nombre: req.user.nombre,
+        cerrarSesion: true,
         // usuario: req.user                           // Error!
         usuario: req.user.toObject()                // Convert document to object
     })

@@ -33,6 +33,14 @@
                 </form>
             </div>
         {{/if}}
+
+        {{#if cerrarSesion}}
+            <div class="cerrar-sesion">
+                <p>Hola! {{nombre}}</p>
+                <a href="/administracion">administración</a>
+                <a href="/cerrar-sesion">Cerrar Sesión</a>
+            </div>
+        {{/if}}
     </div>
 
     <header class="contenedor site-header separador">
