@@ -98,3 +98,21 @@ exports.fromEditarPerfil = (req, res) => {
         usuario: req.user.toObject()                // Convert document to object
     })
 };
+
+// Actualizar cambios del perfil
+exports.editarPerfil = async (req, res) => {
+    const usuario = await Usuario.findById(req.user._id);
+    // console.log(usuario);
+
+    usuario.nombre = req.body.nombre;
+    usuario.eamil = req.body.email;
+    if (req.body.password) {
+        usuario.password = req.body.password;
+    }
+
+    await usuario.save();
+
+    req.flash('correcto', 'Cambios guardados correctamente');
+    // Redireccionar
+    res.redirect('/administracion');
+};
