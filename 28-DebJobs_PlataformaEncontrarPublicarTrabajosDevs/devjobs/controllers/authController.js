@@ -14,6 +14,15 @@ exports.autenticarUsuario = passport.authenticate('local', {
     badRequestMessage: 'Ambos campos son obligatorios'
 });
 
+exports.cerrarSesion = (req, res) => {
+    // Metodo para cerrar sesión en passport
+    req.logout();
+
+    req.flash('correcto', 'Cerrarste sesión correctamente');
+    // Redireccionar
+    return res.redirect('/inciar-sesion');
+};
+
 // Verificar que el usuario este autenticado
 exports.verificarUsuario = (req, res, next) => {
 
