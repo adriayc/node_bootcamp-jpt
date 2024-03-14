@@ -121,5 +121,8 @@ exports.editarVacante = async (req, res) => {
 // Eliinar vacante
 exports.eliminarVacante = (req, res) => {
     const { id } = req.params;
-    console.log(id);
+    // console.log(id);
+
+    // Responde con status y mensaje
+    res.status(200).send('Vacante eliminado correctamente');
 };
