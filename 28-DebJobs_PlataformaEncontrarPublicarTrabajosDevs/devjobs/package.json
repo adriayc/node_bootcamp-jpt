@@ -12,6 +12,7 @@
   "author": "Adriano Ayala",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "concurrently": "^8.2.2",
     "connect-flash": "^0.1.1",
@@ -26,7 +27,8 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "shortid": "^2.2.16",
-    "slug": "^8.2.3"
+    "slug": "^8.2.3",
+    "sweetalert2": "^11.10.6"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",

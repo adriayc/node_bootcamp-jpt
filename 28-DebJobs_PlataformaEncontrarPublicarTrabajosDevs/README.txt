@@ -32,6 +32,10 @@
             # npm install --save connect-flash express-validator@5.3.0          (App version)
         + Passport y Passport-Local
             # npm install --save passport passport-local
+        + Axios
+            # npm install --save axios
+        + SweetAlert2
+            # npm install --save sweetalert2
     - Instalar Mongo Compass
         + Descargar e instalar Mongo Compass https://www.mongodb.com/try/download/shell
         + Configurar MongoDB Atlas

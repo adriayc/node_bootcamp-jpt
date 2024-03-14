@@ -117,3 +117,9 @@ exports.editarVacante = async (req, res) => {
     // Redireccionar
     res.redirect(`/vacantes/${vacante.url}`);
 };
+
+// Eliinar vacante
+exports.eliminarVacante = (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+};

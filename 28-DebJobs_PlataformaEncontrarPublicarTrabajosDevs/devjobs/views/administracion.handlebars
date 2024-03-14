@@ -14,13 +14,13 @@
                     <p class="puesto">{{titulo}}</p>
                 </div>
                 <div class="caja centrar-vertical">
-                    <a href="/candidatos/{{id}}" class="btn btn-amarillo">Candidatos</a>
+                    <a href="/candidatos/{{_id}}" class="btn btn-amarillo">Candidatos</a>
                 </div>
                 <div class="caja centrar-vertical">
                     <a href="/vacantes/editar/{{url}}" class="btn btn-verde">Editar</a>
                 </div>
                 <div class="caja centrar-vertical">
-                    <a href="#" data-eliminar="{{id}}" class="btn btn-rojo">Eliminar</a>
+                    <a href="#" data-eliminar="{{_id}}" class="btn btn-rojo">Eliminar</a>
                 </div>
             </div>
         {{/each}}

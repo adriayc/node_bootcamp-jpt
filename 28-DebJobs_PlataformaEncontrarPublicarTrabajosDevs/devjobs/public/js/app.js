@@ -1,3 +1,5 @@
+import axios from 'axios';
+import Swal from 'sweetalert2';
 // alert('Webpack!');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,6 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (alertas) {
         limpiarAlertas();
+    }
+
+    // Eliminar vacante
+    const vacanteListado = document.querySelector('.panel-administracion');
+
+    if (vacanteListado) {
+        vacanteListado.addEventListener('click', accionesListado);
     }
 });
 
@@ -76,4 +85,18 @@ const limpiarAlertas = () => {
             clearInterval(interval);
         }
     }, 2000);
+};
+
+// Eliminar vacantes
+const accionesListado = e => {
+    e.preventDefault();
+    // console.log(e.target);
+
+    if (e.target.dataset.eliminar) {
+        // Eliminar por medio de axios
+        console.log('Eliminando...');
+
+    } else {
+        window.location.href = e.target.href;
+    }
 };
