@@ -32,6 +32,7 @@ exports.verificarUsuario = (req, res, next) => {
         return next();
     }
 
+    req.flash('correcto', 'Cerraste sesión correctamente');
     // Redireccionar
     res.redirect('/iniciar-sesion');
 };
