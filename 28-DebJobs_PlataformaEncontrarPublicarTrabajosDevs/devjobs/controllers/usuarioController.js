@@ -1,3 +1,4 @@
+const multer = require('multer');
 // const mongoose = require('mongoose');
 // Models
 // const Usuario = mongoose.model('Usuarios');
@@ -117,6 +118,18 @@ exports.editarPerfil = async (req, res) => {
     req.flash('correcto', 'Cambios guardados correctamente');
     // Redireccionar
     res.redirect('/administracion');
+};
+
+// Subir imagenes con multer
+exports.subirImagen = (req, res, next) => {
+    upload(req, res, function (error) {
+        if (error instanceof multer.MulterError) {
+            return next();
+        }
+    });
+
+    // Siguiente middleware
+    next();
 };
 
 // Sanitizar y validar perfil del usuario

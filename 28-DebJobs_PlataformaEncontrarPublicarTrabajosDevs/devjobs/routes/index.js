@@ -43,7 +43,15 @@ module.exports = () => {
 
     // Editar perfil
     router.get('/editar-perfil', authController.verificarUsuario, usuarioController.fromEditarPerfil);
-    router.post('/editar-perfil', authController.verificarUsuario, usuarioController.validarPerfil, usuarioController.editarPerfil);
+    // router.post('/editar-perfil', authController.verificarUsuario, usuarioController.validarPerfil, usuarioController.editarPerfil);
+    router.post(
+        '/editar-perfil', 
+        authController.verificarUsuario, 
+        // No funciona validacion con multer
+        // usuarioController.validarPerfil, 
+        usuarioController.subirImagen,
+        usuarioController.editarPerfil
+    );
 
     return router;
 };
