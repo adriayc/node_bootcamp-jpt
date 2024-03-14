@@ -118,3 +118,35 @@ exports.editarPerfil = async (req, res) => {
     // Redireccionar
     res.redirect('/administracion');
 };
+
+// Sanitizar y validar perfil del usuario
+exports.validarPerfil = (req, res, next) => {
+    // Sanitizar
+    req.sanitizeBody('nombre').escape();
+    req.sanitizeBody('eamil').escape();
+    if (req.body.password) {
+        req.sanitizeBody('password').escape();
+    }
+
+    // Validar
+    req.checkBody('nombre', 'El nombre es requerido').notEmpty();
+    req.checkBody('email', 'El email es requerido').notEmpty();
+
+    const errores = req.validationErrors();
+
+    if (errores) {
+        req.flash('error', errores.map(error => error.msg));
+
+        res.render('editar-perfil', {
+            nombrePagina: 'Editar tu perfil en devJobs',
+            nombre: req.user.nombre,
+            cerrarSesion: true,
+            usuario: req.user.toObject(),                // Convert document to object
+            mensajes: req.flash()
+        });
+        return;
+    }
+
+    // Siguiente middleware
+    next();
+};
