@@ -136,7 +136,12 @@ exports.subirImagen = (req, res, next) => {
         if (error) {
             // Error de multer
             if (error instanceof multer.MulterError) {
-                return next();
+                // return next();
+                if (error.code === 'LIMIT_FILE_SIZE') {
+                    req.flash('error', 'El archivo es muy grande (Maximo 100Kb)');
+                } else {
+                    req.flash('error', error.message);
+                }
             } else {
                 // console.log(error.message);
                 req.flash('error', error.message);
@@ -157,6 +162,7 @@ exports.subirImagen = (req, res, next) => {
 
 // Opciones de multer
 const configuracionMulter = {
+    limits: {fileSize: 100000},                  // Bytes
     // Donde se almacena
     storage: fileStorage = multer.diskStorage({
         destination: (req, file, cb) => {
@@ -178,8 +184,7 @@ const configuracionMulter = {
             // cb(null, false);
             cb(new Error('Formato no válido'), false);
         }
-    },
-    limits: {fileSize: 100000}                  // Bytes
+    }
 };
 
 const upload = multer(configuracionMulter).single('imagen');
