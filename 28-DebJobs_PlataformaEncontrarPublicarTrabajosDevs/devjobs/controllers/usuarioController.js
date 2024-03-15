@@ -89,7 +89,7 @@ exports.formIniciarSesion = (req, res) => {
 };
 
 // Formulario para editar el perfil
-exports.fromEditarPerfil = (req, res) => {
+exports.formEditarPerfil = (req, res) => {
     // console.log(req.user instanceof mongoose.Model);            // true
     // console.log(req.user instanceof mongoose.Document);         // true
     // return;
@@ -97,6 +97,7 @@ exports.fromEditarPerfil = (req, res) => {
     res.render('editar-perfil', {
         nombrePagina: 'Editar tu perfil en devJobs',
         nombre: req.user.nombre,
+        imagen: req.user.imagen,
         cerrarSesion: true,
         // usuario: req.user                           // Error!
         usuario: req.user.toObject()                // Convert document to object
@@ -210,6 +211,7 @@ exports.validarPerfil = (req, res, next) => {
         res.render('editar-perfil', {
             nombrePagina: 'Editar tu perfil en devJobs',
             nombre: req.user.nombre,
+            imagen: req.user.imagen,
             cerrarSesion: true,
             usuario: req.user.toObject(),                // Convert document to object
             mensajes: req.flash()

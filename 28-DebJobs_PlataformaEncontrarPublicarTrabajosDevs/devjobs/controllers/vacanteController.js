@@ -9,6 +9,7 @@ exports.formularioNuevoVacante = (req, res) => {
         npmbrePagina: 'Nueva Vacante',
         tagline: 'Llena el formulario y publica tu vacante',
         nombre: req.user.nombre,
+        imagen: req.user.imagen,
         cerrarSesion: true,
     });
 };
@@ -97,6 +98,7 @@ exports.formEditarVacante = async (req, res, next) => {
     res.render('editar-vacante', {
         nombrePagina: `Editar - ${vacante.titulo}`,
         nombre: req.user.nombre,
+        imagen: req.user.imagen,
         cerrarSesion: true,
         vacante
     });
