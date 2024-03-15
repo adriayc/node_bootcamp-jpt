@@ -1,4 +1,6 @@
 // const mongoose = require('mongoose');
+const multer = require('multer');
+const shortid = require('shortid');
 // Models
 const Vacante = require('../models/Vacantes');          // OPTION #1
 // const Vacante = mongoose.model('Vacante');              // OPTION #2 - Error!
@@ -155,3 +157,50 @@ const verificarAutor = (vacante = {}, usuario = {}) => {
     }
     return true;
 };
+
+// Subir archivos en PDF
+exports.subirCV = (req, res, next) => {
+    upload(req, res, function (error) {
+        if (error) {
+            if (error instanceof multer.MulterError) {
+                if (error.code === 'LIMIT_FILE_SIZE') {
+                    req.flash('error', 'El archivo es muy grande (Máximo 100Kb)')
+                } else {
+                    req.flash('error', error.message);
+                }
+            } else {
+                req.flash('error', error.message);
+            }
+
+            // Redirigir a la página actual
+            res.redirect('back');
+            return;
+        } else {
+            return next();
+        }
+    });
+};
+
+// Opciones de multer
+const configuracionMulter = {
+    limits: {fileSize: 100000},
+    storage: fileStorage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, __dirname + '../../public/uploads/cv');
+        },
+        filename: (req, file, cb) => {
+            const extension = file.mimetype.split('/')[1];
+            cb(null, `${shortid.generate()}.${extension}`);
+        }
+    }),
+    fileFilter(req, file, cb) {
+        // Validacion por el MimeType (Recomendado)
+        if (file.mimetype === 'application/pdf') {
+            cb(null, true);
+        } else {
+            cb(new Error('Formato no válido'));
+        }
+    }
+};
+
+const upload = multer(configuracionMulter).single('cv');

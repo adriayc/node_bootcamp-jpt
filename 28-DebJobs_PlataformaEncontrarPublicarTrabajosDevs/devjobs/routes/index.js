@@ -53,5 +53,8 @@ module.exports = () => {
         usuarioController.editarPerfil
     );
 
+    // Recibir mensajes de cantidatos
+    router.post('/vacantes/:url', vacanteController.subirCV, vacanteController.contactar);
+
     return router;
 };
