@@ -1,5 +1,6 @@
 const multer = require('multer');
 // const mongoose = require('mongoose');
+const shortid = require('shortid');
 // Models
 // const Usuario = mongoose.model('Usuarios');
 const Usuario = require('../models/Usuarios');
@@ -131,6 +132,24 @@ exports.subirImagen = (req, res, next) => {
     // Siguiente middleware
     next();
 };
+
+// Opciones de multer
+const configuracionMulter = {
+    // Donde se almacena
+    storage: fileStorage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, __dirname +'../../public/uploads/perfiles');
+        },
+        filename: (req, file, cb) => {
+            // console.log(file);
+            const extesion = file.mimetype.split('/')[1];
+            // console.log(`${shortid.generate()}.${extesion}`);
+            cb(null, `${shortid.generate()}.${extesion}`);
+        }
+    })
+};
+
+const upload = multer(configuracionMulter).single('imagen');
 
 // Sanitizar y validar perfil del usuario
 exports.validarPerfil = (req, res, next) => {
