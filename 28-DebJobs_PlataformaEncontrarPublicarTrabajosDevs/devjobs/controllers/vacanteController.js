@@ -204,3 +204,27 @@ const configuracionMulter = {
 };
 
 const upload = multer(configuracionMulter).single('cv');
+
+// Almacenar los cantidatos en la db
+exports.contactar = async (req, res, next) => {
+    // console.log(req.params.url);
+    const vacante = await Vacante.findOne({url: req.params.url});
+
+    // Si no existe la vacante
+    if (!vacante) return next();
+
+    // Construir el nuevo objeto
+    const nuevoCantidato = {
+        nombre: req.body.nombre,
+        email: req.body.email,
+        cv: req.file.filename
+    };
+
+    // Almacenar la vacante
+    vacante.candidatos.push(nuevoCantidato);
+    await vacante.save();
+
+    req.flash('correcto', 'Se envió tu curriculum correctamente');
+    // Redirigir
+    res.redirect('/');
+};
