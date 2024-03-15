@@ -114,6 +114,13 @@ exports.editarPerfil = async (req, res) => {
         usuario.password = req.body.password;
     }
 
+    // console.log(req.file);
+    // return;
+
+    if (req.file) {
+        usuario.image = req.file.filename;
+    }
+
     await usuario.save();
 
     req.flash('correcto', 'Cambios guardados correctamente');
@@ -146,7 +153,17 @@ const configuracionMulter = {
             // console.log(`${shortid.generate()}.${extesion}`);
             cb(null, `${shortid.generate()}.${extesion}`);
         }
-    })
+    }),
+    fileFilter(req, file, cb) {
+        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+            // Se ejecuta el cb como true, si la imagen se acepta
+            cb(null, true);
+        } else {
+            // Se ejecuta el cb como false, si la imagen se rechaza
+            cb(null, false);
+        }
+    },
+    limits: {fileSize: 100000}                  // Bytes
 };
 
 const upload = multer(configuracionMulter).single('imagen');
