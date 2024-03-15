@@ -56,5 +56,8 @@ module.exports = () => {
     // Recibir mensajes de cantidatos
     router.post('/vacantes/:url', vacanteController.subirCV, vacanteController.contactar);
 
+    // Muetra los candidatos por vacante
+    router.get('/candidatos/:id', authController.verificarUsuario, vacanteController.mostrarCandidatos);
+
     return router;
 };

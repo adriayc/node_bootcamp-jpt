@@ -228,3 +228,27 @@ exports.contactar = async (req, res, next) => {
     // Redirigir
     res.redirect('/');
 };
+
+// Mostrar los candidatos de la vacante
+exports.mostrarCandidatos = async (req, res, next) => {
+    // console.log(req.params.id);
+    // const vacante = await Vacante.findById(req.params.id);
+    const vacante = await Vacante.findById(req.params.id).lean();
+    // console.log(vacante);
+
+    // Validar si existe vacante
+    if (!vacante) return next();
+
+    // Validar que el autor sea igual al usuario 
+    if (vacante.autor.toString() !== req.user.id.toString()) {
+        return next();
+    }
+
+    res.render('candidatos', {
+        nombrePagina: `Candidatos Vacante - ${vacante.titulo}`,
+        cerrarSesion: true,
+        nombre: req.user.nombre,
+        imagen: req.user.imagen,
+        candidatos: vacante.candidatos
+    });
+};
