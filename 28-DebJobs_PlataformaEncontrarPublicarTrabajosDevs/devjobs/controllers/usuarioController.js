@@ -118,7 +118,7 @@ exports.editarPerfil = async (req, res) => {
     // return;
 
     if (req.file) {
-        usuario.image = req.file.filename;
+        usuario.imagen = req.file.filename;
     }
 
     await usuario.save();
@@ -131,13 +131,28 @@ exports.editarPerfil = async (req, res) => {
 // Subir imagenes con multer
 exports.subirImagen = (req, res, next) => {
     upload(req, res, function (error) {
-        if (error instanceof multer.MulterError) {
+        // console.log(error);
+
+        if (error) {
+            // Error de multer
+            if (error instanceof multer.MulterError) {
+                return next();
+            } else {
+                // console.log(error.message);
+                req.flash('error', error.message);
+            }
+
+            // Redireccionar
+            res.redirect('/administracion');
+            return;
+        } else {
+            // Siguiente middleware
             return next();
         }
     });
 
     // Siguiente middleware
-    next();
+    // next();
 };
 
 // Opciones de multer
@@ -160,7 +175,8 @@ const configuracionMulter = {
             cb(null, true);
         } else {
             // Se ejecuta el cb como false, si la imagen se rechaza
-            cb(null, false);
+            // cb(null, false);
+            cb(new Error('Formato no válido'), false);
         }
     },
     limits: {fileSize: 100000}                  // Bytes
