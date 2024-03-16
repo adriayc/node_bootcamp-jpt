@@ -52,3 +52,11 @@ exports.mostrarPanel = async (req, res) => {
         vacantes
     });
 };
+
+// Formulario para reestablecer password
+exports.formReestablecerPassword = (req, res) => {
+    res.render('reestablecer-password', {
+        nombrePagina: 'Reestablecer tu Password',
+        tagline: 'Si ya tienes una cuenta pero olvidate tu password, ingresa su email'
+    });
+};
