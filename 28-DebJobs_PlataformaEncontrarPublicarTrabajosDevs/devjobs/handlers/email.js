@@ -13,7 +13,21 @@ let transport = nodemailer.createTransport({
     }
 });
 
+// Utilizar template de handlebars
+transport.use('compile', hbs({
+    // viewEngine: 'handlebars',
+    viewEngine: {
+        extname: '.handlebars',
+        partialsDir: __dirname +'/../views/emails',
+        layoutsDir: __dirname +'/../views/emails',
+        defaultLayout: ''
+    },
+    viewPath: __dirname +'/../views/emails',
+    extName: '.handlebars'
+}));
+
 exports.enviar = async (opciones) => {
+    // console.log(opciones)
     const opcionesEmail = {
         from: 'devJobs <noreplay@devjobs.com>',
         to: opciones.usuario.email,

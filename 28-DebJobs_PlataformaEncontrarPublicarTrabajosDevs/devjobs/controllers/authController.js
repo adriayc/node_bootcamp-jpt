@@ -82,7 +82,7 @@ exports.enviarToken = async (req, res) => {
     await usuario.save();
     // Generar la URL
     const resetURL = `http://${req.headers.host}/reestablecer-password/${usuario.token}`;
-    console.log(resetURL);
+    // console.log(resetURL);
 
     // Enviar notificacion por email
     await enviarEmail.enviar({
