@@ -9,6 +9,7 @@ exports.formularioNuevoVacante = (req, res) => {
         npmbrePagina: 'Nueva Vacante',
         tagline: 'Llena el formulario y publica tu vacante',
         nombre: req.user.nombre,
+        imagen: req.user.imagen,
         cerrarSesion: true,
     });
 };
@@ -75,7 +76,9 @@ exports.agregarVacante = async (req, res) => {
 // Mosrar una vacante
 exports.mostrarVacante = async (req, res, next) => {
     // const vacante = await Vacante.findOne({url: req.params.url});
-    const vacante = await Vacante.findOne({url: req.params.url}).lean();
+    // const vacante = await Vacante.findOne({url: req.params.url}).lean();
+    const vacante = await Vacante.findOne({url: req.params.url}).populate('autor').lean();              // JOIN mongoose
+    // console.log(vacante);
 
     // Si no hay resultados
     if (!vacante) return next();
@@ -97,6 +100,7 @@ exports.formEditarVacante = async (req, res, next) => {
     res.render('editar-vacante', {
         nombrePagina: `Editar - ${vacante.titulo}`,
         nombre: req.user.nombre,
+        imagen: req.user.imagen,
         cerrarSesion: true,
         vacante
     });

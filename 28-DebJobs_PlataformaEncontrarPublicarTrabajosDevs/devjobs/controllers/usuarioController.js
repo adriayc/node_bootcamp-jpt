@@ -1,4 +1,6 @@
+const multer = require('multer');
 // const mongoose = require('mongoose');
+const shortid = require('shortid');
 // Models
 // const Usuario = mongoose.model('Usuarios');
 const Usuario = require('../models/Usuarios');
@@ -87,7 +89,7 @@ exports.formIniciarSesion = (req, res) => {
 };
 
 // Formulario para editar el perfil
-exports.fromEditarPerfil = (req, res) => {
+exports.formEditarPerfil = (req, res) => {
     // console.log(req.user instanceof mongoose.Model);            // true
     // console.log(req.user instanceof mongoose.Document);         // true
     // return;
@@ -95,6 +97,7 @@ exports.fromEditarPerfil = (req, res) => {
     res.render('editar-perfil', {
         nombrePagina: 'Editar tu perfil en devJobs',
         nombre: req.user.nombre,
+        imagen: req.user.imagen,
         cerrarSesion: true,
         // usuario: req.user                           // Error!
         usuario: req.user.toObject()                // Convert document to object
@@ -112,12 +115,80 @@ exports.editarPerfil = async (req, res) => {
         usuario.password = req.body.password;
     }
 
+    // console.log(req.file);
+    // return;
+
+    if (req.file) {
+        usuario.imagen = req.file.filename;
+    }
+
     await usuario.save();
 
     req.flash('correcto', 'Cambios guardados correctamente');
     // Redireccionar
     res.redirect('/administracion');
 };
+
+// Subir imagenes con multer
+exports.subirImagen = (req, res, next) => {
+    upload(req, res, function (error) {
+        // console.log(error);
+
+        if (error) {
+            // Error de multer
+            if (error instanceof multer.MulterError) {
+                // return next();
+                if (error.code === 'LIMIT_FILE_SIZE') {
+                    req.flash('error', 'El archivo es muy grande (Maximo 100Kb)');
+                } else {
+                    req.flash('error', error.message);
+                }
+            } else {
+                // console.log(error.message);
+                req.flash('error', error.message);
+            }
+
+            // Redireccionar
+            res.redirect('/administracion');
+            return;
+        } else {
+            // Siguiente middleware
+            return next();
+        }
+    });
+
+    // Siguiente middleware
+    // next();
+};
+
+// Opciones de multer
+const configuracionMulter = {
+    limits: {fileSize: 100000},                  // Bytes
+    // Donde se almacena
+    storage: fileStorage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, __dirname +'../../public/uploads/perfiles');
+        },
+        filename: (req, file, cb) => {
+            // console.log(file);
+            const extesion = file.mimetype.split('/')[1];
+            // console.log(`${shortid.generate()}.${extesion}`);
+            cb(null, `${shortid.generate()}.${extesion}`);
+        }
+    }),
+    fileFilter(req, file, cb) {
+        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+            // Se ejecuta el cb como true, si la imagen se acepta
+            cb(null, true);
+        } else {
+            // Se ejecuta el cb como false, si la imagen se rechaza
+            // cb(null, false);
+            cb(new Error('Formato no válido'), false);
+        }
+    }
+};
+
+const upload = multer(configuracionMulter).single('imagen');
 
 // Sanitizar y validar perfil del usuario
 exports.validarPerfil = (req, res, next) => {
@@ -140,6 +211,7 @@ exports.validarPerfil = (req, res, next) => {
         res.render('editar-perfil', {
             nombrePagina: 'Editar tu perfil en devJobs',
             nombre: req.user.nombre,
+            imagen: req.user.imagen,
             cerrarSesion: true,
             usuario: req.user.toObject(),                // Convert document to object
             mensajes: req.flash()

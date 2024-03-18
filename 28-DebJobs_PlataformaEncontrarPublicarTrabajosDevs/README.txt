@@ -36,6 +36,8 @@
             # npm install --save axios
         + SweetAlert2
             # npm install --save sweetalert2
+        + Multer (Subir archivos)
+            # npm install --save multer
     - Instalar Mongo Compass
         + Descargar e instalar Mongo Compass https://www.mongodb.com/try/download/shell
         + Configurar MongoDB Atlas
