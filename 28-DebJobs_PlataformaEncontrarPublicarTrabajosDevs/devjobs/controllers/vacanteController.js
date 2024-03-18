@@ -1,4 +1,6 @@
 // const mongoose = require('mongoose');
+const multer = require('multer');
+const shortid = require('shortid');
 // Models
 const Vacante = require('../models/Vacantes');          // OPTION #1
 // const Vacante = mongoose.model('Vacante');              // OPTION #2 - Error!
@@ -154,4 +156,99 @@ const verificarAutor = (vacante = {}, usuario = {}) => {
         return false;
     }
     return true;
+};
+
+// Subir archivos en PDF
+exports.subirCV = (req, res, next) => {
+    upload(req, res, function (error) {
+        if (error) {
+            if (error instanceof multer.MulterError) {
+                if (error.code === 'LIMIT_FILE_SIZE') {
+                    req.flash('error', 'El archivo es muy grande (Máximo 100Kb)')
+                } else {
+                    req.flash('error', error.message);
+                }
+            } else {
+                req.flash('error', error.message);
+            }
+
+            // Redirigir a la página actual
+            res.redirect('back');
+            return;
+        } else {
+            return next();
+        }
+    });
+};
+
+// Opciones de multer
+const configuracionMulter = {
+    limits: {fileSize: 100000},
+    storage: fileStorage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, __dirname + '../../public/uploads/cv');
+        },
+        filename: (req, file, cb) => {
+            const extension = file.mimetype.split('/')[1];
+            cb(null, `${shortid.generate()}.${extension}`);
+        }
+    }),
+    fileFilter(req, file, cb) {
+        // Validacion por el MimeType (Recomendado)
+        if (file.mimetype === 'application/pdf') {
+            cb(null, true);
+        } else {
+            cb(new Error('Formato no válido'));
+        }
+    }
+};
+
+const upload = multer(configuracionMulter).single('cv');
+
+// Almacenar los cantidatos en la db
+exports.contactar = async (req, res, next) => {
+    // console.log(req.params.url);
+    const vacante = await Vacante.findOne({url: req.params.url});
+
+    // Si no existe la vacante
+    if (!vacante) return next();
+
+    // Construir el nuevo objeto
+    const nuevoCantidato = {
+        nombre: req.body.nombre,
+        email: req.body.email,
+        cv: req.file.filename
+    };
+
+    // Almacenar la vacante
+    vacante.candidatos.push(nuevoCantidato);
+    await vacante.save();
+
+    req.flash('correcto', 'Se envió tu curriculum correctamente');
+    // Redirigir
+    res.redirect('/');
+};
+
+// Mostrar los candidatos de la vacante
+exports.mostrarCandidatos = async (req, res, next) => {
+    // console.log(req.params.id);
+    // const vacante = await Vacante.findById(req.params.id);
+    const vacante = await Vacante.findById(req.params.id).lean();
+    // console.log(vacante);
+
+    // Validar si existe vacante
+    if (!vacante) return next();
+
+    // Validar que el autor sea igual al usuario 
+    if (vacante.autor.toString() !== req.user.id.toString()) {
+        return next();
+    }
+
+    res.render('candidatos', {
+        nombrePagina: `Candidatos Vacante - ${vacante.titulo}`,
+        cerrarSesion: true,
+        nombre: req.user.nombre,
+        imagen: req.user.imagen,
+        candidatos: vacante.candidatos
+    });
 };

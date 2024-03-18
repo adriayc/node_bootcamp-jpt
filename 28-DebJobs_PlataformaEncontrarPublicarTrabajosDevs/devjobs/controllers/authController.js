@@ -41,6 +41,7 @@ exports.mostrarPanel = async (req, res) => {
     // Obtener las vacantes
     // const vacantes = await Vacante.find({autor: req.user._id});
     const vacantes = await Vacante.find({autor: req.user._id}).lean();
+    // console.log(vacantes);
 
     res.render('administracion', {
         nombrePagina: 'Panel de Admistración',
