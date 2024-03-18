@@ -78,3 +78,10 @@ exports.crearUsuario = async (req, res, next) => {
         return;
     }
 };
+
+// Formulario para iniciar sesion
+exports.formIniciarSesion = (req, res) => {
+    res.render('iniciar-sesion', {
+        nombrePagina: 'Iniciar Sesión debJobs'
+    });
+};

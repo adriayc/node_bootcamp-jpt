@@ -18,6 +18,8 @@ const MongoStore = require('connect-mongo');
 const expressValidator = require('express-validator');
 // Connect flash
 const flash = require('connect-flash');
+// Passport config
+const passport = require('./config/passport');
 
 // Env
 require('dotenv').config({path: 'variables.env'});
@@ -58,19 +60,23 @@ app.use(session({
     store: MongoStore.create({mongoUrl: process.env.DATABASE})
 }));
 
+// Inicializar passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Habilitar flash (Alertas) - Debe ir antes del router o rutas
 app.use(flash());
+
+// Crear nuestro middleware
+app.use((req, res, next) => {
+    res.locals.mensajes = req.flash();
+    next();
+});
 
 // app.use('/', (req, res) => {
 //     res.send('Hola Mundo NodeJS!');
 // });
 app.use('/', router());
-
-// Crear nuestro middleware
-// app.use((req, res, next) => {
-//     res.locals.mensaje = req.flash();
-//     next();
-// });
 
 // Puerto
 // app.listen(5000);
