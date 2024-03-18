@@ -65,3 +65,38 @@
             > Click en 'Create Database'
       - Integrar Trix Editor
         + Ir a la pagina 'https://trix-editor.org/' y descargarlo del su repositorio.
+
+* Deployment de la app
+    - Crear e iniciar sesion en Heroku 'https://www.heroku.com/'
+    - Agregar a .gitignore los siguientes archivos o directorios
+      + node_modules/
+      + public/uploads/cv/*
+      + public/uploads/perfiles/*
+      + variables.env
+    - Agrega IP Address en MongoDB Atlas
+      > Click SECURITY | "Network Access" -> IP Access List -> click en "ADD IP ADDRESS"
+        - Click "ALLOW ACCESS FROM ANYWHERE" -> "Confirmar"
+    - Heroku CLI
+      + Instalar Heroku CLI en su OS
+      + Mostrar la version de heroku
+        $ heroku --version
+      + Login heroku
+       $ heroku login
+    - Crear un repositorio en GitHub
+      > Respository name: devjobs
+      > Descripcion: App de oferta de empleos para devs con NodeJS, MongoDB y Handlebars como Template Engine
+      > Public
+      Click "Create repository"
+    - Deploy a Heroku
+      + Crear el reposotorio
+        $ heroku create --remote production
+      + Crear la variables de entorno
+        # $ heroku config:set DATABASE=mongodb+srv://root:<password>@cluster0.l7xwuum.mongodb.net/<db_name>?retryWrites=true&w=majority&appName=Cluster0
+        $ heroku config:set DATABASE=mongodb+srv://root:<password>@cluster0.l7xwuum.mongodb.net/<db_name>?retryWrites=true&w=majority&appName=Cluster0 --remote production
+        $ heroky config:set SECRETO=palabrasecreto
+        $ heroky config:set KEY=llavesecreta
+      + Muestra las branchs
+        $ git remote -v
+      + Subir al repositorio de heroku (production)
+        $ git push production master
+      + Copiar la URL "https://cryptic-ridge-85209.heroku.com/" en el browser
