@@ -20,6 +20,9 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 // Passport config
 const passport = require('./config/passport');
+// Http errors
+const createError = require('http-errors');
+
 
 // Env
 require('dotenv').config({path: 'variables.env'});
@@ -77,6 +80,25 @@ app.use((req, res, next) => {
 //     res.send('Hola Mundo NodeJS!');
 // });
 app.use('/', router());
+
+// 404 - Pagina no existente
+app.use((req, res, next) => {
+    next(createError(404, 'No encontrado'));
+});
+
+// Administracion de los errores
+app.use((error, req, res) => {
+    // console.log(error.message);
+    // console.log(error.status);
+    
+    res.locals.mensaje = error.message;
+    
+    const status = error.status || 500;
+    res.status(status);
+    res.locals.status = status;
+
+    res.render('error');
+});
 
 // Puerto
 // app.listen(5000);
