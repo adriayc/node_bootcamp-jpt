@@ -9,6 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Llamar la funcion cuando estemos en el formulario de editar
         skillsSeleccionados();
     }
+
+    // Limpiar las alertas
+    let alertas = document.querySelector('.alertas');
+
+    if (alertas) {
+        limpiarAlertas();
+    }
 });
 
 const skills = new Set();
@@ -54,4 +61,19 @@ const skillsSeleccionados = () => {
     const skillsArray = [...skills];
     // Inyectar skillsArray a un input de tipo hidden
     document.querySelector('#skills').value = skillsArray;
+};
+
+const limpiarAlertas = () => {
+    const alertas = document.querySelector('.alertas');
+
+    const interval = setInterval(() => {
+        if (alertas.children.length > 0) {
+            // Remover las alertas
+            alertas.removeChild(alertas.children[0]);
+        } else if (alertas.children.length === 0) {
+            alertas.parentElement.removeChild(alertas);
+            // Remover el interval
+            clearInterval(interval);
+        }
+    }, 2000);
 };

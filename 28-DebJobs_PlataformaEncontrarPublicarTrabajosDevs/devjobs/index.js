@@ -14,6 +14,10 @@ const session = require('express-session');
 // Connect mongo y pasandole la session
 // const MongoStore = require('connect-mongo')(session);        // Error!, old version
 const MongoStore = require('connect-mongo');
+// Express validator
+const expressValidator = require('express-validator');
+// Connect flash
+const flash = require('connect-flash');
 
 // Env
 require('dotenv').config({path: 'variables.env'});
@@ -25,6 +29,9 @@ const app = express();
 // Habilitar bodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+// Habilitar validacion (Express-Validator)
+app.use(expressValidator());
 
 // Habilitar handlebars como 'view'
 app.engine('handlebars', 
@@ -51,10 +58,19 @@ app.use(session({
     store: MongoStore.create({mongoUrl: process.env.DATABASE})
 }));
 
+// Habilitar flash (Alertas) - Debe ir antes del router o rutas
+app.use(flash());
+
 // app.use('/', (req, res) => {
 //     res.send('Hola Mundo NodeJS!');
 // });
 app.use('/', router());
+
+// Crear nuestro middleware
+// app.use((req, res, next) => {
+//     res.locals.mensaje = req.flash();
+//     next();
+// });
 
 // Puerto
 // app.listen(5000);

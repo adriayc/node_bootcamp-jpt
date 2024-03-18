@@ -21,5 +21,27 @@ module.exports = {
             // Inyecta el select en valor que esta seleccionado
             new RegExp(`value="${seleccionado}"`), '$& selected="selected"'
         );
+    },
+    mostrarAlertas: (errores = {}, alertas) => {
+        // console.log(errores);
+        // console.log(alertas.fn());
+
+        const categoria = Object.keys(errores);
+        // console.log(categoria);
+        // console.log(errores[categoria]);
+
+        let html = '';
+        if (categoria.length) {
+            errores[categoria].forEach(error => {
+                html += `
+                    <div class="${categoria} alerta">
+                        ${error}
+                    </div>
+                `;
+            });
+        }
+        // console.log(html);
+
+        return alertas.fn().html = html;
     }
 };
