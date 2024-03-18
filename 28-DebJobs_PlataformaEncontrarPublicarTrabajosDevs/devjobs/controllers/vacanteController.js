@@ -117,3 +117,37 @@ exports.editarVacante = async (req, res) => {
     // Redireccionar
     res.redirect(`/vacantes/${vacante.url}`);
 };
+
+// Eliinar vacante
+exports.eliminarVacante = async (req, res) => {
+    const { id } = req.params;
+    // console.log(id);
+
+    // const vacante = await Vacante.findById(id);
+    const vacante = await Vacante.findById(id).exec();
+    // console.log(vacante);
+    // return;
+
+    // Validar que autor de la vacante sea igual al user
+    if (verificarAutor(vacante, req.user)) {
+        // El usuario es el mismo, eliminar vacante
+        // vacante.remove();                       // Error!   
+        await Vacante.deleteOne({_id: id});     // Ok
+        // await Vacante.findByIdAndDelete(id);    // Ok
+
+        // Responde con status y mensaje
+        res.status(200).send('Vacante eliminado correctamente');
+    } else {
+        // El usuario es distinto, redirigir
+
+        res.status(403).send('Error');
+    }
+};
+
+const verificarAutor = (vacante = {}, usuario = {}) => {
+    // Metodo mongoose para comparar
+    if (!vacante.autor.equals(usuario._id)) {
+        return false;
+    }
+    return true;
+};

@@ -1,3 +1,5 @@
+import axios from 'axios';
+import Swal from 'sweetalert2';
 // alert('Webpack!');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,6 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (alertas) {
         limpiarAlertas();
+    }
+
+    // Eliminar vacante
+    const vacanteListado = document.querySelector('.panel-administracion');
+
+    if (vacanteListado) {
+        vacanteListado.addEventListener('click', accionesListado);
     }
 });
 
@@ -76,4 +85,57 @@ const limpiarAlertas = () => {
             clearInterval(interval);
         }
     }, 2000);
+};
+
+// Eliminar vacantes
+const accionesListado = e => {
+    e.preventDefault();
+    // console.log(e.target);
+
+    if (e.target.dataset.eliminar) {
+        // console.log('Eliminando...');
+        // Eliminar por medio de axios
+
+        Swal.fire({
+            title: "¿Confirmar eliminación?",
+            text: "¡Una vez eliminida, no se puede recuperar!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si, Eliminar",
+            cancelButtonText: 'No, Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Enviar la peticion con axios
+                const url = `${location.origin}/vacantes/eliminar/${e.target.dataset.eliminar}`;
+
+                // Axios para eliminar el registro
+                axios.delete(url, {params: {url}})
+                    .then(function (respuesta) {
+                        // console.log(respuesta);
+                        // return;
+                        if (respuesta.status === 200) {
+                            Swal.fire({
+                                title: "¡Eliminado!",
+                                text: respuesta.data,
+                                icon: "success"
+                            });
+
+                            // TODO: Eliminar del DOM
+                            e.target.parentElement.parentElement.parentElement.removeChild(e.target.parentElement.parentElement);
+                        }
+                    });
+            }
+          }).catch(() => {
+            Swal.fire({
+                title: '¡Hubo un error!',
+                text: 'No se pudo eliminar',
+                icon: 'error'
+            });
+          });
+
+    } else if (e.target.tagName === 'A') {
+        window.location.href = e.target.href;
+    }
 };
