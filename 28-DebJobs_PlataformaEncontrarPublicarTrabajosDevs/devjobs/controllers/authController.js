@@ -14,6 +14,15 @@ exports.autenticarUsuario = passport.authenticate('local', {
     badRequestMessage: 'Ambos campos son obligatorios'
 });
 
+exports.cerrarSesion = (req, res) => {
+    // Metodo para cerrar sesión en passport
+    req.logout();
+
+    req.flash('correcto', 'Cerrarste sesión correctamente');
+    // Redireccionar
+    return res.redirect('/inciar-sesion');
+};
+
 // Verificar que el usuario este autenticado
 exports.verificarUsuario = (req, res, next) => {
 
@@ -23,6 +32,7 @@ exports.verificarUsuario = (req, res, next) => {
         return next();
     }
 
+    req.flash('correcto', 'Cerraste sesión correctamente');
     // Redireccionar
     res.redirect('/iniciar-sesion');
 };
@@ -35,6 +45,8 @@ exports.mostrarPanel = async (req, res) => {
     res.render('administracion', {
         nombrePagina: 'Panel de Admistración',
         tagline: 'Crear y Adminstra tus vacantes desde aquí',
+        nombre: req.user.nombre,
+        cerrarSesion: true,
         vacantes
     });
 };

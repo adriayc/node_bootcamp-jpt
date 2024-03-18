@@ -85,3 +85,68 @@ exports.formIniciarSesion = (req, res) => {
         nombrePagina: 'Iniciar Sesión debJobs'
     });
 };
+
+// Formulario para editar el perfil
+exports.fromEditarPerfil = (req, res) => {
+    // console.log(req.user instanceof mongoose.Model);            // true
+    // console.log(req.user instanceof mongoose.Document);         // true
+    // return;
+
+    res.render('editar-perfil', {
+        nombrePagina: 'Editar tu perfil en devJobs',
+        nombre: req.user.nombre,
+        cerrarSesion: true,
+        // usuario: req.user                           // Error!
+        usuario: req.user.toObject()                // Convert document to object
+    })
+};
+
+// Actualizar cambios del perfil
+exports.editarPerfil = async (req, res) => {
+    const usuario = await Usuario.findById(req.user._id);
+    // console.log(usuario);
+
+    usuario.nombre = req.body.nombre;
+    usuario.eamil = req.body.email;
+    if (req.body.password) {
+        usuario.password = req.body.password;
+    }
+
+    await usuario.save();
+
+    req.flash('correcto', 'Cambios guardados correctamente');
+    // Redireccionar
+    res.redirect('/administracion');
+};
+
+// Sanitizar y validar perfil del usuario
+exports.validarPerfil = (req, res, next) => {
+    // Sanitizar
+    req.sanitizeBody('nombre').escape();
+    req.sanitizeBody('eamil').escape();
+    if (req.body.password) {
+        req.sanitizeBody('password').escape();
+    }
+
+    // Validar
+    req.checkBody('nombre', 'El nombre es requerido').notEmpty();
+    req.checkBody('email', 'El email es requerido').notEmpty();
+
+    const errores = req.validationErrors();
+
+    if (errores) {
+        req.flash('error', errores.map(error => error.msg));
+
+        res.render('editar-perfil', {
+            nombrePagina: 'Editar tu perfil en devJobs',
+            nombre: req.user.nombre,
+            cerrarSesion: true,
+            usuario: req.user.toObject(),                // Convert document to object
+            mensajes: req.flash()
+        });
+        return;
+    }
+
+    // Siguiente middleware
+    next();
+};

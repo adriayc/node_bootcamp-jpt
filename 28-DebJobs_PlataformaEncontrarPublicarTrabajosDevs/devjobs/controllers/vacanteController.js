@@ -7,8 +7,50 @@ exports.formularioNuevoVacante = (req, res) => {
     // res.send('Formulario nuevo vacante');
     res.render('nueva-vacante', {
         npmbrePagina: 'Nueva Vacante',
-        tagline: 'Llena el formulario y publica tu vacante'
+        tagline: 'Llena el formulario y publica tu vacante',
+        nombre: req.user.nombre,
+        cerrarSesion: true,
     });
+};
+
+// Validar y sanitizar los campos de las vacantes
+exports.validarVacante = (req, res, next) => {
+    // Sanitizar los campos
+    req.sanitizeBody('titulo').escape();
+    req.sanitizeBody('empresa').escape();
+    req.sanitizeBody('ubicacion').escape();
+    req.sanitizeBody('salario').escape();
+    req.sanitizeBody('contrato').escape();
+    req.sanitizeBody('skills').escape();
+
+    // Validar los campos
+    // req.checkBody('titulo', 'Agrega un Titulo a la vacante').not().empty();
+    req.checkBody('titulo', 'El titulo es requerido').notEmpty();
+    req.checkBody('empresa', 'La empresa es requerida').notEmpty();
+    req.checkBody('ubicacion', 'La ubicacion es requerida').notEmpty();
+    req.checkBody('contrato', 'El contrato es requerido').notEmpty();
+    req.checkBody('skills', 'Los skills son requeridos').notEmpty();
+
+    const errores = req.validationErrors();
+    // console.log(errores);
+    // return;
+
+    // Si existe erroes
+    if (errores) {
+        req.flash('error', errores.map(error => error.msg));
+
+        res.render('nueva-vacante', {
+            nombrePagina: 'Nueva Vacante',
+            tagline: 'Llena el formulario y publica tu vacante',
+            nombre: req.user.nombre,
+            cerrarSesion: true,
+            mensajes: req.flash()
+        });
+        return;
+    }
+
+    // Siguiente middleware
+    next();
 };
 
 // Agrega la vacante a la base de datos
@@ -54,6 +96,8 @@ exports.formEditarVacante = async (req, res, next) => {
 
     res.render('editar-vacante', {
         nombrePagina: `Editar - ${vacante.titulo}`,
+        nombre: req.user.nombre,
+        cerrarSesion: true,
         vacante
     });
 };
