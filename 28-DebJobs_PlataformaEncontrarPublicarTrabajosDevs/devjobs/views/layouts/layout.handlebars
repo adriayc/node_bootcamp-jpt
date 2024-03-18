@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {{!-- Google font --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    {{!-- Custom styles --}}
+    <link rel="stylesheet" href="/css/app.css">
+    <title>{{nombrePagina}}</title>
+</head>
+<body>
+    
+    <div class="contenedor nombre-sitio">
+        <h1>
+            <a href="/">devJobs</a>
+        </h1>
+
+        {{#if barra}}
+            <div class="buscador">
+                <form action="#">
+                    <input type="text" class="buscar">
+                    <input type="submit" value="Buscar">
+                </form>
+            </div>
+        {{/if}}
+    </div>
+
+    <header class="contenedor site-header separador">
+        <h2>{{nombrePagina}}</h2>
+
+        {{#if tagline}}
+            <p class="tagline">{{tagline}}</p>
+        {{/if}}
+
+        {{#if boton}}
+            <a href="/vacantes/nueva" class="btn btn-azul">Publicar Nueva Vacante</a>
+        {{/if}}
+    </header>
+
+    <div class="contenedor contenido-principal">
+        {{{body}}}
+    </div>
+
+</body>
+</html>
