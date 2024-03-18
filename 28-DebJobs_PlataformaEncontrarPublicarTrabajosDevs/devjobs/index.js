@@ -1,5 +1,6 @@
 const express = require('express');
 const path =  require('path');              // Utilidad de node que permite obtener la URL
+const bodyParser = require('body-parser');  // Utilidad de node que permite el envio por POST
 // Mongoose
 const mongoose = require('mongoose');
 // Handlebars
@@ -21,11 +22,17 @@ require('./config/db');
 
 const app = express();
 
+// Habilitar bodyParser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 // Habilitar handlebars como 'view'
 app.engine('handlebars', 
     // exphbs({         // Error!
     exphbs.engine({
-        defaultLayout: 'layout'
+        defaultLayout: 'layout',
+        // Agregar los hepers
+        helpers: require('./helpers/handlebars')
     })
 );
 app.set('view engine', 'handlebars');

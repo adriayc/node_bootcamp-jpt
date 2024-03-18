@@ -21,6 +21,10 @@
             # npm install --save dotenv connect-mongo mongoose shortid slug session cookie-parser
         + Express session
             # npm install --save express-session
+        + Webpack
+            # npm install --save-dev @babel/core @babel/preset-env babel-loader webpack webpack-cli
+        + Concurrently (Ejecutar varios comandos simultaneamente)
+            # npm install --save concurrently
     - Instalar Mongo Compass
         + Descargar e instalar Mongo Compass https://www.mongodb.com/try/download/shell
         + Configurar MongoDB Atlas
@@ -42,3 +46,5 @@
             > Database Name: devjobs
             > Collection Name: vacantes
             > Click en 'Create Database'
+      - Integrar Trix Editor
+        + Ir a la pagina 'https://trix-editor.org/' y descargarlo del su repositorio.
