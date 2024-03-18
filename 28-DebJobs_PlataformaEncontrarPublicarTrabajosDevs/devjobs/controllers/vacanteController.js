@@ -41,3 +41,32 @@ exports.mostrarVacante = async (req, res, next) => {
         vacante
     })
 };
+
+// Editar una vacante
+exports.formEditarVacante = async (req, res, next) => {
+    // const vacante = await Vacante.findOne({url: req.params.url});
+    const vacante = await Vacante.findOne({url: req.params.url}).lean();
+
+    if (!vacante) return next();
+
+    res.render('editar-vacante', {
+        nombrePagina: `Editar - ${vacante.titulo}`,
+        vacante
+    });
+};
+
+// Guardar editar vacantes
+exports.editarVacante = async (req, res) => {
+    const vacanteActualizada = req.body;
+    vacanteActualizada.skills = req.body.skills.split(',');
+    // console.log(vacanteActualizada);
+
+    const vacante = await Vacante.findOneAndUpdate({url: req.params.url}, vacanteActualizada, {
+        // Devuelve el documento actualizado
+        new: true,
+        runValidators: true
+    });
+
+    // Redireccionar
+    res.redirect(`/vacantes/${vacante.url}`);
+};
