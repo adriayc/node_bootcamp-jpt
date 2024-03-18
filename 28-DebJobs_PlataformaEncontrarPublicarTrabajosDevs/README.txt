@@ -38,6 +38,8 @@
             # npm install --save sweetalert2
         + Multer (Subir archivos)
             # npm install --save multer
+        + Nodemailer (Envio de emails)
+            # npm install --save nodemailer nodemailer-express-handlebars
     - Instalar Mongo Compass
         + Descargar e instalar Mongo Compass https://www.mongodb.com/try/download/shell
         + Configurar MongoDB Atlas
