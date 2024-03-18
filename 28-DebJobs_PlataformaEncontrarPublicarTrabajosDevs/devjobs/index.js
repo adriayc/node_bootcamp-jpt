@@ -20,6 +20,9 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 // Passport config
 const passport = require('./config/passport');
+// Http errors
+const createError = require('http-errors');
+
 
 // Env
 require('dotenv').config({path: 'variables.env'});
@@ -78,6 +81,32 @@ app.use((req, res, next) => {
 // });
 app.use('/', router());
 
+// 404 - Pagina no existente
+app.use((req, res, next) => {
+    next(createError(404, 'No encontrado'));
+});
+
+// Administracion de los errores
+app.use((error, req, res) => {
+    // console.log(error.message);
+    // console.log(error.status);
+    
+    res.locals.mensaje = error.message;
+    
+    const status = error.status || 500;
+    res.status(status);
+    res.locals.status = status;
+
+    res.render('error');
+});
+
+// Dehar que heroky asigne el puerto
+const host = '0.0.0.0';
+const port = process.env.PORT || process.env.PUERTO;
+
 // Puerto
 // app.listen(5000);
-app.listen(process.env.PUERTO);
+// app.listen(process.env.PUERTO);
+app.listen(port, host, () => {
+    console.log('El servidor esta funcionado correctamente');
+});
