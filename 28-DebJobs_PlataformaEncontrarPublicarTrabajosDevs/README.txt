@@ -100,3 +100,8 @@
       + Subir al repositorio de heroku (production)
         $ git push production master
       + Copiar la URL "https://cryptic-ridge-85209.heroku.com/" en el browser
+
+* Ideas para Monetizar la App
+    - Colocar un Limite de anuncios en el plan gratis.
+    - Las vacantes de los usuarios "Premium" se muestran primero.
+    - Estadísticas avanzadas (Que habilidades tiene nuestros visitantes).
