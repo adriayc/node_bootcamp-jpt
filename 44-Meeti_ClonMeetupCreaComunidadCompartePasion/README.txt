@@ -21,3 +21,26 @@
       # npm install --save ejs
     + Ejs Layouts
       $ npm install --save express-ejs-layouts
+
+* Instalar PostgreSQL en Linux
+  + PostgreSQL 'https://www.postgresql.org/download/'
+  + PgAdmin 4 'https://www.pgadmin.org/download/pgadmin-4-apt/'
+  + Comandos PSQL:
+    Muestra la version de PostgreSQL
+      $ psql --version
+    Existe 2 formas para ingresar al promt de PostgreSQL.
+    - Forma #1:
+      $ sudo -i -u postgres
+      $ psql
+      $ \q
+      $ exit
+    - Forma #2:
+      $ sudo -i -u postgres psql
+      $ \q
+    Modificar el password de PostgreSQL
+      $ sudo -u postgres psql
+      $ \password             # Confirmar el password
+      $ \q
+    Crear una nueva DB en PostgreSQL
+      $ \l                          # Listar las DBs
+      $ CREATE DATABASE meeti_db;   # Crear una DB
