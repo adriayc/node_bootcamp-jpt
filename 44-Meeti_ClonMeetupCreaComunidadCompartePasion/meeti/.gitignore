@@ -1,0 +1,4 @@
+# AAC
+node_modules/
+package-lock.json
+variables.env
