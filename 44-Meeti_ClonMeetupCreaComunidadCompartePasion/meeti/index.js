@@ -21,6 +21,16 @@ app.set('views', path.join(__dirname, './views'));
 // Archivos staticos
 app.use(express.static('public'));
 
+// Customs Middleware (usuuarios logueados, flash message, fecha actual)
+app.use((req, res, next) => {
+    const fecha = new Date();
+    res.locals.year = fecha.getFullYear();
+
+    // Siguiente middleware
+    next();
+});
+
+// Habilitar rutas
 app.use('/', router());
 
 // Agregar el puerto
