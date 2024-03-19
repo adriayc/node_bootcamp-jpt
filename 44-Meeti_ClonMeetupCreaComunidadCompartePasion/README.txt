@@ -17,3 +17,5 @@
       $ npm install --save-dev nodemon
     + Express y DotEnv
       $ npm install --save express dotenv
+    + Ejs (Template Engine)
+      # npm install --save ejs
