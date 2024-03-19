@@ -19,3 +19,5 @@
       $ npm install --save express dotenv
     + Ejs (Template Engine)
       # npm install --save ejs
+    + Ejs Layouts
+      $ npm install --save express-ejs-layouts
