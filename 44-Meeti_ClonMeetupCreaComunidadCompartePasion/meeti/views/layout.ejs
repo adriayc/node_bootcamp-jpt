@@ -32,6 +32,17 @@
         </nav>
     </header>
 
+    <!-- Flash messages -->
+    <% if (locals.mensajes) { %>
+        <% const categoria = Object.keys(locals.mensajes) %>
+        <!-- Comentarios en EJS -->
+        <% /* %><%= categoria %><% */ %>
+        <%#= categoria  %>
+        <% if (categoria.length) { %>
+
+        <% } %>
+    <% } %>
+
     <!-- Inyectar el contenido de las views -->
     <%- body %>
     

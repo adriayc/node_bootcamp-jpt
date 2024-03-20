@@ -18,6 +18,11 @@ exports.crearNuevaCuenta = async (req, res) => {
         // TODO: Flash message y redireccionar
 
     } catch (error) {
-        console.log(error);
+        // console.log(error);
+        const erroresSequelize = error.errors.map(err => err.message);
+        // console.log(erroresSequelize);
+
+        req.flash('error', erroresSequelize);
+        res.redirect('/crear-cuenta');
     }
 };
