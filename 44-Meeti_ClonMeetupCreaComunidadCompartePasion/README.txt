@@ -21,6 +21,8 @@
       # npm install --save ejs
     + Ejs Layouts
       $ npm install --save express-ejs-layouts
+    + Sequelize (ORM) y PostgreSQL
+      $ npm install --save sequelize pg pg-hstore
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'

@@ -5,6 +5,11 @@ const expressLayouts = require('express-ejs-layouts');
 require('dotenv').config({path: 'variables.env'});
 // Routers
 const router = require('./routes');
+// Configuracion postgres
+const db = require('./config/db');
+
+// Habilitar sequelize postgres
+db.sync().then(() => console.log('DB Conectado')).catch(error => console.log(error));
 
 // Inicializar express
 const app = express();
