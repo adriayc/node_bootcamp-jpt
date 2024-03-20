@@ -28,6 +28,9 @@
       $ npm install --save bcryptjs
     + Connect Flash (Flash messages), Cookie Parser y Express Session
       $ npm install --save connect-flash cookie-parser express-session
+    + Express Validator (Validacion de forms)
+      $ npm install --save express-validator             // Current version
+      $ npm install --save express-validator@5.3.0       // Old version (Our App)
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'

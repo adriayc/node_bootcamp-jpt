@@ -15,6 +15,8 @@ const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 // Session
 const session = require('express-session');
+// Express validator
+const expressValidator = require('express-validator');
 
 // Habilitar los modelos de forma global
 require('./models/Usuario');
@@ -28,6 +30,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+// Habilitar express validator 
+app.use(expressValidator());
 
 // Habilitar express layout
 app.use(expressLayouts);
