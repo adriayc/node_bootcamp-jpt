@@ -8,6 +8,8 @@ const router = require('./routes');
 // Configuracion postgres
 const db = require('./config/db');
 
+// Habilitar los modelos de forma global
+require('./models/Usuario');
 // Habilitar sequelize postgres
 db.sync().then(() => console.log('DB Conectado')).catch(error => console.log(error));
 

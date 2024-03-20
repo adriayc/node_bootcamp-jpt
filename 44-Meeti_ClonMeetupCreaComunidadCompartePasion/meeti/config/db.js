@@ -10,5 +10,9 @@ module.exports = new Sequelize('meeti_db', 'postgres', 'psql123', {
         min: 0,
         acquire: 30000,
         idle: 10000
-    }
+    },
+    // define: {
+    //     timestamps: false       // No agrega el createdAt y updatedAt       
+    // },
+    // logging: false              // Desabilitar los logs de la terminal
 });

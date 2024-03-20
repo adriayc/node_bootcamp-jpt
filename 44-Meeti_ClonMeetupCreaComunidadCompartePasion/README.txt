@@ -23,6 +23,9 @@
       $ npm install --save express-ejs-layouts
     + Sequelize (ORM) y PostgreSQL
       $ npm install --save sequelize pg pg-hstore
+    + BcryptNodejs (Hash)
+      $ npm install --save bcrypt-nodejs    (Deperedado!)
+      $ npm install --save bcryptjs
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'
