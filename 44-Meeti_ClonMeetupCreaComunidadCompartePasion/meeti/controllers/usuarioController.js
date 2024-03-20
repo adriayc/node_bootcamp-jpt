@@ -11,8 +11,13 @@ exports.crearNuevaCuenta = async (req, res) => {
     const usuario = req.body;
     // console.log(usuario);
 
-    const nuevoUsuario = await Usuario.create(usuario);
-    console.log('Usuario creado', nuevoUsuario);
+    try {
+        const nuevoUsuario = await Usuario.create(usuario);
+        console.log('Usuario creado', nuevoUsuario);
+    
+        // TODO: Flash message y redireccionar
 
-    // TODO: Flash message y redireccionar
+    } catch (error) {
+        console.log(error);
+    }
 };
