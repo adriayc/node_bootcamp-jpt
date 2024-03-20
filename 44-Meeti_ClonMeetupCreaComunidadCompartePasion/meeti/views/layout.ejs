@@ -39,7 +39,11 @@
         <% /* %><%= categoria %><% */ %>
         <%#= categoria  %>
         <% if (categoria.length) { %>
-
+            <% locals.mensajes[categoria].forEach(alerta => { %>
+                <div class="alertas">
+                    <p class="alerta <%= categoria %>"><%= alerta %></p>
+                </div>
+            <% }) %>
         <% } %>
     <% } %>
 
