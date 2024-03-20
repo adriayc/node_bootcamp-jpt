@@ -7,6 +7,8 @@ require('dotenv').config({path: 'variables.env'});
 const router = require('./routes');
 // Configuracion postgres
 const db = require('./config/db');
+// Body parser
+const bodyParser = require('body-parser');
 
 // Habilitar los modelos de forma global
 require('./models/Usuario');
@@ -15,6 +17,10 @@ db.sync().then(() => console.log('DB Conectado')).catch(error => console.log(err
 
 // Inicializar express
 const app = express();
+
+// Habilitar bodyParser (leer formularios)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Habilitar express layout
 app.use(expressLayouts);
