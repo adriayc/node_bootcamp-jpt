@@ -20,10 +20,13 @@ exports.crearNuevaCuenta = async (req, res) => {
     // console.log(erroresExpress);
 
     try {
-        const nuevoUsuario = await Usuario.create(usuario);
-        console.log('Usuario creado', nuevoUsuario);
+        // const nuevoUsuario = await Usuario.create(usuario);
+        await Usuario.create(usuario);
+        // console.log('Usuario creado', nuevoUsuario);
     
-        // TODO: Flash message y redireccionar
+        // Flash message y redireccionar
+        req.flash('exito', 'Hemos enviando un E-mail, confirma tu cuenta');
+        res.redirect('/iniciar-sesion');
 
     } catch (error) {
         // console.log(error);
@@ -42,4 +45,10 @@ exports.crearNuevaCuenta = async (req, res) => {
         req.flash('error', listaErrores);
         res.redirect('/crear-cuenta');
     }
+};
+
+exports.formIniciarSesion = (req, res) => {
+    res.render('inciar-sesion', {
+        nombrePagina: 'Iniciar Sesión'
+    });
 };
