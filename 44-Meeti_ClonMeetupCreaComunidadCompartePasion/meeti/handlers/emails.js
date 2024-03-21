@@ -20,10 +20,13 @@ exports.enviarEmail = async (opciones) => {
     console.log(opciones);
 
     // Leer el archivo para el email
+    const archivo = __dirname +'../views/${opcines.archivo}.ejs';
 
     // Compilarlo
+    const compilado = ejs.compile(fs.readFileSync(archivo, 'utf8'));
 
     // Crear el HTML
+    const html = compilado({url: opciones.url});
 
     // Configurar las opciones del email
 
