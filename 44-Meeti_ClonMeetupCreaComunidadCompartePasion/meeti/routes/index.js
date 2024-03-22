@@ -36,7 +36,7 @@ module.exports = function() {
     router.post('/iniciar-sesion', authController.autenticarUsuario);
 
     // Panel de administracion
-    router.get('/administracion', adminController.panelAdministracion);
+    router.get('/administracion', authController.usuarioAutenticado, adminController.panelAdministracion);
 
     return router;
 };
