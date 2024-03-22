@@ -4,6 +4,10 @@ const passport = require('passport');
 //     console.log('Autenticando...');
 // };
 exports.autenticarUsuario = passport.authenticate('local', {
-    successRedirect: '/ok',
-    failureRedirect: '/fail'
+    // successRedirect: '/ok',
+    // failureRedirect: '/fail'
+    successRedirect: '/administracion',
+    failureRedirect: '/iniciar-sesion',
+    failureFlash: true,
+    badRequestMessage: 'El email y password son obligatorios'
 });
