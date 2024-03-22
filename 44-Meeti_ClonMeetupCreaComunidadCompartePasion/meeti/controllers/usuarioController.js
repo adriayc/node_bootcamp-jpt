@@ -34,7 +34,7 @@ exports.crearNuevaCuenta = async (req, res) => {
             usuario,
             url,
             subject: 'Confirma tu cuenta de Meeti',
-            archivo: 'confirma-cuenta'
+            archivo: 'confirmar-cuenta'
         });
     
         // Flash message y redireccionar
