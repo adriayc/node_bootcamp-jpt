@@ -4,6 +4,7 @@ const homeController = require('../controllers/homeController');
 const usuarioController = require('../controllers/usuarioController');
 const authController = require('../controllers/authController');
 const adminController = require('../controllers/adminController');
+const grupoController = require('../controllers/grupoController');
 
 // Inicializar el router
 const router = express.Router();
@@ -37,6 +38,9 @@ module.exports = function() {
 
     // Panel de administracion
     router.get('/administracion', authController.usuarioAutenticado, adminController.panelAdministracion);
+
+    // Nuevos grupos
+    router.get('/nuevo-grupo', authController.usuarioAutenticado, grupoController.formNuevoGrupo);
 
     return router;
 };

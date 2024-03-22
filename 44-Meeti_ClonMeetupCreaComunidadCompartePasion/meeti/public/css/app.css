@@ -37,6 +37,10 @@ img {
 ul {
     list-style: none;padding: 0;
 }
+.trix-editor ul {
+    list-style: unset;
+    padding: inherit;
+}
 p {
     line-height: 2;
 }
