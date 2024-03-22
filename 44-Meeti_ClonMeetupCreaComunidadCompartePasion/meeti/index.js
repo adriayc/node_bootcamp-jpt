@@ -17,6 +17,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 // Express validator
 const expressValidator = require('express-validator');
+// Config passport
+const passport = require('./config/passport');
 
 // Habilitar los modelos de forma global
 require('./models/Usuario');
@@ -58,6 +60,10 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+
+// Inicializar passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Customs Middleware (usuuarios logueados, flash message, fecha actual)
 app.use((req, res, next) => {

@@ -33,6 +33,8 @@
       $ npm install --save express-validator@5.3.0       // Old version (Our App)
     + Nodemailer (Envio de emails)
       $ npm install --save nodemailer
+    + Passport (Autenticacion)
+      $ npm install --save passport passport-local
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'
