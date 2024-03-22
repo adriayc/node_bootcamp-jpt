@@ -56,3 +56,5 @@
     Crear una nueva DB en PostgreSQL
       $ \l                          # Listar las DBs
       $ CREATE DATABASE meeti_db;   # Crear una DB
+    Backup de la DB
+      $ pg_dump -h 127.0.0.1 -p 5432 -U postgres meeti_db > meeti_db.bak
