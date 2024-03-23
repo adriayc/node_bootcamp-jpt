@@ -35,6 +35,8 @@
       $ npm install --save nodemailer
     + Passport (Autenticacion)
       $ npm install --save passport passport-local
+    + Uuid (Generar IDs únicos)
+      # npm install --save uuid
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'
