@@ -15,7 +15,18 @@ exports.formNuevoGrupo = async (req, res) => {
 
 // Guardar el grupo en la DB
 exports.crearGrupo = async (req, res) => {
+    // Sanitizar los campos
+    req.sanitizeBody('nombre');
+    req.sanitizeBody('url');
+
     const grupo = req.body;
+    // console.log(grupo); return;
+
+    // Almacena ID del usuario autenticado como creardor del grupo
+    grupo.usuarioId = req.user.id;
+    // Almacenar ID de la categoria
+    // grupo.categoriaId = req.body.Categoria;
+
     // console.log(grupo); return;
 
     try {
@@ -27,9 +38,13 @@ exports.crearGrupo = async (req, res) => {
         res.redirect('/administracion');
 
     } catch (error) {
-        console.log(error);
+        // console.log(error);
 
-        req.flash('error', error);
+        // Extraer los error de sequelize
+        const erroresSequelize = error.error.map(err => err.message);
+
+        // req.flash('error', error);
+        req.flash('error', erroresSequelize);
         // Redireccionar
         res.redirect('/nuevo-grupo');
     }

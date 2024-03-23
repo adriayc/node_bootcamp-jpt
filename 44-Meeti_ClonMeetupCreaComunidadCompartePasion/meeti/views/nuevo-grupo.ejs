@@ -16,7 +16,8 @@
         </div>
         <div class="campo">
             <label for="categoria">Categoría</label>
-            <select name="catagoria" id="categoria">
+            <!-- <select name="categoria" id="categoria"> -->
+            <select name="categoriaId" id="categoria">
                 <option value="" selected disabled>-- Elige una categoria --</option>
                 <% categorias.forEach(categoria => { %>
                     <option value="<%= categoria.id %>"><%= categoria.nombre %></option>
