@@ -21,6 +21,42 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: categorias; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.categorias (
+    id integer NOT NULL,
+    nombre text,
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.categorias OWNER TO postgres;
+
+--
+-- Name: categorias_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.categorias_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.categorias_id_seq OWNER TO postgres;
+
+--
+-- Name: categorias_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.categorias_id_seq OWNED BY public.categorias.id;
+
+
+--
 -- Name: usuarios; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -63,10 +99,37 @@ ALTER SEQUENCE public.usuarios_id_seq OWNED BY public.usuarios.id;
 
 
 --
+-- Name: categorias id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categorias ALTER COLUMN id SET DEFAULT nextval('public.categorias_id_seq'::regclass);
+
+
+--
 -- Name: usuarios id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.usuarios ALTER COLUMN id SET DEFAULT nextval('public.usuarios_id_seq'::regclass);
+
+
+--
+-- Data for Name: categorias; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.categorias (id, nombre, "createdAt", "updatedAt") FROM stdin;
+1	Programación	2024-03-23 10:41:16.30579-04	2024-03-23 10:41:16.30579-04
+2	Diseño	2024-03-23 10:41:48.701873-04	2024-03-23 10:41:48.701873-04
+3	Negocios y Emprendimiento	2024-03-23 10:42:41.503164-04	2024-03-23 10:42:41.503164-04
+4	Moda y Estilo	2024-03-23 10:43:48.448051-04	2024-03-23 10:43:48.448051-04
+5	Salud y Ejercicio	2024-03-23 10:43:48.448051-04	2024-03-23 10:43:48.448051-04
+6	Fotografía y Viajes	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
+7	Comida y Bebida\n	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
+8	Diseño y Arquitectura	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
+9	Café	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
+10	CIne y Película	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
+11	Libros	2024-03-23 10:47:26.794603-04	2024-03-23 10:47:26.794603-04
+12	Aprendizaje	2024-03-23 10:47:26.794603-04	2024-03-23 10:47:26.794603-04
+\.
 
 
 --
@@ -80,10 +143,25 @@ COPY public.usuarios (id, nombre, imagen, email, password, activo, "tokenPasswor
 
 
 --
+-- Name: categorias_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.categorias_id_seq', 2, true);
+
+
+--
 -- Name: usuarios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.usuarios_id_seq', 2, true);
+
+
+--
+-- Name: categorias categorias_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categorias
+    ADD CONSTRAINT categorias_pkey PRIMARY KEY (id);
 
 
 --

@@ -22,6 +22,7 @@ const passport = require('./config/passport');
 
 // Habilitar los modelos de forma global
 require('./models/Usuario');
+require('./models/Categoria');
 // Habilitar sequelize postgres
 db.sync().then(() => console.log('DB Conectado')).catch(error => console.log(error));
 
