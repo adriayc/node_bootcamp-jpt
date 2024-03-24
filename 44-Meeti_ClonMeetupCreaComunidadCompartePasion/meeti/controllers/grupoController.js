@@ -6,6 +6,8 @@ const Grupo = require('../models/Grupo');
 
 // Configuracion de multer
 const configuracionMulter = {
+    // filesize [bits]
+    limits: {fileSize: 100000},
     storage: fileStorage = multer.diskStorage({
         destination: (req, file, next) => {
             next(null, __dirname +'/../public/uploads/grupos');
@@ -36,8 +38,19 @@ exports.formNuevoGrupo = async (req, res) => {
 exports.subirImagen = (req, res, next) => {
     upload(req, res, function (error) {
         if (error) {
-            console.log(error);
-            // TODO: Manejar errores
+            // console.log(error);
+            // Manejar errores
+            if (error instanceof multer.MulterError) {
+                if (error.code === 'LIMIT_FILE_SIZE') {
+                    req.flash('error', 'El archivo es muy grande');
+                } else {
+                    req.flash('error', error.message);
+                }
+            }
+
+            // Redireccionar atras
+            res.redirect('back');
+            return;
         } else {
             next();
         }
@@ -78,7 +91,7 @@ exports.crearGrupo = async (req, res) => {
         // console.log(error);
 
         // Extraer los error de sequelize
-        const erroresSequelize = error.error.map(err => err.message);
+        const erroresSequelize = error.errors.map(err => err.message);
 
         // req.flash('error', error);
         req.flash('error', erroresSequelize);
