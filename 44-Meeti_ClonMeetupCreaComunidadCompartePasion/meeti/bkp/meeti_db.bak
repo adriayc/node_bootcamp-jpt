@@ -167,7 +167,7 @@ b262b59d-a955-4e46-831d-e620b3420d42	JavaScript México	<div>Hola somo <strong>J
 
 COPY public.usuarios (id, nombre, imagen, email, password, activo, "tokenPassword", "expiraToken", "createdAt", "updatedAt") FROM stdin;
 1	Adriano	\N	adriano@correo.com	$2a$10$CDIZcogIrMr7KDGSJrmqDeb7kp5tb7iTYoL20FNKASFUINb2W.VfW	t	\N	\N	2024-03-21 23:15:35.877-04	2024-03-21 23:15:50.875-04
-2	Carla	\N	carla@correo.com	$2a$10$uXAjEIXmW03f.Dl0XbYzqenyBO5f1644ldqP2c4R8pubwbpHf1h96	f	\N	\N	2024-03-22 16:27:34.76-04	2024-03-22 16:27:34.76-04
+2	Carla	\N	carla@correo.com	$2a$10$uXAjEIXmW03f.Dl0XbYzqenyBO5f1644ldqP2c4R8pubwbpHf1h96	t	\N	\N	2024-03-22 16:27:34.76-04	2024-03-22 16:27:34.76-04
 \.
 
 
