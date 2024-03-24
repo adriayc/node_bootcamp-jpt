@@ -45,6 +45,7 @@ module.exports = function() {
 
     // Editar grupos
     router.get('/editar-grupo/:grupoId', authController.usuarioAutenticado, grupoController.formEditarGrupo);
+    router.post('/editar-grupo/:grupoId', authController.usuarioAutenticado, grupoController.editarGrupo);
 
     return router;
 };

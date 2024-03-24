@@ -135,3 +135,32 @@ exports.formEditarGrupo = async (req, res) => {
         categorias
     });
 };
+
+// Guardar los cambios de editar grupo en la DB
+exports.editarGrupo = async (req, res, next) => {
+    const grupo = await Grupo.findOne({where: {id: req.params.grupoId, usuarioId: req.user.id}});
+
+    // Validar el grupo (Si no exite el grupo y el usuario no el que lo creo)
+    if (!grupo) {
+        req.flash('error', 'Operación no válida');
+        // Redireccionar
+        res.redirect('/administracion');
+        return next();
+    }
+
+    // Si todo es Ok
+    const { nombre, descripcion, categoriaId, url } = req.body;
+
+    // Asignar los valores
+    grupo.nombre = nombre;
+    grupo.descripcion = descripcion;
+    grupo.categoriaId = categoriaId;
+    grupo.url = url;
+
+    // Guardar en la DB
+    await grupo.save();
+
+    req.flash('exito', 'Los cambios fueron almacenados correctamente');
+    // Redireccionar
+    res.redirect('/administracion');
+};
