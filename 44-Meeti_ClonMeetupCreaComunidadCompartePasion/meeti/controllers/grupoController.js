@@ -1,6 +1,25 @@
+const multer = require('multer');
+const shortid = require('shortid');
 // Models
 const Categoria = require('../models/Categoria');
 const Grupo = require('../models/Grupo');
+
+// Configuracion de multer
+const configuracionMulter = {
+    storage: fileStorage = multer.diskStorage({
+        destination: (req, file, next) => {
+            next(null, __dirname +'/../public/uploads/grupos');
+        },
+        filename: (req, file, next) => {
+            // console.log(file.minetype);
+            const extension = file.mimetype.split('/')[1];
+            next(null, `${shortid.generate()}.${extension}`);
+        }
+    })
+};
+
+// Inicializar multer
+const upload = multer(configuracionMulter).single('imagen');
 
 exports.formNuevoGrupo = async (req, res) => {
     const categorias = await Categoria.findAll();
@@ -13,8 +32,23 @@ exports.formNuevoGrupo = async (req, res) => {
     });
 };
 
+// Subir imagen al grupo al servidor
+exports.subirImagen = (req, res, next) => {
+    upload(req, res, function (error) {
+        if (error) {
+            console.log(error);
+            // TODO: Manejar errores
+        } else {
+            next();
+        }
+    });
+};
+
 // Guardar el grupo en la DB
 exports.crearGrupo = async (req, res) => {
+    // console.log(req);
+    // console.log(req.file);
+
     // Sanitizar los campos
     req.sanitizeBody('nombre');
     req.sanitizeBody('url');
@@ -28,6 +62,9 @@ exports.crearGrupo = async (req, res) => {
     // grupo.categoriaId = req.body.Categoria;
 
     // console.log(grupo); return;
+
+    // Leer la imagen del grupo
+    grupo.imagen = req.file.filename;
 
     try {
         // Almacenar el DB
