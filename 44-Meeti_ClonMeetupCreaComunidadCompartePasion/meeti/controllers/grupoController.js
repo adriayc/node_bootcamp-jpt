@@ -17,7 +17,17 @@ const configuracionMulter = {
             const extension = file.mimetype.split('/')[1];
             next(null, `${shortid.generate()}.${extension}`);
         }
-    })
+    }),
+    fileFilter(req, file, next) {
+        // console.log(file.mimetype);
+        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+            //  El formato del archivo es valido (true = aceptando archivo)
+            next(null, true)
+        } else {
+            // El formato del archivo no es valido (false = rechazando archivo)
+            next(new Error('Formato no válido'), false);
+        }
+    }
 };
 
 // Inicializar multer
@@ -46,6 +56,8 @@ exports.subirImagen = (req, res, next) => {
                 } else {
                     req.flash('error', error.message);
                 }
+            } else if (error.hasOwnProperty('message')) {
+                req.flash('error', error.message);
             }
 
             // Redireccionar atras
@@ -76,8 +88,10 @@ exports.crearGrupo = async (req, res) => {
 
     // console.log(grupo); return;
 
-    // Leer la imagen del grupo
-    grupo.imagen = req.file.filename;
+    // Leer la imagen del grupo (Si solo hay un archivo)
+    if (req.file) {
+        grupo.imagen = req.file.filename;
+    }
 
     try {
         // Almacenar el DB

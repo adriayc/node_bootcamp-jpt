@@ -57,6 +57,25 @@ ALTER SEQUENCE public.categorias_id_seq OWNED BY public.categorias.id;
 
 
 --
+-- Name: grupos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.grupos (
+    id uuid DEFAULT 'cab50caa-6ac0-412c-881a-7542e546d8cf'::uuid NOT NULL,
+    nombre text NOT NULL,
+    descripcion text NOT NULL,
+    url text,
+    imagen text,
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL,
+    "categoriaId" integer,
+    "usuarioId" integer
+);
+
+
+ALTER TABLE public.grupos OWNER TO postgres;
+
+--
 -- Name: usuarios; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -133,6 +152,16 @@ COPY public.categorias (id, nombre, "createdAt", "updatedAt") FROM stdin;
 
 
 --
+-- Data for Name: grupos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.grupos (id, nombre, descripcion, url, imagen, "createdAt", "updatedAt", "categoriaId", "usuarioId") FROM stdin;
+b262b59d-a955-4e46-831d-e620b3420d42	JavaScript México	<div>Hola somo <strong>JavaScript México</strong></div>	http://www.javascriptmx.com	ntA1591_W.jpeg	2024-03-24 00:14:26.994-04	2024-03-24 00:14:26.994-04	1	1
+4280aa25-3f79-4e7f-a3c1-71da5f2c4ccd	NodeJS Colombia	<div>Hola somos la comunidad de NodeJS Colombia</div>	https://www.nodejsco.com	\N	2024-03-24 00:28:07.462-04	2024-03-24 00:28:07.462-04	1	1
+\.
+
+
+--
 -- Data for Name: usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -165,6 +194,14 @@ ALTER TABLE ONLY public.categorias
 
 
 --
+-- Name: grupos grupos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.grupos
+    ADD CONSTRAINT grupos_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: usuarios usuarios_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -178,6 +215,22 @@ ALTER TABLE ONLY public.usuarios
 
 ALTER TABLE ONLY public.usuarios
     ADD CONSTRAINT usuarios_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: grupos grupos_categoriaId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.grupos
+    ADD CONSTRAINT "grupos_categoriaId_fkey" FOREIGN KEY ("categoriaId") REFERENCES public.categorias(id) ON UPDATE CASCADE ON DELETE SET NULL;
+
+
+--
+-- Name: grupos grupos_usuarioId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.grupos
+    ADD CONSTRAINT "grupos_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES public.usuarios(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
 
 --
