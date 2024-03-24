@@ -43,5 +43,8 @@ module.exports = function() {
     router.get('/nuevo-grupo', authController.usuarioAutenticado, grupoController.formNuevoGrupo);
     router.post('/nuevo-grupo', authController.usuarioAutenticado, grupoController.subirImagen, grupoController.crearGrupo);
 
+    // Editar grupos
+    router.get('/editar-grupo/:grupoId', authController.usuarioAutenticado, grupoController.formEditarGrupo);
+
     return router;
 };
