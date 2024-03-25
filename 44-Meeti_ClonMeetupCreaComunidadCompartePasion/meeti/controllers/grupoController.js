@@ -3,6 +3,7 @@ const shortid = require('shortid');
 // Models
 const Categoria = require('../models/Categoria');
 const Grupo = require('../models/Grupo');
+const { Association } = require('sequelize');
 
 // Configuracion de multer
 const configuracionMulter = {
@@ -163,4 +164,15 @@ exports.editarGrupo = async (req, res, next) => {
     req.flash('exito', 'Los cambios fueron almacenados correctamente');
     // Redireccionar
     res.redirect('/administracion');
+};
+
+// Formulario para editar la imagen del grupo
+exports.formEditarImagen = async (req, res) => {
+    const grupo = await Grupo.findByPk(req.params.grupoId);
+    // console.log(grupo);
+
+    res.render('imagen-grupo', {
+        nombrePagina: `Editar imagen grupo: ${grupo.nombre}`,
+        grupo
+    });
 };
