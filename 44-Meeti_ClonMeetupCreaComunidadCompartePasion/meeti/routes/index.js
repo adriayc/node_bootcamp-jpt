@@ -5,6 +5,7 @@ const usuarioController = require('../controllers/usuarioController');
 const authController = require('../controllers/authController');
 const adminController = require('../controllers/adminController');
 const grupoController = require('../controllers/grupoController');
+const meetiController = require('../controllers/meetiController');
 
 // Inicializar el router
 const router = express.Router();
@@ -54,6 +55,9 @@ module.exports = function() {
     // Eliminar grupo
     router.get('/eliminar-grupo/:grupoId', authController.usuarioAutenticado, grupoController.formEliminarGrupo);
     router.post('/eliminar-grupo/:grupoId', authController.usuarioAutenticado, grupoController.eliminarGrupo);
+
+    // Nuevos meeti
+    router.get('/nuevo-meeti', authController.usuarioAutenticado, meetiController.formNuevoMeeti);
 
     return router;
 };
