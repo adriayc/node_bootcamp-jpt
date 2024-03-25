@@ -1,5 +1,6 @@
 const multer = require('multer');
 const shortid = require('shortid');
+const fs = require('fs');
 // Models
 const Categoria = require('../models/Categoria');
 const Grupo = require('../models/Grupo');
@@ -168,11 +169,60 @@ exports.editarGrupo = async (req, res, next) => {
 
 // Formulario para editar la imagen del grupo
 exports.formEditarImagen = async (req, res) => {
-    const grupo = await Grupo.findByPk(req.params.grupoId);
+    const grupo = await Grupo.findOne({where: {id: req.params.grupoId, usuarioId: req.user.id}});
     // console.log(grupo);
 
     res.render('imagen-grupo', {
         nombrePagina: `Editar imagen grupo: ${grupo.nombre}`,
         grupo
     });
+};
+
+// Guarda la imagen del grupo en la DB y elimina la anterior
+exports.editarImagen = async (req, res, next) => {
+    const grupo = await Grupo.findOne({where: {id: req.params.grupoId, usuarioId: req.user.id}});
+
+    // Validar grupo
+    if (!grupo) {
+        req.glash('Error', 'Operacion no válida');
+        // Redireccionar
+        res.redirect('/iniciar-sesion');
+        return next();
+    }
+
+    // Verificar que el archivo es nuevo
+    if (req.file) {
+        console.log(req.file.filename);
+    }
+
+    // Revisar que exista un archivo anterior
+    if (grupo.imagen) {
+        console.log(grupo.imagen);
+    }
+
+    // Si hay imagen anterior y nuevo, eliminar la anterior del server
+    if (req.file && grupo.imagen) {
+        const imagenAnteriorPath = __dirname +`/../public/uploads/grupos/${grupo.imagen}`;
+        // console.log(imagenAnteriorPath);
+        
+        // Eliminar archivo con FileSystem
+        fs.unlink(imagenAnteriorPath, (error) => {
+            if (error) {
+                console.log(error);
+            }
+            return;
+        });
+    }
+
+    // Si hay una imagen nuevo, asignamos en el grupo
+    if (req.file) {
+        grupo.imagen = req.file.filename;
+    }
+
+    // Guardamos en la DB
+    await grupo.save();
+
+    req.flash('exito', 'Se ha actualizado la imagen correctamente');
+    // Redireccionar
+    res.redirect('/administracion');
 };
