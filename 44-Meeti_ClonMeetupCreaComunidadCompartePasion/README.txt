@@ -39,6 +39,11 @@
       # npm install --save uuid
     + Multer (Subir archivos) y Shortid (Generador de IDs cortos)
       # npm install --save multer shortid
+    + Webpack
+      # npm install webpack webpack-cli --save-dev    // Current version
+      # npm install -D babel-loader @babel/core @babel/preset-env webpack webpack-cli       // App version
+    + Concurrently (Ejecutar varios comandos simultaneamente)
+      # npm install --save concurrently
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'
