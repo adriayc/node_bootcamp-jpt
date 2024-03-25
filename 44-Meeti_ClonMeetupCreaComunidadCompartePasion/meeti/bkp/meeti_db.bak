@@ -156,8 +156,9 @@ COPY public.categorias (id, nombre, "createdAt", "updatedAt") FROM stdin;
 --
 
 COPY public.grupos (id, nombre, descripcion, url, imagen, "createdAt", "updatedAt", "categoriaId", "usuarioId") FROM stdin;
-b262b59d-a955-4e46-831d-e620b3420d42	JavaScript México	<div>Hola somo <strong>JavaScript México</strong></div>	http://www.javascriptmx.com	ntA1591_W.jpeg	2024-03-24 00:14:26.994-04	2024-03-24 00:14:26.994-04	1	1
-4280aa25-3f79-4e7f-a3c1-71da5f2c4ccd	NodeJS Colombia	<div>Hola somos la comunidad de NodeJS Colombia</div>	https://www.nodejsco.com	\N	2024-03-24 00:28:07.462-04	2024-03-24 00:28:07.462-04	1	1
+4280aa25-3f79-4e7f-a3c1-71da5f2c4ccd	NodeJS Colombia	<div>Hola somos la comunidad de NodeJS Colombia</div>	https://www.nodejsco.com	jwTdjehJu.jpeg	2024-03-24 00:28:07.462-04	2024-03-24 22:08:49.775-04	1	1
+b262b59d-a955-4e46-831d-e620b3420d42	JavaScript México	<div>Hola somo <strong>JavaScript México</strong></div>	http://www.javascriptmx.com	-AH-F4ZoN.jpeg	2024-03-24 00:14:26.994-04	2024-03-24 22:10:27.84-04	1	1
+fcec772f-7b50-41f9-a476-2b04985a7abc	Diseño UX/UI Bolivia Updated	<div>Hola somos la comunidad de <strong>diseño UX/UI</strong> Bolivia Updated.</div>	https://www.diseniouxbo.com	e0Jm_5rht.jpeg	2024-03-24 16:54:03.278-04	2024-03-24 22:11:53.482-04	2	1
 \.
 
 

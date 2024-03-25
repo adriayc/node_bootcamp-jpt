@@ -53,6 +53,7 @@ module.exports = function() {
 
     // Eliminar grupo
     router.get('/eliminar-grupo/:grupoId', authController.usuarioAutenticado, grupoController.formEliminarGrupo);
+    router.post('/eliminar-grupo/:grupoId', authController.usuarioAutenticado, grupoController.eliminarGrupo);
 
     return router;
 };
