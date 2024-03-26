@@ -59,6 +59,8 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
             // Si existe un pin anterior limpiarlo
             markers.clearLayers();
 
+            // Iniciarlizar el geocoder
+            const geocodeService = L.esri.Geocoding.reverseGeocode();
             // Utilizar el provider de leaflet-geosearch
             const provider = new OpenStreetMapProvider();
             // console.log(provider);
@@ -66,33 +68,46 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
                 // console.log(resultado);
                 // console.log(resultado[0].bounds[0]);
 
-                // Mostrar el mapa
-                map.setView(resultado[0]?.bounds[0], 15);
+                // geocodeService.reverse().latlng(resultado[0].bounds[0], 15).run(function(error, result) {            // Error!
+                geocodeService.latlng(resultado[0].bounds[0], 15).run(function(error, result) {
+                    console.log(result);
 
-                // Agregar el pin
-                marker = new L.marker(resultado[0]?.bounds[0], {
-                    draggable: true,                // Mover el pin
-                    autoPan: true                   // Mover el mapa segun la posicion del pin
-                })
-                .addTo(map)
-                // Mostrar popup de informacion
-                .bindPopup(resultado[0]?.label)
-                .openPopup();
+                    // Mostrar el mapa
+                    map.setView(resultado[0]?.bounds[0], 15);
 
-                // Asignar al contenedor de markers
-                markers.addLayer(marker);
+                    // Agregar el pin
+                    marker = new L.marker(resultado[0]?.bounds[0], {
+                        draggable: true,                // Mover el pin
+                        autoPan: true                   // Mover el mapa segun la posicion del pin
+                    })
+                    .addTo(map)
+                    // Mostrar popup de informacion
+                    .bindPopup(resultado[0]?.label)
+                    .openPopup();
 
-                // Detectar movimiento del marker en el mapa
-                marker.on('moveend', function(e) {
-                    // console.log(e.target);
+                    // Asignar al contenedor de markers
+                    markers.addLayer(marker);
 
-                    marker = e.target;
-                    // console.log(marker.getLatLng());
-                    const posicion = marker.getLatLng();
-                    // Centrar el mapa a la posicion del pin
-                    map.panTo(new L.LatLng(posicion.lat, posicion.lng));
+                    // Detectar movimiento del marker en el mapa
+                    marker.on('moveend', function(e) {
+                        // console.log(e.target);
+
+                        marker = e.target;
+                        // console.log(marker.getLatLng());
+                        const posicion = marker.getLatLng();
+                        // Centrar el mapa a la posicion del pin
+                        map.panTo(new L.LatLng(posicion.lat, posicion.lng));
+
+                        // Reverse geocoding, cuando el usuario reubica el pin
+                        // geocodeService.reverse().latlng(posicion, 15).run(function(error, result) {      // Error!
+                        geocodeService.latlng(posicion, 15).run(function(error, result) {
+                            console.log(result);
+
+                            // Mostrar el popup de informacion
+                            marker.bindPopup(result?.address?.LongLabel);
+                        });
+                    });
                 });
-
             });
         }
     }
