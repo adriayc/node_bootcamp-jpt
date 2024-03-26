@@ -22,6 +22,7 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
     let map;
     const lat = -17.377221;
     const lng = -66.1570064;
+    let markers;
     let marker;
 
     document.addEventListener('DOMContentLoaded', event => {
@@ -31,6 +32,8 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
             // const map = L.map('mapa').setView([51.505, -0.09], 13);
             // const map = L.map('mapa').setView([lat, lng], 15);
             map = L.map('mapa').setView([lat, lng], 15);
+            // Contenedor para todos los marker
+            markers = new L.FeatureGroup().addTo(map);
     
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -53,6 +56,9 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
         if (e.target.value.length > 8) {
             // console.log('Buscando...');
 
+            // Si existe un pin anterior limpiarlo
+            markers.clearLayers();
+
             // Utilizar el provider de leaflet-geosearch
             const provider = new OpenStreetMapProvider();
             // console.log(provider);
@@ -72,6 +78,21 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
                 // Mostrar popup de informacion
                 .bindPopup(resultado[0]?.label)
                 .openPopup();
+
+                // Asignar al contenedor de markers
+                markers.addLayer(marker);
+
+                // Detectar movimiento del marker en el mapa
+                marker.on('moveend', function(e) {
+                    // console.log(e.target);
+
+                    marker = e.target;
+                    // console.log(marker.getLatLng());
+                    const posicion = marker.getLatLng();
+                    // Centrar el mapa a la posicion del pin
+                    map.panTo(new L.LatLng(posicion.lat, posicion.lng));
+                });
+
             });
         }
     }
