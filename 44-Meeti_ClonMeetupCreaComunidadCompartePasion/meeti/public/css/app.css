@@ -381,6 +381,29 @@ main.contenedor-formularios {
     color: #0F4C5C;
     /* font-size: 1rem; */
 }
+.campo.contenedor-mapa {
+    height: 35rem;
+    margin-bottom: 4rem;
+    display: block;
+}
+.contenedor-mapa .mapa {
+    width: 100%;
+    height: inherit;
+}
+form .informacion {
+    font-weight: bold;
+    color: #333;
+    font-size: 1rem;
+    /* text-align: center; */
+    margin-bottom: 3rem;
+}
+form .informacion.leaflet {
+    font-size: 80%;
+    text-align: center;
+}
+form .informacion:last-of-type{
+    margin-bottom: 1rem;
+}
 .default-form .campo label {
     flex: 0 0 120px;
 }

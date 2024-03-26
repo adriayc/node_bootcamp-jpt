@@ -15,7 +15,7 @@
   \**************************/
 /***/ (() => {
 
-eval("console.log('Hello world Webpack!');\n\n//# sourceURL=webpack://meeti/./public/js/app.js?");
+eval("// console.log('Hello world Webpack!');\n\n// IIFE (Immediately Invoked Funcion expresssion)\n(function () {\n  // const map = L.map('mapa').setView([51.505, -0.09], 13);\n\n  // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {\n  //     attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'\n  // }).addTo(map);\n\n  // L.marker([51.5, -0.09]).addTo(map)\n  //     .bindPopup('A pretty CSS popup.<br> Easily customizable.')\n  //     .openPopup();\n\n  document.addEventListener('DOMContentLoaded', function (event) {\n    var mapa = document.querySelector('#mapa');\n    if (mapa) {\n      var map = L.map('mapa').setView([51.505, -0.09], 13);\n      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {\n        attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'\n      }).addTo(map);\n      L.marker([51.5, -0.09]).addTo(map).bindPopup('A pretty CSS popup.<br> Easily customizable.').openPopup();\n    }\n  });\n})();\n\n//# sourceURL=webpack://meeti/./public/js/app.js?");
 
 /***/ })
 
