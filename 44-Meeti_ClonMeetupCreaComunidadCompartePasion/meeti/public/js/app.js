@@ -22,6 +22,7 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
     let map;
     const lat = -17.377221;
     const lng = -66.1570064;
+    let marker;
 
     document.addEventListener('DOMContentLoaded', event => {
         const mapa = document.querySelector('#mapa');
@@ -56,9 +57,21 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
             const provider = new OpenStreetMapProvider();
             // console.log(provider);
             provider.search({query: e.target.value}).then(resultado => {
-                console.log(resultado);
+                // console.log(resultado);
+                // console.log(resultado[0].bounds[0]);
+
+                // Mostrar el mapa
+                map.setView(resultado[0]?.bounds[0], 15);
 
                 // Agregar el pin
+                marker = new L.marker(resultado[0]?.bounds[0], {
+                    draggable: true,                // Mover el pin
+                    autoPan: true                   // Mover el mapa segun la posicion del pin
+                })
+                .addTo(map)
+                // Mostrar popup de informacion
+                .bindPopup(resultado[0]?.label)
+                .openPopup();
             });
         }
     }
