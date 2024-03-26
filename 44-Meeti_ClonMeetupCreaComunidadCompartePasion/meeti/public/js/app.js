@@ -1,5 +1,7 @@
 // console.log('Hello world Webpack!');
 
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
+
 // IIFE (Immediately Invoked Funcion expresssion)
 (function () {
 
@@ -13,20 +15,52 @@
     //     .bindPopup('A pretty CSS popup.<br> Easily customizable.')
     //     .openPopup();
 
+
+    // Copiar la lat y lng de la URL de google maps
+    // https://www.google.com/maps/place/Nadine+Import+SRL+Konica+Minolta/@-17.377221,-66.1570064,3a,75y,92.01h,92.97t
+
+    let map;
+    const lat = -17.377221;
+    const lng = -66.1570064;
+
     document.addEventListener('DOMContentLoaded', event => {
         const mapa = document.querySelector('#mapa');
     
         if (mapa) {
-            const map = L.map('mapa').setView([51.505, -0.09], 13);
+            // const map = L.map('mapa').setView([51.505, -0.09], 13);
+            // const map = L.map('mapa').setView([lat, lng], 15);
+            map = L.map('mapa').setView([lat, lng], 15);
     
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
     
-            L.marker([51.5, -0.09]).addTo(map)
-                .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-                .openPopup();
+            // L.marker([51.5, -0.09]).addTo(map)
+            //     .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+            //     .openPopup();
+
+            // Buscar la direccion
+            const buscador = document.querySelector('#formbuscador');
+            buscador.addEventListener('input', buscarDireccion);
         }
     });
+
+    // Metodo para buscar la direccion
+    function buscarDireccion(e) {
+        // console.log(e.target.value);
+
+        if (e.target.value.length > 8) {
+            // console.log('Buscando...');
+
+            // Utilizar el provider de leaflet-geosearch
+            const provider = new OpenStreetMapProvider();
+            // console.log(provider);
+            provider.search({query: e.target.value}).then(resultado => {
+                console.log(resultado);
+
+                // Agregar el pin
+            });
+        }
+    }
 
 })();
