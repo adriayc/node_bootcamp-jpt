@@ -70,7 +70,9 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
                 // geocodeService.reverse().latlng(resultado[0].bounds[0], 15).run(function(error, result) {            // Error!
                 geocodeService.latlng(resultado[0].bounds[0], 15).run(function(error, result) {
-                    console.log(result);
+                    // console.log(result);
+
+                    llenarInputs(result);
 
                     // Mostrar el mapa
                     map.setView(resultado[0]?.bounds[0], 15);
@@ -101,7 +103,9 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
                         // Reverse geocoding, cuando el usuario reubica el pin
                         // geocodeService.reverse().latlng(posicion, 15).run(function(error, result) {      // Error!
                         geocodeService.latlng(posicion, 15).run(function(error, result) {
-                            console.log(result);
+                            // console.log(result);
+
+                            llenarInputs(result);
 
                             // Mostrar el popup de informacion
                             marker.bindPopup(result?.address?.LongLabel);
@@ -110,6 +114,18 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch';
                 });
             });
         }
+    }
+
+    function llenarInputs(resultado) {
+        console.log(resultado);
+
+        document.querySelector('#direccion').value = resultado.address.Address || '';
+        document.querySelector('#ciudad').value = resultado.address.City || '';
+        document.querySelector('#estado').value = resultado.address.Region || '';
+        document.querySelector('#pais').value = resultado.address.CntryName || '';
+        document.querySelector('#codigo-pais').value = resultado.address.CountryCode || '';
+        document.querySelector('#lat').value = resultado.latlng.lat || '';
+        document.querySelector('#lng').value = resultado.latlng.lng || '';
     }
 
 })();
