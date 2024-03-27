@@ -11,46 +11,27 @@
     <div class="seccion-admin">
         <h2>Tus Meetis</h2>
 
-        <ul>
-            <li>
-                <div class="informacion-admin">
-                    <p class="fecha">Lunes, 22 de mayo de 2024</p>
-                    <h3>E-Commerce en México</h3>
-                    <small>23 Asistentes</small>
-                </div>
-                <div class="acciones contenedor-botones">
-                    <a href="#" class="btn btn-verde">Editar</a>
-                    <a href="#" class="btn btn-azul2">Asistentes</a>
-                    <a href="#" class="btn btn-rojo">Eliminar</a>
-                </div>
-            </li>
-
-            <li>
-                <div class="informacion-admin">
-                    <p class="fecha">Miercoles, 22 de Abril de 2024</p>
-                    <h3>Bitcoin y otras criptomonedas</h3>
-                    <small>30 Asistentes</small>
-                </div>
-                <div class="acciones contenedor-botones">
-                    <a href="#" class="btn btn-verde">Editar</a>
-                    <a href="#" class="btn btn-azul2">Asistentes</a>
-                    <a href="#" class="btn btn-rojo">Eliminar</a>
-                </div>
-            </li>
-
-            <li>
-                <div class="informacion-admin">
-                    <p class="fecha">Sabado, 20 de Febrero de 2024</p>
-                    <h3>Node México</h3>
-                    <small>10 Asistentes</small>
-                </div>
-                <div class="acciones contenedor-botones">
-                    <a href="#" class="btn btn-verde">Editar</a>
-                    <a href="#" class="btn btn-azul2">Asistentes</a>
-                    <a href="#" class="btn btn-rojo">Eliminar</a>
-                </div>
-            </li>
-        </ul>
+        <% if (meetis.length > 0) { %>
+            <ul>
+                <% meetis.forEach(meeti => { %>
+                    <li>
+                        <div class="informacion-admin">
+                            <!-- <p class="fecha">Lunes, 22 de mayo de 2024</p> -->
+                            <p class="fecha"><%= meeti.fecha %></p>
+                            <h3><%= meeti.titulo %></h3>
+                            <small><%= meeti.interesados.length %> Asistentes</small>
+                        </div>
+                        <div class="acciones contenedor-botones">
+                            <a href="/editar-meeti/<%= meeti.id %>" class="btn btn-verde">Editar</a>
+                            <a href="/asistentes-meeti/<%= meeti.id %>" class="btn btn-azul2">Asistentes</a>
+                            <a href="/eliminar-meeti/<%= meeti.id %>" class="btn btn-rojo">Eliminar</a>
+                        </div>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>Aún no tienes meeti's creados</p>
+        <% } %>
     </div>
 
     <div class="seccion-admin">
