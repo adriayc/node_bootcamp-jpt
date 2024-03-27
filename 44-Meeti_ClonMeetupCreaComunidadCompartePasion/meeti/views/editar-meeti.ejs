@@ -74,13 +74,17 @@
             <label>País</label>
             <input type="text" id="pais" name="pais" value="<%= meeti.pais %>">
         </div>
-        <div class="campo">
+        <!-- <div class="campo">
             <label>Latitud</label>
             <input type="text" id="lat" name="lat" value="<%= meeti.ubicacion.coordinates[0] %>" readonly="readonly">
         </div>
         <div class="campo">
             <label>Longtitud</label>
             <input type="text" id="lng" name="lng" value="<%= meeti.ubicacion.coordinates[1] %>" readonly="readonly">
+        </div> -->
+        <div class="hidden">
+            <input type="hidden" id="lat" name="lat">
+            <input type="hidden" id="lng" name="lng">
         </div>
         <div class="campo enviar">
             <input type="submit" class="btn btn-rosa" value="Guardar Cambios">
