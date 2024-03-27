@@ -49,6 +49,8 @@
       # npm install --save leaflet-geosearch@2.7.0      // App version
     + Slug
       # npm install --save slug
+    + Moment.js
+      # npm install --save moment
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'

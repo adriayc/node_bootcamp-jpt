@@ -17,7 +17,9 @@
                     <li>
                         <div class="informacion-admin">
                             <!-- <p class="fecha">Lunes, 22 de mayo de 2024</p> -->
-                            <p class="fecha"><%= meeti.fecha %></p>
+                            <% moment.locale('es') %>
+                            <% const fecha = meeti.fecha +' '+ meeti.hora %>
+                            <p class="fecha"><%= moment(fecha).format('LLLL') %> Horas</p>
                             <h3><%= meeti.titulo %></h3>
                             <small><%= meeti.interesados.length %> Asistentes</small>
                         </div>
