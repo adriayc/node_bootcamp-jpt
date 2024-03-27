@@ -250,12 +250,12 @@ exports.eliminarGrupo = async (req, res, next) => {
     const grupo = await Grupo.findOne({where: {id: req.params.grupoId, usuarioId: req.user.id}});
 
     // Validar el grupo
-    if (!grupo) {
-        req.flash('error', 'Operacion no válida');
-        // Redireccionar
-        res.redirect('/administracion');
-        return next();
-    }
+    // if (!grupo) {
+    //     req.flash('error', 'Operacion no válida');
+    //     // Redireccionar
+    //     res.redirect('/administracion');
+    //     return next();
+    // }
 
     // Validar imagen y eliminar imagen
     if (grupo.imagen) {

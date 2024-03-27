@@ -209,7 +209,6 @@ fcec772f-7b50-41f9-a476-2b04985a7abc	Diseño UX/UI Bolivia Updated	<div>Hola som
 --
 
 COPY public.meetis (id, titulo, slug, invitado, cupo, descripcion, fecha, hora, direccion, ciudad, estado, pais, ubicacion, interesados, "createdAt", "updatedAt", "usuarioId", "grupoId") FROM stdin;
-1c06f378-f54e-4722-abf8-48b01646d237	Introducción a JavaScript	introduccion-a-javascript-5CJM-sp2X	Adriano Ayala	20	<div>Esto es el primer meeti de Introducción a JavaScript</div>	2024-03-30	18:00:00	Avenida Libertador Simón Bolívar	Cochabamba	Cochabamba	Bolivia	0101000020E6100000E20511A9695F31C0761BD47E6B8A50C0	{}	2024-03-27 00:41:33.081-04	2024-03-27 00:41:33.081-04	1	b262b59d-a955-4e46-831d-e620b3420d42
 b3d58346-ae45-4398-8ed3-eb6adca08b1b	Introducción a Diseño UX/UI	introduccion-a-diseno-uxui-2DShSq0NC	Adriano Ayala	10	<div>Este es una meeti de introducción de Diseño UX/UI</div>	2024-03-25	11:00:00	Avenida Heroínas	Cochabamba	Cochabamba	Bolivia	0101000020E61000006911073E166431C0D81690BD9C8950C0	{}	2024-03-27 10:05:31.245-04	2024-03-27 10:05:31.245-04	1	fcec772f-7b50-41f9-a476-2b04985a7abc
 16686d92-5c3f-4715-8f23-fdc878c01a9d	GraphQL, MongoDB y NodeJS	graphql-y-nodejs-i5ClpPCIf	Adriano Ayala	20	<div>Nuevo meeti de <strong>GraphQL, Mongo y NodeJS</strong></div>	2024-04-02	07:30:00	Avenida Aniceto Padilla	Cochabamba	Cochabamba	Bolivia	0101000020E6100000D8726227D06031C0083387F4028A50C0	{}	2024-03-27 09:05:50.048-04	2024-03-27 15:52:32.399-04	1	4280aa25-3f79-4e7f-a3c1-71da5f2c4ccd
 \.

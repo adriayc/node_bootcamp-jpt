@@ -154,3 +154,12 @@ exports.formEliminarMeeti = async (req, res, next) => {
         nombrePagina: `Eliminar Meeti: ${meeti.titulo}`
     });
 };
+
+// Eliminar meeti de la DB
+exports.eliminarMeeti = async (req, res) => {
+    await Meeti.destroy({where: {id: req.params.id}});
+
+    req.flash('exito', 'Se ha eliminando la meeti correctamente');
+    // Redireccionar
+    res.redirect('/administracion');
+};
