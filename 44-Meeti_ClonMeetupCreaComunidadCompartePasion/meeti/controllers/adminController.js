@@ -16,11 +16,15 @@ exports.panelAdministracion = async (req, res) => {
     // consultas.push(Grupo.findAll({where: {usuarioId: req.user.id}}));
     // consultas.push(Meeti.findAll({where: {usuarioId: req.user.id}}));
     // const [grupos, meetis] = await Promise.all(consultas);
-    const [grupos, meetis] = await Promise.all([
+    const [grupos, meetis, meetisAnteriores] = await Promise.all([
         Grupo.findAll({where: {usuarioId: req.user.id}}),
         Meeti.findAll({where: {
             usuarioId: req.user.id,
             fecha: {[Op.gte]: moment(new Date()).format('YYYY-MM-DD')}
+        }}),
+        Meeti.findAll({where: {
+            usuarioId: req.user.id,
+            fecha: {[Op.lt]: moment(new Date()).format('YYYY-MM-DD')}
         }})
     ]);
 
@@ -28,6 +32,7 @@ exports.panelAdministracion = async (req, res) => {
         nombrePagina: 'Panel de Administración',
         grupos,
         meetis,
+        meetisAnteriores,
         moment
     });
 };

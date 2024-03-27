@@ -9,7 +9,7 @@
     </div>
 
     <div class="seccion-admin">
-        <h2>Próximos Meetis</h2>
+        <h2>Próximos Meeti's</h2>
 
         <% if (meetis.length > 0) { %>
             <ul>
@@ -56,6 +56,34 @@
         </ul>
         <% } else { %>
             <p>No tienes un grupo creado</p>
+        <% } %>
+    </div>
+
+    <div class="seccion-admin">
+        <h2>Meeti's Anteriores</h2>
+
+        <% if (meetisAnteriores.length > 0) { %>
+            <ul>
+                <% meetisAnteriores.forEach(meeti => { %>
+                    <li>
+                        <div class="informacion-admin">
+                            <!-- <p class="fecha">Lunes, 22 de mayo de 2024</p> -->
+                            <% moment.locale('es') %>
+                            <% const fecha = meeti.fecha +' '+ meeti.hora %>
+                            <p class="fecha"><%= moment(fecha).format('LLLL') %> Horas</p>
+                            <h3><%= meeti.titulo %></h3>
+                            <small><%= meeti.interesados.length %> Asistentes</small>
+                        </div>
+                        <div class="acciones contenedor-botones">
+                            <a href="/editar-meeti/<%= meeti.id %>" class="btn btn-verde">Editar</a>
+                            <a href="/asistentes-meeti/<%= meeti.id %>" class="btn btn-azul2">Asistentes</a>
+                            <a href="/eliminar-meeti/<%= meeti.id %>" class="btn btn-rojo">Eliminar</a>
+                        </div>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>Aún no tienes meeti's anteriores creados</p>
         <% } %>
     </div>
 </main>
