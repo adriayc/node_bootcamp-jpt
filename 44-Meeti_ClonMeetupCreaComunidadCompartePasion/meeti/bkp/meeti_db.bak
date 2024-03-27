@@ -16,6 +16,20 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis IS 'PostGIS geometry and geography spatial types and functions';
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -74,6 +88,34 @@ CREATE TABLE public.grupos (
 
 
 ALTER TABLE public.grupos OWNER TO postgres;
+
+--
+-- Name: meetis; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.meetis (
+    id uuid DEFAULT 'aeea4d2f-db75-4969-b888-41c42ad67081'::uuid NOT NULL,
+    titulo character varying(255) NOT NULL,
+    slug character varying(255),
+    invitado character varying(255),
+    cupo integer DEFAULT 0,
+    descripcion text NOT NULL,
+    fecha date NOT NULL,
+    hora time without time zone NOT NULL,
+    direccion character varying(255) NOT NULL,
+    ciudad character varying(255) NOT NULL,
+    estado character varying(255) NOT NULL,
+    pais character varying(255) NOT NULL,
+    ubicacion public.geometry(Point),
+    interesados integer[] DEFAULT ARRAY[]::integer[],
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL,
+    "usuarioId" integer,
+    "grupoId" uuid
+);
+
+
+ALTER TABLE public.meetis OWNER TO postgres;
 
 --
 -- Name: usuarios; Type: TABLE; Schema: public; Owner: postgres
@@ -163,6 +205,24 @@ fcec772f-7b50-41f9-a476-2b04985a7abc	Diseño UX/UI Bolivia Updated	<div>Hola som
 
 
 --
+-- Data for Name: meetis; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.meetis (id, titulo, slug, invitado, cupo, descripcion, fecha, hora, direccion, ciudad, estado, pais, ubicacion, interesados, "createdAt", "updatedAt", "usuarioId", "grupoId") FROM stdin;
+1c06f378-f54e-4722-abf8-48b01646d237	Introducción a JavaScript	introduccion-a-javascript-5CJM-sp2X	Adriano Ayala	20	<div>Esto es el primer meeti de Introducción a JavaScript</div>	2024-03-30	18:00:00	Avenida Libertador Simón Bolívar	Cochabamba	Cochabamba	Bolivia	0101000020E6100000E20511A9695F31C0761BD47E6B8A50C0	{}	2024-03-27 00:41:33.081-04	2024-03-27 00:41:33.081-04	1	b262b59d-a955-4e46-831d-e620b3420d42
+16686d92-5c3f-4715-8f23-fdc878c01a9d	GraphQL y NodeJS	graphql-y-nodejs-i5ClpPCIf	Adriano Ayala	30	<div>Nuevo meeti de GraphQL y NodeJS</div>	2024-04-02	07:00:00	Avenida Rodríguez Morales	Cochabamba	Cochabamba	Bolivia	0101000020E6100000DA220D9BB95E31C0A29E7148078A50C0	{}	2024-03-27 09:05:50.048-04	2024-03-27 09:05:50.048-04	1	4280aa25-3f79-4e7f-a3c1-71da5f2c4ccd
+\.
+
+
+--
+-- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM stdin;
+\.
+
+
+--
 -- Data for Name: usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -203,6 +263,14 @@ ALTER TABLE ONLY public.grupos
 
 
 --
+-- Name: meetis meetis_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.meetis
+    ADD CONSTRAINT meetis_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: usuarios usuarios_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -232,6 +300,22 @@ ALTER TABLE ONLY public.grupos
 
 ALTER TABLE ONLY public.grupos
     ADD CONSTRAINT "grupos_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES public.usuarios(id) ON UPDATE CASCADE ON DELETE SET NULL;
+
+
+--
+-- Name: meetis meetis_grupoId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.meetis
+    ADD CONSTRAINT "meetis_grupoId_fkey" FOREIGN KEY ("grupoId") REFERENCES public.grupos(id) ON UPDATE CASCADE ON DELETE SET NULL;
+
+
+--
+-- Name: meetis meetis_usuarioId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.meetis
+    ADD CONSTRAINT "meetis_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES public.usuarios(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
 
 --

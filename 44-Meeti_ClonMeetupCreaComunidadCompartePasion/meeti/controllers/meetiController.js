@@ -12,6 +12,26 @@ exports.formNuevoMeeti = async (req, res) => {
     });
 };
 
+// Sanitizar los meeti
+exports.sanitizarMeeti = (req, res, next) => {
+    req.sanitizeBody('titulo');
+    req.sanitizeBody('invitado');
+    req.sanitizeBody('cupo');
+    req.sanitizeBody('descripcion');
+    req.sanitizeBody('fecha');
+    req.sanitizeBody('hora');
+    req.sanitizeBody('direccion');
+    req.sanitizeBody('cuidad');
+    req.sanitizeBody('estado');
+    req.sanitizeBody('pais');
+    req.sanitizeBody('lat');
+    req.sanitizeBody('lnt');
+    req.sanitizeBody('grupoId');
+
+    // Ir al siguiente middleware
+    next();
+};
+
 // Crear un nuevo meeti
 exports.crearMeeti = async (req, res) => {
     // Obtener los datos
