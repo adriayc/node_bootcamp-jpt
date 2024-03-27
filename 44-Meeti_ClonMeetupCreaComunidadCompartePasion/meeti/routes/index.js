@@ -70,6 +70,7 @@ module.exports = function() {
 
     // Editar informacion de perfil
     router.get('/editar-perfil', authController.usuarioAutenticado, usuarioController.formEditarPerfil);
+    router.post('/editar-perfil', authController.usuarioAutenticado, usuarioController.editarPerfil);
 
     return router;
 };

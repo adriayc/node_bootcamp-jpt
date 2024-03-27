@@ -98,3 +98,28 @@ exports.formEditarPerfil = async (req, res) => {
         usuario
     });
 };
+
+// Guardar los campos del perfil en la DB
+exports.editarPerfil = async (req, res) => {
+    const usuario = await Usuario.findByPk(req.user.id);
+    
+    // Sanitizar los valores
+    req.sanitizeBody('nombre');
+    req.sanitizeBody('descripcion');
+    req.sanitizeBody('email');
+
+    // Extraer los datos
+    const { nombre, descripcion, email } = req.body;
+
+    // Asignar los valores
+    usuario.nombre = nombre;
+    usuario.descripcion = descripcion;
+    usuario.email = email;
+
+    // Guardar en la DB
+    await usuario.save();
+
+    req.flash('exito', 'Se ha actualizado correctamente');
+    // Redireccionar
+    res.redirect('/administracion');
+};
