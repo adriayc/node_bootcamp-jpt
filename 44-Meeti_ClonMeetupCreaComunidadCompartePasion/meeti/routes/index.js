@@ -68,5 +68,8 @@ module.exports = function() {
     router.get('/eliminar-meeti/:id', authController.usuarioAutenticado, meetiController.formEliminarMeeti);
     router.post('/eliminar-meeti/:id', authController.usuarioAutenticado, meetiController.eliminarMeeti);
 
+    // Editar informacion de perfil
+    router.get('/editar-perfil', authController.usuarioAutenticado, usuarioController.formEditarPerfil);
+
     return router;
 };

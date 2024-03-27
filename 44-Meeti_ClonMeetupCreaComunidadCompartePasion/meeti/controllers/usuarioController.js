@@ -88,3 +88,13 @@ exports.formIniciarSesion = (req, res) => {
         nombrePagina: 'Iniciar Sesión'
     });
 };
+
+// Formulario para editar perfil
+exports.formEditarPerfil = async (req, res) => {
+    const usuario = await Usuario.findByPk(req.user.id);
+
+    res.render('editar-perfil', {
+        nombrePagina: 'Editar Perfil',
+        usuario
+    });
+};
