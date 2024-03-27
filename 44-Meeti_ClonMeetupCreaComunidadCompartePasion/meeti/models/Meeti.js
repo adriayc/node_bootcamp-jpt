@@ -68,7 +68,7 @@ const Meeti = db.define('meetis', {
             }
         }
     },
-    cuidad: {
+    ciudad: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
