@@ -70,3 +70,30 @@ exports.crearMeeti = async (req, res) => {
         res.redirect('/nuevo-meeti');
     }
 };
+
+// Formulario para editar meeti
+exports.formEditarMeeti = async (req, res, next) => {
+    // const consultas = [];
+    // consultas.push(Meeti.findByPk(req.params.id));
+    // consultas.push(Grupo.findAll({where: {usuarioId: req.user.id}}));
+    // const [meeti, grupos] = await Promise.all(consultas);
+    const [meeti, grupos] = await Promise.all([
+        Meeti.findByPk(req.params.id),
+        Grupo.findAll({where: {usuarioId: req.user.id}})
+    ]);
+
+    // 
+    if (!meeti || !grupos) {
+        res.flash('error', 'Operación no valida');
+        // Redireccionar
+        res.redirect('/administracion');
+        return next();
+    }
+
+    // Vista
+    res.render('editar-meeti', {
+        nombrePagina: `Editar Meeti: ${meeti.titulo}`,
+        meeti,
+        grupos
+    })
+};
