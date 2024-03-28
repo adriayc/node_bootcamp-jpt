@@ -41,8 +41,7 @@ SET default_table_access_method = heap;
 CREATE TABLE public.categorias (
     id integer NOT NULL,
     nombre text,
-    "createdAt" timestamp with time zone NOT NULL,
-    "updatedAt" timestamp with time zone NOT NULL
+    slug text
 );
 
 
@@ -178,19 +177,19 @@ ALTER TABLE ONLY public.usuarios ALTER COLUMN id SET DEFAULT nextval('public.usu
 -- Data for Name: categorias; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.categorias (id, nombre, "createdAt", "updatedAt") FROM stdin;
-1	Programación	2024-03-23 10:41:16.30579-04	2024-03-23 10:41:16.30579-04
-2	Diseño	2024-03-23 10:41:48.701873-04	2024-03-23 10:41:48.701873-04
-3	Negocios y Emprendimiento	2024-03-23 10:42:41.503164-04	2024-03-23 10:42:41.503164-04
-4	Moda y Estilo	2024-03-23 10:43:48.448051-04	2024-03-23 10:43:48.448051-04
-5	Salud y Ejercicio	2024-03-23 10:43:48.448051-04	2024-03-23 10:43:48.448051-04
-6	Fotografía y Viajes	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
-7	Comida y Bebida\n	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
-8	Diseño y Arquitectura	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
-9	Café	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
-10	CIne y Película	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
-11	Libros	2024-03-23 10:47:26.794603-04	2024-03-23 10:47:26.794603-04
-12	Aprendizaje	2024-03-23 10:47:26.794603-04	2024-03-23 10:47:26.794603-04
+COPY public.categorias (id, nombre, slug) FROM stdin;
+1	Programación	programacion
+2	Diseño	diseno
+3	Negocios y Emprendimiento	negocios-y-emprendimiento
+4	Moda y Estilo	moda-y-estilo
+5	Salud y Ejercicio	salud-y-ejercicio
+6	Fotografía y Viajes	fotografia-y-viajes
+7	Comida y Bebidas	comida-y-bebidas
+8	Diseño y Arquitectura	diseno-y-arquitectura
+9	Café	cafe
+10	Cine y Películas	cine-y-peliculas
+11	Libros	libros
+12	Aprendizaje	aprendizaje
 \.
 
 
@@ -200,6 +199,8 @@ COPY public.categorias (id, nombre, "createdAt", "updatedAt") FROM stdin;
 
 COPY public.grupos (id, nombre, descripcion, url, imagen, "createdAt", "updatedAt", "categoriaId", "usuarioId") FROM stdin;
 b482d5df-63d2-42d3-842b-afc21118acdb	NodeJS México	<div>Hola, somo la comunidad <strong>NodeJS México</strong></div>	https://www.nodejsmx.com	YWJC9ZmVf.jpeg	2024-03-27 18:23:55.426-04	2024-03-27 18:23:55.426-04	1	1
+3b69dd5c-9b1a-4bc6-a5ce-4c234c1f6bc7	JavaScript Moderno	<div>Esto es un grupo de JavaScript Moderno</div>	https://www.jsmoderno.com	7zYfHtNHb.jpeg	2024-03-28 12:39:29.532-04	2024-03-28 12:39:29.532-04	1	1
+582a548e-cc98-4fbf-b673-c225685f944b	Diseño UX/UI	<div>Esto es la comunidad de <strong>Diseño UX/UI</strong></div>	https://www.disenioux.com	-EDFapnrR.jpeg	2024-03-28 12:41:22.504-04	2024-03-28 12:41:22.504-04	2	1
 \.
 
 
@@ -232,7 +233,7 @@ COPY public.usuarios (id, nombre, imagen, descripcion, email, password, activo, 
 -- Name: categorias_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.categorias_id_seq', 2, true);
+SELECT pg_catalog.setval('public.categorias_id_seq', 1, false);
 
 
 --
@@ -280,14 +281,6 @@ ALTER TABLE ONLY public.usuarios
 
 ALTER TABLE ONLY public.usuarios
     ADD CONSTRAINT usuarios_pkey PRIMARY KEY (id);
-
-
---
--- Name: grupos grupos_categoriaId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.grupos
-    ADD CONSTRAINT "grupos_categoriaId_fkey" FOREIGN KEY ("categoriaId") REFERENCES public.categorias(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
 
 --

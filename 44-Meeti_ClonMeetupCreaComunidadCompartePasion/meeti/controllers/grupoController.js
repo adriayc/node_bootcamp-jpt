@@ -1,10 +1,10 @@
+const {v4: uuid} = require('uuid');
 const multer = require('multer');
 const shortid = require('shortid');
 const fs = require('fs');
 // Models
 const Categoria = require('../models/Categoria');
 const Grupo = require('../models/Grupo');
-const { Association } = require('sequelize');
 
 // Configuracion de multer
 const configuracionMulter = {
@@ -94,6 +94,9 @@ exports.crearGrupo = async (req, res) => {
     if (req.file) {
         grupo.imagen = req.file.filename;
     }
+
+    // Asignar un ID unico (Soluciona el error de ID unico)
+    grupo.id = uuid();
 
     try {
         // Almacenar el DB
