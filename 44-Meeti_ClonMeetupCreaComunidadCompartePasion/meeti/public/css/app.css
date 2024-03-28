@@ -567,11 +567,20 @@ trix-toolbar .trix-button--icon-strike {
     flex-direction: column;
     justify-content: center;
 }
+@media (min-width: 768px) {
+    .pregunta-asistencia {
+        flex-basis: 400px;
+    }
+}
 .pregunta-asistencia p {
     font-size: 2rem;
     font-weight: 700;
     margin: 0;
     text-align: center;
+}
+.pregunta-asistencia form, 
+.pregunta-asistencia input[type="submit"] {
+   width: 100%;
 }
 .opciones-asistencia {
     display: flex;
@@ -637,13 +646,21 @@ trix-toolbar .trix-button--icon-strike {
 }
 .comentario .texto {
     padding: 2rem;
+    flex: 1;
     border: 1px solid #C7C7C7;
     background-color: white;
 }
 .comentario .texto p {
     margin: 0;
 }
-
+.comentario span {
+    color: #0F4C5C;
+    font-weight: bold;
+}
+.comentario #eliminar,
+.eliminar-comentario {
+    margin-top: 2rem;
+}
 
 /** Sidebar **/
 .contenido-evento aside {
