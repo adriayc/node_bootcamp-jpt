@@ -224,7 +224,7 @@ COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM
 --
 
 COPY public.usuarios (id, nombre, imagen, descripcion, email, password, activo, "tokenPassword", "expiraToken", "createdAt", "updatedAt") FROM stdin;
-1	Adriano A	\N	<div>Mi biografia</div>	adriano@correo.com	$2a$10$.zx7dAz/Fdo8mK3x1GktZeqdtGHRe1526dAC40FQgzXRDp5mndvBu	t	\N	\N	2024-03-27 18:20:56.422-04	2024-03-27 18:45:34.786-04
+1	Adriano A	A3-Lc3Eak.jpeg	<div>Mi biografia</div>	adriano@correo.com	$2a$10$mQiPKMVLrDMXz.sIg2vFFuEvys/0exYHrAHNgWs1tEN2giWZ6c3fa	t	\N	\N	2024-03-27 18:20:56.422-04	2024-03-28 00:10:47.641-04
 \.
 
 
