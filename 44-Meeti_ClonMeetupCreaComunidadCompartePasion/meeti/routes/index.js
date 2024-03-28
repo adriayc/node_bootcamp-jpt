@@ -74,6 +74,7 @@ module.exports = function() {
 
     // Editar el password
     router.get('/cambiar-password', authController.usuarioAutenticado, usuarioController.formCambiarPassword);
+    router.post('/cambiar-password', authController.usuarioAutenticado, usuarioController.cambiarPassword);
 
     return router;
 };

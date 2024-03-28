@@ -2,6 +2,7 @@
 const Usuario = require('../models/Usuario');
 // E-mail config
 const enviarEmail = require('../handlers/emails');
+const { has } = require('lodash');
 
 exports.formCrearCuenta = (req, res) => {
     res.render('crear-cuenta', {
@@ -130,4 +131,41 @@ exports.formCambiarPassword = (req, res) => {
     res.render('cambiar-password', {
         nombrePagina: 'Cambiar Password'
     });
+};
+
+// Guardar nuevo password en la DB
+exports.cambiarPassword = async (req, res, next) => {
+    const usuario = await Usuario.findByPk(req.user.id);
+
+    // Validar que el password actual sea igual al del usuario
+    if (!usuario.validarPassword(req.body.actualPassword)) {
+        req.flash('error', 'El password actual es incorrecto');
+        // Redireccionar
+        res.redirect('/administracion');
+        return next();
+    }
+
+    // Hashear el nuevo password
+    const hash = usuario.hashPassword(req.body.nuevoPassword);
+    // console.log(hash); return;
+
+    // Asignar el password
+    usuario.password = hash;
+
+    // Guardar en la DB
+    await usuario.save();
+
+    // Logout (Cerrar sesión)
+    // req.logout();
+    req.logout(function(err) {
+        if (err) { return next(err); }
+
+        req.flash('exito', 'Se ha actualizado el password correctamente, vuelve a iniciar sesión');
+        // Redireccionar
+        res.redirect('/iniciar-sesion');
+    });
+
+    // req.flash('exito', 'Se ha actualizado el password correctamente, vuelve a iniciar sesión');
+    // // Redireccionar
+    // res.redirect('/iniciar-sesion');
 };
