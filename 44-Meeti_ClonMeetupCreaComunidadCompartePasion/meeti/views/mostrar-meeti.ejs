@@ -1,25 +1,32 @@
+<!-- Muestra la informacion del JSON -->
+<%#= JSON.stringify(meeti) %>
+
 <div class="encabezado-evento">
     <div class="contenedor">
         <div class="resumen-evento">
-            <h1>Nombre del Evento</h1>
+            <h1><%= meeti.titulo %></h1>
 
             <div class="info-autor">
                 <div class="imagen">
-                    <img src="" alt="">
+                    <% if (meeti.usuario.imagen) { %>
+                        <img src="/uploads/perfiles/<%= meeti.usuario.imagen %>" alt="">
+                    <% } %>
                 </div>
                 <div class="informacion">
                     <p>Organizado por:</p>
                     <p class="autor">
-                        <a href="">Juan</a> Creador de:
-                        <a href="">Node México</a>
+                        <a href="/usuarios/<%= meeti.usuario.id %>"><%= meeti.usuario.nombre %></a> Creador de:
+                        <a href="/grupos/<%= meeti.grupo.id %>"><%= meeti.grupo.nombre %></a>
                     </p>
                 </div>
             </div><!-- .info-autor -->
         </div><!-- .resumen-evento -->
 
         <div class="pregunta-asistencia">
-            <p>¿Asistirás?</p>
-            <a href="#" class="btn btn-azul">Si</a>
+            <% if (usuario.id) { %>
+                <p>¿Asistirás?</p>
+                <a href="#" class="btn btn-azul">Si</a>
+            <% } %>
         </div>
     </div>
 </div>
@@ -29,14 +36,16 @@
         <div class="informacion-evento">
             <div class="descripcion">
                 <!-- Imagen del meeti -->
+                <img src="/uploads/grupos/<%= meeti.grupo.imagen %>" alt="">
 
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur adipisci minus dolorem, nam veritatis, harum quam repellendus officiis voluptatibus explicabo iusto quos laboriosam laudantium consequatur labore, ipsa perferendis aliquam magnam.</p>
+                <!-- <%#- %> Imprimir HTML  -->
+                <%- meeti.descripcion %>
             </div><!-- .descripcion -->
 
             <div class="asistentes">
                 <div class="titulo">
-                    <h3>Asistentes</h3>
-                    <a href="#">Ver Todos</a>
+                    <h3><%= meeti.interesados.length %> Asistentes</h3>
+                    <a href="/asistentes/<%= meeti.slug %>">Ver Todos</a>
                 </div>
             </div><!-- .asistentes -->
 
@@ -72,10 +81,12 @@
 
         <aside class="informacion">
             <div class="fecha">
-                <p>30 de Agostro de 2024, 20:30 horas</p>
+                <% moment.locale('es') %>
+                <% const fecha = meeti.fecha +' '+ meeti.hora %>
+                <p><%= moment(fecha).format('LLLL') %> horas</p>
             </div>
             <div class="ubicacion">
-                <p>Avenida Siempre Viva</p>
+                <p><%= meeti.direccion %>, <%= meeti.ciudad %>, <%= meeti.estado %>, <%= meeti.pais %></p>
             </div>
         </aside>
     </div>

@@ -1,3 +1,4 @@
+const moment = require('moment');
 // Models
 const Meeti = require('../../models/Meeti');
 const Grupo = require('../../models/Grupo');
@@ -22,6 +23,7 @@ exports.mostrarMeeti = async (req, res) => {
 
     res.render('mostrar-meeti', {
         nombrePagina: meeti.titulo,
-        meeti
+        meeti,
+        moment
     });
 };
