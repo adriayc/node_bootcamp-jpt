@@ -22,3 +22,22 @@ exports.usuarioAutenticado = (req, res, next) => {
     // Si no esta autenticado
     res.redirect('/iniciar-sesion');
 };
+
+// Cerrar sesion
+exports.cerrarSesion = (req, res, next) => {
+    // Cerrar sesion
+    // req.logout();            // Error
+    req.logout(function(err) {
+        if (err) { return next(err); }
+
+        req.flash('exito', 'Se ha cerrado sesión correctamente');
+        // Redireccionar
+        res.redirect('/iniciar-sesion');
+        next();
+    });
+
+    // req.flash('exito', 'Se ha cerrado sesión correctamente');
+    // // Redireccionar
+    // res.redirect('/iniciar-sesion');
+    // next();
+};
