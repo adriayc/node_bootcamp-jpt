@@ -169,3 +169,13 @@ exports.cambiarPassword = async (req, res, next) => {
     // // Redireccionar
     // res.redirect('/iniciar-sesion');
 };
+
+// Formulario para editar la imagen de perfil
+exports.formEditarImagenPerfil = async (req, res) => {
+    const usuario = await Usuario.findByPk(req.user.id);
+
+    res.render('imagen-perfil' ,{
+        nombrePagina: 'Subir Imagen Perfil',
+        usuario
+    });
+};

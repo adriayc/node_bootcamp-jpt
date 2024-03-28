@@ -76,5 +76,8 @@ module.exports = function() {
     router.get('/cambiar-password', authController.usuarioAutenticado, usuarioController.formCambiarPassword);
     router.post('/cambiar-password', authController.usuarioAutenticado, usuarioController.cambiarPassword);
 
+    // Editar imagen de perfil
+    router.get('/imagen-perfil', authController.usuarioAutenticado, usuarioController.formEditarImagenPerfil)
+
     return router;
 };
