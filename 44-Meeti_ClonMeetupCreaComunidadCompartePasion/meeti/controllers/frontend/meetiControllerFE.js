@@ -1,4 +1,5 @@
 const moment = require('moment');
+const Sequelize = require('sequelize');
 // Models
 const Meeti = require('../../models/Meeti');
 const Grupo = require('../../models/Grupo');
@@ -30,5 +31,11 @@ exports.mostrarMeeti = async (req, res) => {
 
 // Confirmar o cancela asistencia a meeti
 exports.confirmarAsistencia = (req, res) => {
+    Meeti.update(
+        {interesados: Sequelize.fn('array_append', Sequelize.col('interesados'), req.user.id)},
+        {'where': {slug: req.params.slug}}
+    );
 
+    // Response
+    res.send('Has confirmado tu asistencia');
 };
