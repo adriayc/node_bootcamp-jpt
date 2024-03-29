@@ -15,6 +15,12 @@ import axios from 'axios';
 
         const btn = document.querySelector('#confirmar-asistencia input[type="submit"]');
         let accion = document.querySelector('#accion').value;
+        const mensaje = document.querySelector('#mensaje');
+
+        // Limpiar la respuesta previa del mensaje
+        while (mensaje.firstChild) {
+            mensaje.removeChild(mensaje.firstChild);
+        }
 
         // Datos
         const datos = {
@@ -36,6 +42,9 @@ import axios from 'axios';
                     btn.classList.remove('btn-rojo');
                     btn.classList.add('btn-azul');
                 }
+
+                // Mostrar un mensaje
+                mensaje.appendChild(document.createTextNode(respuesta.data));
             });
     }
 
