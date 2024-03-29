@@ -88,6 +88,12 @@
             <div class="ubicacion">
                 <p><%= meeti.direccion %>, <%= meeti.ciudad %>, <%= meeti.estado %>, <%= meeti.pais %></p>
             </div>
+
+            <!-- Mostrar mapa -->
+            <input type="hidden" id="lat" value="<%= meeti.ubicacion.coordinates[0] %>">
+            <input type="hidden" id="lng" value="<%= meeti.ubicacion.coordinates[1] %>">
+            <input type="hidden" id="direccion" value="<%= meeti.direccion %>">
+            <div id="ubicacion-meeti"></div>
         </aside>
     </div>
 </main>
