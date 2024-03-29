@@ -47,7 +47,10 @@ module.exports = function() {
     router.get('/usuarios/:id', usuarioControllerFE.mostrarUsuario);
 
     // Muestra grupos en el fronted
-    router.get('/grupos/:id', grupoControllerFE.mostrarGrupo)
+    router.get('/grupos/:id', grupoControllerFE.mostrarGrupo);
+
+    // Muestra meeti's por categoria
+    router.get('/categorias/:slug', meetiControllerFE.mostrarCategoria);
 
     // Crear cuenta
     router.get('/crear-cuenta', usuarioController.formCrearCuenta);
