@@ -96,6 +96,10 @@ exports.mostrarCategoria = async (req, res, next) => {
             {
                 model: Usuario
             }
+        ],
+        order: [
+            ['fecha', 'ASC'],
+            ['hora', 'ASC']
         ]
     })
     // console.log(categoria.id);
