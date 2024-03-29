@@ -31,11 +31,28 @@ exports.mostrarMeeti = async (req, res) => {
 
 // Confirmar o cancela asistencia a meeti
 exports.confirmarAsistencia = (req, res) => {
-    Meeti.update(
-        {interesados: Sequelize.fn('array_append', Sequelize.col('interesados'), req.user.id)},
-        {'where': {slug: req.params.slug}}
-    );
+    // console.log(req.body);
+    // return;
 
-    // Response
-    res.send('Has confirmado tu asistencia');
+    const { accion } = req.body;
+
+    if (accion === 'confirmar') {
+        // Agregar usuario
+        Meeti.update(
+            {interesados: Sequelize.fn('array_append', Sequelize.col('interesados'), req.user.id)},
+            {'where': {slug: req.params.slug}}
+        );
+
+        // Response
+        res.send('Has confirmado tu asistencia');
+    } else {
+        // Cancelar usuario
+        Meeti.update(
+            {interesados: Sequelize.fn('array_remove', Sequelize.col('interesados'), req.user.id)},
+            {'where': {slug: req.params.slug}}
+        );
+
+        // Response
+        res.send('Has cancelado tu asistencia');
+    }
 };

@@ -27,6 +27,7 @@
                 <form action="/confirmar-asistencia/<%= meeti.slug %>" id="confirmar-asistencia">
                     <p>¿Asistirás?</p>
                     <!-- <a href="#" class="btn btn-azul">Si</a> -->
+                    <input type="hidden" id="accion" value="confirmar">
                     <input type="submit" value="Si" class="btn btn-azul">
                 </form>
             <% } else { %>
