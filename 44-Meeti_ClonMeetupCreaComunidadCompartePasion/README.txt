@@ -51,6 +51,8 @@
       # npm install --save slug
     + Moment.js
       # npm install --save moment
+    + Axios
+      # npm install --save axios
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'

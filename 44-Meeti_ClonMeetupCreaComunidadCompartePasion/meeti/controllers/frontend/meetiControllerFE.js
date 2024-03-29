@@ -27,3 +27,8 @@ exports.mostrarMeeti = async (req, res) => {
         moment
     });
 };
+
+// Confirmar o cancela asistencia a meeti
+exports.confirmarAsistencia = (req, res) => {
+
+};

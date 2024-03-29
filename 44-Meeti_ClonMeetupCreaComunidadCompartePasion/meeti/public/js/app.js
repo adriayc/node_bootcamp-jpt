@@ -1,6 +1,8 @@
 // console.log('Hello world Webpack!');
 
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
+// Import asistencia
+import asistencia from './asistencia';
 
 // IIFE (Immediately Invoked Funcion expresssion)
 (function () {
