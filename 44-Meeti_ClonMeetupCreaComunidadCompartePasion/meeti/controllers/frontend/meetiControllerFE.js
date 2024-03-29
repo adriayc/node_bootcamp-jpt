@@ -75,7 +75,7 @@ exports.mostrarAsistentes = async (req, res) => {
     // console.log(asistentes);
 
     res.render('asistentes-meeti', {
-        nombrePagina: 'Listado de Asistentes Meeti',
+        nombrePagina: 'Listado Asistentes Meeti',
         asistentes
     });
 };
