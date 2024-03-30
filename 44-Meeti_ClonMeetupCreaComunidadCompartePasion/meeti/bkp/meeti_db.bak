@@ -70,6 +70,42 @@ ALTER SEQUENCE public.categorias_id_seq OWNED BY public.categorias.id;
 
 
 --
+-- Name: comentarios; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.comentarios (
+    id integer NOT NULL,
+    mensaje text,
+    "usuarioId" integer,
+    "meetiId" uuid
+);
+
+
+ALTER TABLE public.comentarios OWNER TO postgres;
+
+--
+-- Name: comentarios_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.comentarios_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.comentarios_id_seq OWNER TO postgres;
+
+--
+-- Name: comentarios_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.comentarios_id_seq OWNED BY public.comentarios.id;
+
+
+--
 -- Name: grupos; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -167,6 +203,13 @@ ALTER TABLE ONLY public.categorias ALTER COLUMN id SET DEFAULT nextval('public.c
 
 
 --
+-- Name: comentarios id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comentarios ALTER COLUMN id SET DEFAULT nextval('public.comentarios_id_seq'::regclass);
+
+
+--
 -- Name: usuarios id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -190,6 +233,17 @@ COPY public.categorias (id, nombre, slug) FROM stdin;
 10	Cine y Películas	cine-y-peliculas
 11	Libros	libros
 12	Aprendizaje	aprendizaje
+\.
+
+
+--
+-- Data for Name: comentarios; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.comentarios (id, mensaje, "usuarioId", "meetiId") FROM stdin;
+1	Hola!	2	73183eb3-1f3c-41c2-8f2d-53ed2fc13987
+2	Buen día!	3	73183eb3-1f3c-41c2-8f2d-53ed2fc13987
+3	Hola, la meeti esta confirmada!	1	73183eb3-1f3c-41c2-8f2d-53ed2fc13987
 \.
 
 
@@ -246,6 +300,13 @@ SELECT pg_catalog.setval('public.categorias_id_seq', 1, false);
 
 
 --
+-- Name: comentarios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.comentarios_id_seq', 3, true);
+
+
+--
 -- Name: usuarios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -258,6 +319,14 @@ SELECT pg_catalog.setval('public.usuarios_id_seq', 3, true);
 
 ALTER TABLE ONLY public.categorias
     ADD CONSTRAINT categorias_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comentarios comentarios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comentarios
+    ADD CONSTRAINT comentarios_pkey PRIMARY KEY (id);
 
 
 --
@@ -290,6 +359,22 @@ ALTER TABLE ONLY public.usuarios
 
 ALTER TABLE ONLY public.usuarios
     ADD CONSTRAINT usuarios_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comentarios comentarios_meetiId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comentarios
+    ADD CONSTRAINT "comentarios_meetiId_fkey" FOREIGN KEY ("meetiId") REFERENCES public.meetis(id) ON UPDATE CASCADE ON DELETE SET NULL;
+
+
+--
+-- Name: comentarios comentarios_usuarioId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.comentarios
+    ADD CONSTRAINT "comentarios_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES public.usuarios(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
 
 --
