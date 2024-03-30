@@ -1,5 +1,6 @@
 // Models
 const Comentario = require('../../models/Comentario');
+const Meeti = require('../../models/Meeti');
 
 // Guardar los comentarios
 exports.agregarComentario = async (req, res, next) => {
@@ -34,8 +35,11 @@ exports.eliminarComentario = async (req, res, next) => {
         return next();
     }
 
+    // Obtener la meeti
+    const meeti = await Meeti.findOne({where: {id: comentario.meetiId}});
+
     // Validar que el usuario sea el creado del comentario
-    if (comentario.usuarioId === req.user.id) {
+    if (comentario.usuarioId === req.user.id || meeti.usuarioId === req.user.id) {
         // Eliminar comentario
         await comentario.destroy();
 
