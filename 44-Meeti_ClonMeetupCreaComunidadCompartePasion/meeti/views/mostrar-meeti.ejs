@@ -65,21 +65,31 @@
 
             <div class="comentarios">
                 <h2>Comentarios</h2>
-                <div class="comentario">
-                    <div class="imagen"></div>
-                    <div class="texto">
-                        <p>Hola</p>
-                        <p>Escrito por: <span>Adriano Ayala</span></p>
-                        <input type="button" value="Eliminar" class="btn btn-azul">
-                    </div>
-                </div>
-                <div class="comentario">
-                    <div class="imagen"></div>
-                    <div class="texto">
-                        <p>Hola</p>
-                        <p>Escrito por: <span>Adriano Ayala</span></p>
-                    </div>
-                </div>
+
+                <% if (comentarios.length > 0) { %>
+                    <% comentarios.forEach(comentario => { %>
+                        <!-- Mostrar la data del JSON -->
+                        <%#= JSON.stringify(comentario) %>
+
+                        <div class="comentario">
+                            <div class="imagen">
+                                <% if (comentario.usuario.imagen) { %>
+                                    <img src="/uploads/perfiles/<%= comentario.usuario.imagen %>" alt="">
+                                <% } %>
+                            </div>
+                            <div class="texto">
+                                <p><%= comentario.mensaje %></p>
+                                <p>Escrito por: 
+                                    <a href="/usuarios/<%= comentario.usuario.id %>"><span><%= comentario.usuario.nombre %></span></a>
+                                </p>
+                                <input type="button" value="Eliminar" class="btn btn-azul">
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No hay comentarios aún</p>
+                <% } %>
+
                 <% if (usuario.id) { %>
                     <form action="/meeti/<%= meeti.id %>" method="POST" class="default-form comentarios">
                         <legend>Agrega un comentario</legend>
