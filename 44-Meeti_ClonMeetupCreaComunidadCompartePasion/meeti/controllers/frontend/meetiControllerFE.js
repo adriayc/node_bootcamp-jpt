@@ -30,16 +30,30 @@ exports.mostrarMeeti = async (req, res) => {
     // Trabajando con la ubicacion (Sequelize.GEOMETRY('POINT'))
     // ST-GeomFromText - obtiene la ubicacion de la lat y lng
     const ubicacion = Sequelize.literal(`ST_GeomFromText('POINT(${meeti.ubicacion.coordinates[0]} ${meeti.ubicacion.coordinates[1]})')`);
+    // console.log(ubicacion);
 
     // ST_Distance_Sphere - retorna una linea en metros
     // const distancia = Sequelize.fn('ST_Distance_Sphere', Sequelize.col('ubicacion'), ubicacion);    // Error!
     const distancia = Sequelize.fn('ST_DistanceSphere', Sequelize.col('ubicacion'), ubicacion);
+    // console.log(distancia);
 
     // Obtener los 3 meeti's mas cercanos
     const meetisCercanos = await Meeti.findAll({
+        include: [
+            {
+                model: Grupo
+            },
+            {
+                model: Usuario,
+                attributes: ['id', 'nombre', 'imagen']
+            }
+        ],
+        // Donde la distancia sea menor o igual a 2Km
         where: Sequelize.where(distancia, {[Op.lte]: 2000}),            // 2000mt igual 2km
         // Ordena del mas cercano a lejano
         order: distancia,
+        // A partir del 1er registro (Ignorar el 1 registro)
+        offset: 1,
         limit: 3
     });
     // console.log(meetisCercanos);
