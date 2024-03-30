@@ -47,6 +47,9 @@ module.exports = function() {
     // Comentarios en el meeti
     router.post('/meeti/:id', comentarioControllerFE.agregarComentario);
 
+    // Eliminar comentario en el meeti
+    router.post('/eliminar-comentario', comentarioControllerFE.eliminarComentario)
+
     // Muestra perfiles en el frontend
     router.get('/usuarios/:id', usuarioControllerFE.mostrarUsuario);
 

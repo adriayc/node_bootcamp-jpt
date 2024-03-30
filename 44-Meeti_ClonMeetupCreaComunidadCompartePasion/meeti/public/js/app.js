@@ -3,6 +3,7 @@
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 // Import asistencia
 import asistencia from './asistencia';
+import eliminarComentario from './eliminarComentario';
 
 // IIFE (Immediately Invoked Funcion expresssion)
 (function () {

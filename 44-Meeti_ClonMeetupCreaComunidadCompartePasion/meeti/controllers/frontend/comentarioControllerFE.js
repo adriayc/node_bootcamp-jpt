@@ -16,3 +16,8 @@ exports.agregarComentario = async (req, res, next) => {
     res.redirect('back');
     next();
 };
+
+// Eliminar comentario
+exports.eliminarComentario = (req, res, next) => {
+    res.send('Eliminando...');
+};
