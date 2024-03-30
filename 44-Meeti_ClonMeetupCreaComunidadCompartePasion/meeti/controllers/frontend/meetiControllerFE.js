@@ -7,6 +7,9 @@ const Usuario = require('../../models/Usuario');
 const Categoria = require('../../models/Categoria');
 const Comentario = require('../../models/Comentario');
 
+// Operadores de sequlize
+const Op = Sequelize.Op;
+
 exports.mostrarMeeti = async (req, res) => {
     const meeti = await Meeti.findOne({
         where: {slug: req.params.slug},
@@ -24,6 +27,23 @@ exports.mostrarMeeti = async (req, res) => {
     // Validar meeti
     if (!meeti) res.redirect('/');
 
+    // Trabajando con la ubicacion (Sequelize.GEOMETRY('POINT'))
+    // ST-GeomFromText - obtiene la ubicacion de la lat y lng
+    const ubicacion = Sequelize.literal(`ST_GeomFromText('POINT(${meeti.ubicacion.coordinates[0]} ${meeti.ubicacion.coordinates[1]})')`);
+
+    // ST_Distance_Sphere - retorna una linea en metros
+    // const distancia = Sequelize.fn('ST_Distance_Sphere', Sequelize.col('ubicacion'), ubicacion);    // Error!
+    const distancia = Sequelize.fn('ST_DistanceSphere', Sequelize.col('ubicacion'), ubicacion);
+
+    // Obtener los 3 meeti's mas cercanos
+    const meetisCercanos = await Meeti.findAll({
+        where: Sequelize.where(distancia, {[Op.lte]: 2000}),            // 2000mt igual 2km
+        // Ordena del mas cercano a lejano
+        order: distancia,
+        limit: 3
+    });
+    // console.log(meetisCercanos);
+
     // Obtener todas los comentarios de la meeti (Despues de validar la meeti)
     const comentarios = await Comentario.findAll({
         where: {meetiId: meeti.id},
@@ -39,6 +59,7 @@ exports.mostrarMeeti = async (req, res) => {
         nombrePagina: meeti.titulo,
         meeti,
         comentarios,
+        meetisCercanos,
         moment
     });
 };
