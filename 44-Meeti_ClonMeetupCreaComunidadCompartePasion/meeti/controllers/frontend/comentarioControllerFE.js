@@ -30,16 +30,20 @@ exports.eliminarComentario = async (req, res, next) => {
 
     // Validar que exista el comentario
     if (!comentario) {
-        res.send('Acción no valida');
+        res.status(404).send('Acción no valida');
         return next();
     }
 
     // Validar que el usuario sea el creado del comentario
     if (comentario.usuarioId === req.user.id) {
-        res.send('Si, eres la persona que creo este comentario');
+        // Eliminar comentario
+        await comentario.destroy();
+
+        res.status(200).send('Se ha eliminando correctamente');
         return next();
     }  else {
-        res.send('No, eres la persona que creo este comentario!');
+        // res.send('No, eres la persona que creo este comentario!');
+        res.status(403).send('Acción no valida');
         return next();
     }
 };

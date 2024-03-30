@@ -43,13 +43,24 @@ import Swal from 'sweetalert2';
                 // Solitar la solicitud post con axios
                 axios.post(this.action, datos)
                 .then(respuesta => {
-                    console.log(respuesta);
-                })
+                    // console.log(respuesta);
 
-                Swal.fire({
-                    title: "¡Eliminado!",
-                    text: "Se ha eliminado correctamente.",
-                    icon: "success"
+                    Swal.fire({
+                        title: "¡Eliminado!",
+                        text: respuesta.data,
+                        icon: "success"
+                    });
+
+                    // Eliminar el comentario del DOM
+                    this.parentElement.parentElement.remove();
+                }).catch(error => {
+                    // console.log(error.response);
+
+                    Swal.fire({
+                        title: '¡Error!',
+                        text: error.response.data,
+                        icon: 'error'
+                    });
                 });
             }
           });
