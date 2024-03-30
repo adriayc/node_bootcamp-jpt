@@ -25,6 +25,7 @@ require('./models/Usuario');
 require('./models/Categoria');
 require('./models/Grupo');
 require('./models/Meeti');
+require('./models/Comentario');
 // Habilitar sequelize postgres
 db.sync().then(() => console.log('DB Conectado')).catch(error => console.log(error));
 

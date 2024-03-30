@@ -80,16 +80,20 @@
                         <p>Escrito por: <span>Adriano Ayala</span></p>
                     </div>
                 </div>
-                <form action="#" class="default-form comentarios">
-                    <legend>Agrega un comentario</legend>
-                    <div class="campo">
-                        <label>Comentario</label>
-                        <textarea name="comentario"></textarea>
-                    </div>
-                    <div class="campo enviar">
-                        <input type="submit" value="Enviar" class="btn btn-rosa">
-                    </div>
-                </form><!-- .formulario-comentarios -->
+                <% if (usuario.id) { %>
+                    <form action="/meetis/<%= meeti.slug %>" method="POST" class="default-form comentarios">
+                        <legend>Agrega un comentario</legend>
+                        <div class="campo">
+                            <label>Comentario</label>
+                            <textarea name="comentario"></textarea>
+                        </div>
+                        <div class="campo enviar">
+                            <input type="submit" value="Enviar" class="btn btn-rosa">
+                        </div>
+                    </form><!-- .formulario-comentarios -->
+                <% } else { %>
+                    <p>Inicia sesión para agregar un comentario</p>
+                <% } %>
             </div><!-- .comentarios -->
         </div><!-- .informacion-evento -->
 
