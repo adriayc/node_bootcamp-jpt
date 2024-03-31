@@ -31,6 +31,8 @@
     + Express Validator (Validacion de forms)
       $ npm install --save express-validator             // Current version
       $ npm install --save express-validator@5.3.0       // Old version (Our App)
+    + Nodemailer (Envio de emails)
+      $ npm install --save nodemailer
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'
@@ -54,3 +56,5 @@
     Crear una nueva DB en PostgreSQL
       $ \l                          # Listar las DBs
       $ CREATE DATABASE meeti_db;   # Crear una DB
+    Backup de la DB
+      $ pg_dump -h 127.0.0.1 -p 5432 -U postgres meeti_db > meeti_db.bak
