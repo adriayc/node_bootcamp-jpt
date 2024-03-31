@@ -37,6 +37,10 @@ module.exports = function() {
     router.get('/iniciar-sesion', usuarioController.formIniciarSesion);
     router.post('/iniciar-sesion', authController.autenticarUsuario);
 
+    // Cerrar sesion
+    // router.get('/cerrar-sesion', usuarioController.usuarioAutenticado, authController.cerrarSesion);
+    router.get('/cerrar-sesion', authController.usuarioAutenticado, authController.cerrarSesion);
+
     // Panel de administracion
     router.get('/administracion', authController.usuarioAutenticado, adminController.panelAdministracion);
 
@@ -59,6 +63,26 @@ module.exports = function() {
     // Nuevos meeti
     router.get('/nuevo-meeti', authController.usuarioAutenticado, meetiController.formNuevoMeeti);
     router.post('/nuevo-meeti', authController.usuarioAutenticado, meetiController.sanitizarMeeti, meetiController.crearMeeti);
+
+    // Editar meeti
+    router.get('/editar-meeti/:id', authController.usuarioAutenticado, meetiController.formEditarMeeti);
+    router.post('/editar-meeti/:id', authController.usuarioAutenticado, meetiController.editarMeeti);
+
+    // Eliminar meeti
+    router.get('/eliminar-meeti/:id', authController.usuarioAutenticado, meetiController.formEliminarMeeti);
+    router.post('/eliminar-meeti/:id', authController.usuarioAutenticado, meetiController.eliminarMeeti);
+
+    // Editar informacion de perfil
+    router.get('/editar-perfil', authController.usuarioAutenticado, usuarioController.formEditarPerfil);
+    router.post('/editar-perfil', authController.usuarioAutenticado, usuarioController.editarPerfil);
+
+    // Editar el password
+    router.get('/cambiar-password', authController.usuarioAutenticado, usuarioController.formCambiarPassword);
+    router.post('/cambiar-password', authController.usuarioAutenticado, usuarioController.cambiarPassword);
+
+    // Editar imagen de perfil
+    router.get('/imagen-perfil', authController.usuarioAutenticado, usuarioController.formEditarImagenPerfil);
+    router.post('/imagen-perfil', authController.usuarioAutenticado, usuarioController.subirImagen, usuarioController.editarImagenPerfil);
 
     return router;
 };

@@ -68,8 +68,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Customs Middleware (usuuarios logueados, flash message, fecha actual)
+// Customs Middleware (usuarios logueados, flash message, fecha actual)
 app.use((req, res, next) => {
+    // Usuario logueado
+    res.locals.usuario = {...req.user} || null;
     // Flash message
     res.locals.mensajes = req.flash();
     const fecha = new Date();
