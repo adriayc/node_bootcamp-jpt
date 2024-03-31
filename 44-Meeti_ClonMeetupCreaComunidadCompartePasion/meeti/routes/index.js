@@ -2,6 +2,7 @@ const express = require('express');
 // Controllers
 const homeController = require('../controllers/homeController');
 const usuarioController = require('../controllers/usuarioController');
+const authController = require('../controllers/authController');
 
 // Inicializar el router
 const router = express.Router();
@@ -31,6 +32,7 @@ module.exports = function() {
 
     // Iniciar sesion
     router.get('/iniciar-sesion', usuarioController.formIniciarSesion);
+    router.post('/iniciar-sesion', authController.autenticarUsuario);
 
     return router;
 };

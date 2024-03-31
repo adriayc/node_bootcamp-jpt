@@ -75,6 +75,7 @@ ALTER TABLE ONLY public.usuarios ALTER COLUMN id SET DEFAULT nextval('public.usu
 
 COPY public.usuarios (id, nombre, imagen, email, password, activo, "tokenPassword", "expiraToken", "createdAt", "updatedAt") FROM stdin;
 1	Adriano	\N	adriano@correo.com	$2a$10$CDIZcogIrMr7KDGSJrmqDeb7kp5tb7iTYoL20FNKASFUINb2W.VfW	t	\N	\N	2024-03-21 23:15:35.877-04	2024-03-21 23:15:50.875-04
+2	Carla	\N	carla@correo.com	$2a$10$uXAjEIXmW03f.Dl0XbYzqenyBO5f1644ldqP2c4R8pubwbpHf1h96	f	\N	\N	2024-03-22 16:27:34.76-04	2024-03-22 16:27:34.76-04
 \.
 
 
@@ -82,7 +83,7 @@ COPY public.usuarios (id, nombre, imagen, email, password, activo, "tokenPasswor
 -- Name: usuarios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.usuarios_id_seq', 1, true);
+SELECT pg_catalog.setval('public.usuarios_id_seq', 2, true);
 
 
 --
