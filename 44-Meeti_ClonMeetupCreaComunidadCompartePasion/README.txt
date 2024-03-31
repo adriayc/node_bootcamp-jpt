@@ -44,6 +44,9 @@
       # npm install -D babel-loader @babel/core @babel/preset-env webpack webpack-cli       // App version
     + Concurrently (Ejecutar varios comandos simultaneamente)
       # npm install --save concurrently
+    + Leaflet Geosearch (Agrega soporte para geocodificación)
+      # npm install --save leaflet-geosearch            // Current version
+      # npm install --save leaflet-geosearch@2.7.0      // App version
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'
