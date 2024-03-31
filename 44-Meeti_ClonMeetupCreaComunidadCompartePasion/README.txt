@@ -85,3 +85,23 @@
   + Instalar PostGIS 'https://postgis.net/documentation/getting_started/'
   + Abrimos PgAdmin 4 y ejecutamos el siguiente script SQL:
     SQL: CREATE EXTENSION postgis;
+
+* Deployment de la App
+  * Crear el repositiorio en GitHub
+    + Crear un nuevo repositio
+      > Respositorio name: meeti
+      > Description: Deployment del proyecto Meeti
+      > Public
+      > Click 'Create respositorio'
+    + Inicilizar el respositorio con git
+      $ git init
+    + Agregar el archivo .gitignore al repositio
+      * node_modules
+      * variables.env
+      * public/uploads/grupos/*
+      * public/uploads/perfiles/*
+    + Comandos de git (Subir el repositio a GitHub)
+      $ git add .
+      $ git commit -m "Deployment de la app a Heroku"
+      $ git remote add origin url_reposotorio
+      $ git push -u origin master
