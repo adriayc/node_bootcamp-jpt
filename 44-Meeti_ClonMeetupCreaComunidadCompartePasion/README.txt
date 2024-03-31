@@ -53,6 +53,8 @@
       # npm install --save moment
     + Axios
       # npm install --save axios
+    + SweetAlert2 (Alertas)
+      # npm install --save sweetalert2
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'
