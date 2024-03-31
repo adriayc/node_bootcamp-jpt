@@ -3,6 +3,7 @@ const express = require('express');
 const homeController = require('../controllers/homeController');
 const usuarioController = require('../controllers/usuarioController');
 const authController = require('../controllers/authController');
+const adminController = require('../controllers/adminController');
 
 // Inicializar el router
 const router = express.Router();
@@ -33,6 +34,9 @@ module.exports = function() {
     // Iniciar sesion
     router.get('/iniciar-sesion', usuarioController.formIniciarSesion);
     router.post('/iniciar-sesion', authController.autenticarUsuario);
+
+    // Panel de administracion
+    router.get('/administracion', authController.usuarioAutenticado, adminController.panelAdministracion);
 
     return router;
 };
