@@ -11,6 +11,7 @@ const meetiControllerFE = require('../controllers/frontend/meetiControllerFE');
 const usuarioControllerFE = require('../controllers/frontend/usuarioControllerFE');
 const grupoControllerFE = require('../controllers/frontend/grupoControllerFE');
 const comentarioControllerFE = require('../controllers/frontend/comentarioControllerFE');
+const busquedaControllerFE = require('../controllers/frontend/busquedaControllerFE');
 
 
 // Inicializar el router
@@ -58,6 +59,9 @@ module.exports = function() {
 
     // Muestra meeti's por categoria
     router.get('/categorias/:slug', meetiControllerFE.mostrarCategoria);
+
+    // Busqueda de meeti's
+    router.get('/busqueda', busquedaControllerFE.resultadosBusqueda);
 
     // Crear cuenta
     router.get('/crear-cuenta', usuarioController.formCrearCuenta);
