@@ -105,3 +105,13 @@
       $ git commit -m "Deployment de la app a Heroku"
       $ git remote add origin url_reposotorio
       $ git push -u origin master
+    + Instalar Heroku CLI 'https://devcenter.heroku.com/articles/heroku-cli'
+    + Creando la App en Heroku
+      $ heroku create --remote production
+      > Ir a la App creada en Heroku    (Crear la App)
+        > Click app de heroku -> Click 'More' | 'View Logs' (Muestra los logs)
+      $ git push production master    (Subir a Heroku)
+    + Importar la Base de Datos en Heroku
+      > Ir a la App -> 'Resouces' -> Add-ons (Buscar 'Heroku Postgres') -> Click 'Provision'
+      > Ir a la App -> 'Settings' (Muestra las variables de configuracion de la DB Postgres)
+        > DATABASE_URL    url_postgres
