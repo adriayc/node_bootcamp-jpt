@@ -21,6 +21,16 @@
       # npm install --save ejs
     + Ejs Layouts
       $ npm install --save express-ejs-layouts
+    + Sequelize (ORM) y PostgreSQL
+      $ npm install --save sequelize pg pg-hstore
+    + BcryptNodejs (Hash)
+      $ npm install --save bcrypt-nodejs    (Deperedado!)
+      $ npm install --save bcryptjs
+    + Connect Flash (Flash messages), Cookie Parser y Express Session
+      $ npm install --save connect-flash cookie-parser express-session
+    + Express Validator (Validacion de forms)
+      $ npm install --save express-validator             // Current version
+      $ npm install --save express-validator@5.3.0       // Old version (Our App)
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'

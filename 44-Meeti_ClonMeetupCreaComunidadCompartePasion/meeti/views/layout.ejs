@@ -27,10 +27,25 @@
 
         <nav class="nav">
             <a href="#">Crear Grupo</a>
-            <a href="">Iniciar Sesión</a>
+            <a href="/iniciar-sesion">Iniciar Sesión</a>
             <a href="/crear-cuenta">Registrarse</a>
         </nav>
     </header>
+
+    <!-- Flash messages -->
+    <% if (locals.mensajes) { %>
+        <% const categoria = Object.keys(locals.mensajes) %>
+        <!-- Comentarios en EJS -->
+        <% /* %><%= categoria %><% */ %>
+        <%#= categoria  %>
+        <% if (categoria.length) { %>
+            <% locals.mensajes[categoria].forEach(alerta => { %>
+                <div class="alertas">
+                    <p class="alerta <%= categoria %>"><%= alerta %></p>
+                </div>
+            <% }) %>
+        <% } %>
+    <% } %>
 
     <!-- Inyectar el contenido de las views -->
     <%- body %>
@@ -39,7 +54,7 @@
     <footer class="contenedor site-footer">
         <nav class="nav">
             <a href="#">Crear Grupo</a>
-            <a href="">Iniciar Sesión</a>
+            <a href="/iniciar-sesion">Iniciar Sesión</a>
             <a href="/crear-cuenta">Registrarse</a>
         </nav>
 
