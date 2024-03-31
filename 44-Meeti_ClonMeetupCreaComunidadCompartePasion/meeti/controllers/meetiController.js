@@ -1,5 +1,5 @@
+const {v4: uuid} = require('uuid');
 // Models
-const { eq } = require('lodash');
 const Grupo = require('../models/Grupo'); 
 const Meeti = require('../models/Meeti');
 
@@ -50,6 +50,9 @@ exports.crearMeeti = async (req, res) => {
         meeti.cupo = 0;
     }
     // console.log(meeti);
+
+    // Asignar un ID unico (Soluciona el error de ID unico)
+    meeti.id = uuid();
 
     try {
         // Almacenar en la DB

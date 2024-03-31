@@ -25,6 +25,8 @@ module.exports = function() {
     });
     */
 
+    /** AREA PUBLICA */
+
     router.get('/', homeController.home);
 
     // Crear cuenta
@@ -38,8 +40,10 @@ module.exports = function() {
     router.post('/iniciar-sesion', authController.autenticarUsuario);
 
     // Cerrar sesion
-    // router.get('/cerrar-sesion', usuarioController.usuarioAutenticado, authController.cerrarSesion);
     router.get('/cerrar-sesion', authController.usuarioAutenticado, authController.cerrarSesion);
+
+
+    /** AREA PRIVADA */
 
     // Panel de administracion
     router.get('/administracion', authController.usuarioAutenticado, adminController.panelAdministracion);

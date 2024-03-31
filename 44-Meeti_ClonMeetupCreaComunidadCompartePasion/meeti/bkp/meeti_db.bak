@@ -41,8 +41,7 @@ SET default_table_access_method = heap;
 CREATE TABLE public.categorias (
     id integer NOT NULL,
     nombre text,
-    "createdAt" timestamp with time zone NOT NULL,
-    "updatedAt" timestamp with time zone NOT NULL
+    slug text
 );
 
 
@@ -178,19 +177,19 @@ ALTER TABLE ONLY public.usuarios ALTER COLUMN id SET DEFAULT nextval('public.usu
 -- Data for Name: categorias; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.categorias (id, nombre, "createdAt", "updatedAt") FROM stdin;
-1	Programación	2024-03-23 10:41:16.30579-04	2024-03-23 10:41:16.30579-04
-2	Diseño	2024-03-23 10:41:48.701873-04	2024-03-23 10:41:48.701873-04
-3	Negocios y Emprendimiento	2024-03-23 10:42:41.503164-04	2024-03-23 10:42:41.503164-04
-4	Moda y Estilo	2024-03-23 10:43:48.448051-04	2024-03-23 10:43:48.448051-04
-5	Salud y Ejercicio	2024-03-23 10:43:48.448051-04	2024-03-23 10:43:48.448051-04
-6	Fotografía y Viajes	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
-7	Comida y Bebida\n	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
-8	Diseño y Arquitectura	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
-9	Café	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
-10	CIne y Película	2024-03-23 10:46:30.912394-04	2024-03-23 10:46:30.912394-04
-11	Libros	2024-03-23 10:47:26.794603-04	2024-03-23 10:47:26.794603-04
-12	Aprendizaje	2024-03-23 10:47:26.794603-04	2024-03-23 10:47:26.794603-04
+COPY public.categorias (id, nombre, slug) FROM stdin;
+1	Programación	programacion
+2	Diseño	diseno
+3	Negocios y Emprendimiento	negocios-y-emprendimiento
+4	Moda y Estilo	moda-y-estilo
+5	Salud y Ejercicio	salud-y-ejercicio
+6	Fotografía y Viajes	fotografia-y-viajes
+7	Comida y Bebidas	comida-y-bebidas
+8	Diseño y Arquitectura	diseno-y-arquitectura
+9	Café	cafe
+10	Cine y Películas	cine-y-peliculas
+11	Libros	libros
+12	Aprendizaje	aprendizaje
 \.
 
 
@@ -200,6 +199,8 @@ COPY public.categorias (id, nombre, "createdAt", "updatedAt") FROM stdin;
 
 COPY public.grupos (id, nombre, descripcion, url, imagen, "createdAt", "updatedAt", "categoriaId", "usuarioId") FROM stdin;
 b482d5df-63d2-42d3-842b-afc21118acdb	NodeJS México	<div>Hola, somo la comunidad <strong>NodeJS México</strong></div>	https://www.nodejsmx.com	YWJC9ZmVf.jpeg	2024-03-27 18:23:55.426-04	2024-03-27 18:23:55.426-04	1	1
+3b69dd5c-9b1a-4bc6-a5ce-4c234c1f6bc7	JavaScript Moderno	<div>Esto es un grupo de JavaScript Moderno</div>	https://www.jsmoderno.com	7zYfHtNHb.jpeg	2024-03-28 12:39:29.532-04	2024-03-28 12:39:29.532-04	1	1
+582a548e-cc98-4fbf-b673-c225685f944b	Diseño UX/UI	<div>Esto es la comunidad de <strong>Diseño UX/UI</strong></div>	https://www.disenioux.com	-EDFapnrR.jpeg	2024-03-28 12:41:22.504-04	2024-03-28 12:41:22.504-04	2	1
 \.
 
 
@@ -208,6 +209,13 @@ b482d5df-63d2-42d3-842b-afc21118acdb	NodeJS México	<div>Hola, somo la comunidad
 --
 
 COPY public.meetis (id, titulo, slug, invitado, cupo, descripcion, fecha, hora, direccion, ciudad, estado, pais, ubicacion, interesados, "createdAt", "updatedAt", "usuarioId", "grupoId") FROM stdin;
+6235fac2-7fd0-4dd8-b3bc-afb8376e92d6	GraphQL, MongoDB y NodeJS	graphql-mongodb-y-nodejs-6vLXBDRoK	Adriano Ayala	20	<div>Esto es una meeti de GraphQL, MongoDB y NodeJS</div>	2024-04-01	07:00:00	Avenida Libertador Simón Bolívar	Cochabamba	Cochabamba	Bolivia	0101000020E6100000A49418FD8C5F31C0F21AA69A658A50C0	{}	2024-03-28 14:28:07.531-04	2024-03-28 14:28:07.531-04	1	b482d5df-63d2-42d3-842b-afc21118acdb
+d7ba68e5-1d19-48bc-b3f4-b215ca2f9ba6	Introducción a JavaScript	introduccion-a-javascript-H3yCSBMj3	Adriano Ayala	30	<div>Meeti de Intruducción a JavaScript</div>	2024-04-02	09:00:00	Avenida Circunvalación	Cochabamba	Cochabamba	Bolivia	0101000020E6100000ADC6B64C825F31C00345BC7F8F8B50C0	{}	2024-03-28 14:29:52.281-04	2024-03-28 14:29:52.281-04	1	3b69dd5c-9b1a-4bc6-a5ce-4c234c1f6bc7
+43f777d4-064a-404d-a16e-53d84f22584f	Fundamentos de Diseño UX	fundamentos-de-diseno-ux-6YmpHjK6U	Carla Nogales	15	<div>Meeti de Fundamentos de Diseño UX</div>	2024-04-03	12:00:00	Avenida Uyuni	Cochabamba	Cochabamba	Bolivia	0101000020E6100000E8687102176131C020B1BE9CBC8950C0	{}	2024-03-28 14:31:42.699-04	2024-03-28 14:31:42.699-04	1	582a548e-cc98-4fbf-b673-c225685f944b
+73183eb3-1f3c-41c2-8f2d-53ed2fc13987	ORM's de MySQL y MongoDB en NodeJS	orms-de-mysql-y-mongodb-en-nodejs-KDc5SLURN	Nicol Rodriguez	10	<div>Introducción a ORM's de MySQL y MongoDB en NodeJS</div>	2024-04-03	17:00:00	Avenida Juan de la Rosa	Cochabamba	Cochabamba	Bolivia	0101000020E6100000BA9F5994A66031C04E376001CD8A50C0	{}	2024-03-28 14:34:17.061-04	2024-03-28 14:34:17.061-04	1	b482d5df-63d2-42d3-842b-afc21118acdb
+b076acb3-c17e-4abe-8427-fa88fc7b013c	Creando el primer App con JavaScript	creando-el-primer-app-con-javascript-8_wk_jUau	Adriano Ayala	0	<div>Meeti donde se creará un app en JavaScript desde cero</div>	2024-04-02	19:00:00	Avenida Libertador Simón Bolívar	Cochabamba	Cochabamba	Bolivia	0101000020E6100000F5814803E16031C06225A3B04E8A50C0	{}	2024-03-28 14:36:11.696-04	2024-03-28 14:36:11.696-04	1	3b69dd5c-9b1a-4bc6-a5ce-4c234c1f6bc7
+18cb47c5-8656-46c2-9997-4fee348876c5	Intruducción a NodeJS	intruduccion-a-nodejs-WXCJqFkxS	Virctor Gonzales	25	<div>Meeti de intruducción a NodeJS</div>	2024-03-26	12:00:00	Calle Antofagasta	Cochabamba	Cochabamba	Bolivia	0101000020E610000023B670720D6231C0BF739E488D8B50C0	{}	2024-03-28 14:37:27.031-04	2024-03-28 14:37:27.031-04	1	b482d5df-63d2-42d3-842b-afc21118acdb
+bf578ce6-524d-44af-bcd7-dc8172f16e99	Intruducción a JavaScript	intruduccion-a-javascript-uNhQhtCfX	Diana Rosales	14	<div>Este meeti es de Introducción a JavaScript</div>	2024-03-24	21:00:00	Avenida Félix Araníbar	Cochabamba	Cochabamba	Bolivia	0101000020E6100000C0481E3E9F6131C044FF5FD09D8A50C0	{}	2024-03-28 14:39:03.726-04	2024-03-28 14:39:03.726-04	1	3b69dd5c-9b1a-4bc6-a5ce-4c234c1f6bc7
 \.
 
 
@@ -232,7 +240,7 @@ COPY public.usuarios (id, nombre, imagen, descripcion, email, password, activo, 
 -- Name: categorias_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.categorias_id_seq', 2, true);
+SELECT pg_catalog.setval('public.categorias_id_seq', 1, false);
 
 
 --
@@ -280,14 +288,6 @@ ALTER TABLE ONLY public.usuarios
 
 ALTER TABLE ONLY public.usuarios
     ADD CONSTRAINT usuarios_pkey PRIMARY KEY (id);
-
-
---
--- Name: grupos grupos_categoriaId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.grupos
-    ADD CONSTRAINT "grupos_categoriaId_fkey" FOREIGN KEY ("categoriaId") REFERENCES public.categorias(id) ON UPDATE CASCADE ON DELETE SET NULL;
 
 
 --
