@@ -37,6 +37,8 @@
       $ npm install --save passport passport-local
     + Uuid (Generar IDs únicos)
       # npm install --save uuid
+    + Multer (Subir archivos) y Shortid (Generador de IDs cortos)
+      # npm install --save multer shortid
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'
