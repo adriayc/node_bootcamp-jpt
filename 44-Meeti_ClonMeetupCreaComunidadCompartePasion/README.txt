@@ -85,3 +85,55 @@
   + Instalar PostGIS 'https://postgis.net/documentation/getting_started/'
   + Abrimos PgAdmin 4 y ejecutamos el siguiente script SQL:
     SQL: CREATE EXTENSION postgis;
+
+* Deployment de la App
+  * Crear el repositiorio en GitHub
+    + Crear un nuevo repositio
+      > Respositorio name: meeti
+      > Description: Deployment del proyecto Meeti
+      > Public
+      > Click 'Create respositorio'
+    + Inicilizar el respositorio con git
+      $ git init
+    + Agregar el archivo .gitignore al repositio
+      * node_modules
+      * variables.env
+      * public/uploads/grupos/*
+      * public/uploads/perfiles/*
+    + Comandos de git (Subir el repositio a GitHub)
+      $ git add .
+      $ git commit -m "Deployment de la app a Heroku"
+      $ git remote add origin url_reposotorio
+      $ git push -u origin master
+    + Instalar Heroku CLI 'https://devcenter.heroku.com/articles/heroku-cli'
+    + Creando la App en Heroku
+      $ heroku create --remote production
+      > Ir a la App creada en Heroku    (Crear la App)
+        > Click app de heroku -> Click 'More' | 'View Logs' (Muestra los logs)
+      $ git push production master    (Subir a Heroku)
+    + Importar la Base de Datos en Heroku
+      > Ir a la App -> 'Resouces' -> Add-ons (Buscar 'Heroku Postgres') -> Click 'Provision'
+      > Ir a la App -> 'Settings' (Muestra las variables de configuracion de la DB Postgres)
+        > DATABASE_URL    postgres://usuario:password@dominio:puerto/db_name
+      > Agregar variables de entornos desde la App de Heroku
+        > Click 'Settings' | 'Config Vars' -> Click 'Add' (Agregar una nueva variable)
+        DB_NAME     db_name
+      > Agregar variables de entorno desde la terminal
+        $ heroku config | grep DATABASE_URL     (Devuelve el valor de la variable)
+          > postgres://usuario:password@dominio:puerto/db_name
+        $ heroku config:set DB_USER=user        (Agregar una variable desde la terminal)
+        $ heroku config:set DB_PASS=password
+        $ heroku config:set DB_HOST=host
+        $ heroku config:set DB_PORT=5432
+        $ heroku config:set SECRETO=palabrasecreata
+        $ heroku config:set KEY=llavesecreta
+      > Conectarse a la DB desde un cliente 'TablePlus' (De forma remota o URL)
+        > Nex -> Connection form URL...
+          Connection URL: DATABASE_URL    (URL de la db generado por heroku)
+          > Click 'Impotar' y finalmente 'Connect'
+        > Click en 'SQL' y ejecutar la siguiente consulta:
+          CREATE extesion postgis;
+        > Click en la App -> Click 'More' | 'Run console'
+          heroku run: npm start         (Click 'Run')
+    + Abrir la App
+      > Click en la app -> click 'Open app' (Abre la app en una nueva pestaña)

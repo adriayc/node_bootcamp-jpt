@@ -85,7 +85,11 @@ app.use((req, res, next) => {
 // Habilitar rutas
 app.use('/', router());
 
+// Definir el host y puerto
+const host = process.env.HOST || '0.0.0.0';
+const port = process.env.PORT || 5000;
+
 // Agregar el puerto
-app.listen(process.env.PORT, () => {
+app.listen(port, host, () => {
     console.log('El servidor esta funcionado');
 });
