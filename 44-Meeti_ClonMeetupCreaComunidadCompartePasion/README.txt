@@ -47,6 +47,8 @@
     + Leaflet Geosearch (Agrega soporte para geocodificación)
       # npm install --save leaflet-geosearch            // Current version
       # npm install --save leaflet-geosearch@2.7.0      // App version
+    + Slug
+      # npm install --save slug
 
 * Instalar PostgreSQL en Linux
   + PostgreSQL 'https://www.postgresql.org/download/'
@@ -72,3 +74,8 @@
       $ CREATE DATABASE meeti_db;   # Crear una DB
     Backup de la DB
       $ pg_dump -h 127.0.0.1 -p 5432 -U postgres meeti_db > meeti_db.bak
+
+* Solucionar el error de type "geography"
+  + Instalar PostGIS 'https://postgis.net/documentation/getting_started/'
+  + Abrimos PgAdmin 4 y ejecutamos el siguiente script SQL:
+    SQL: CREATE EXTENSION postgis;

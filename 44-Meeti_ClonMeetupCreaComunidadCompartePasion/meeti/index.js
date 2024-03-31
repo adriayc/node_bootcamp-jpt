@@ -24,6 +24,7 @@ const passport = require('./config/passport');
 require('./models/Usuario');
 require('./models/Categoria');
 require('./models/Grupo');
+require('./models/Meeti');
 // Habilitar sequelize postgres
 db.sync().then(() => console.log('DB Conectado')).catch(error => console.log(error));
 
