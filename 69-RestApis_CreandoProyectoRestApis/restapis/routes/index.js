@@ -23,8 +23,9 @@ module.exports = function() {
     router.delete('/clientes/:id', clienteController.eliminarCliente);
 
 
-    // Agrega nuevo producto
-    router.post('/productos', productoController.nuevoProducto);
+    // Agrega nuevo producto (Subir archivos)
+    router.post('/productos', productoController.subirArchivo, productoController.nuevoProducto);
+
 
     // Retornar el router
     return router;
