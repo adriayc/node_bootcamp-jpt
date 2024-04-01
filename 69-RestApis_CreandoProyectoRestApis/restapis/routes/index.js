@@ -1,6 +1,7 @@
 const express = require('express');
 // Controllers
 const clienteController = require('../controllers/clienteController');
+const productoController = require('../controllers/productoController');
 
 // Inicializar el router
 const router = express.Router();
