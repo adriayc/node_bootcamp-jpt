@@ -96,3 +96,33 @@ exports.mostrarProducto = async (req, res, next) => {
         next();
     }
 };
+
+// Actualizar un producto por ID
+exports.actualizarProducto = async (req, res, next) => {
+    try {
+        const nuevoProducto =  req.body;
+
+        // Validar que exista un archivo
+        if (req.file) {
+            nuevoProducto.imagen = req.file.filename;
+        } else {
+            // Obtener el producto anterior
+            const productoAnterior = await Producto.findById(req.params.id);
+
+            nuevoProducto.imagen = productoAnterior.imagen;
+        }
+
+        // const producto = await Producto.findOneAndUpdate({_id: req.params.id}, req.body, {
+        const producto = await Producto.findOneAndUpdate({_id: req.params.id}, nuevoProducto, {
+            // Devolver el nuevo doc
+            new: true
+        });
+
+        // Devolver una respuesta
+        res.json(producto);
+
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+};
