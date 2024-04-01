@@ -1,16 +1,13 @@
 const express = require('express');
+// Controllers
+const clienteController = require('../controllers/clienteController');
 
 // Inicializar el router
 const router = express.Router();
 
 module.exports = function() {
-    router.get('/', (req, res) => {
-        res.send('Inicio');
-    });
-
-    router.get('/nosotros', (req, res) => {
-        res.send('Nosotros');
-    });
+    // Agregar nuevo cliente
+    router.post('/clientes', clienteController.nuevoCliente);
 
     // Retornar el router
     return router;
