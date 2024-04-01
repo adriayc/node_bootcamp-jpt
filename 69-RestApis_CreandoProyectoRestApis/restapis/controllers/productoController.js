@@ -62,3 +62,17 @@ exports.nuevoProducto = async (req, res, next) => {
         next();
     }
 };
+
+// Obtiene todo los productos
+exports.mostrarProductos = async (req, res, next) => {
+    try {
+        const productos = await Producto.find({});
+
+        // Devolver una respuesta
+        res.json(productos);
+        
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+};

@@ -26,6 +26,8 @@ module.exports = function() {
     // Agrega nuevo producto (Subir archivos)
     router.post('/productos', productoController.subirArchivo, productoController.nuevoProducto);
 
+    // Obtener todos los productos
+    router.get('/productos', productoController.mostrarProductos);
 
     // Retornar el router
     return router;
