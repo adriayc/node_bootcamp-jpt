@@ -38,3 +38,18 @@
       > Databases Name: restapis_db
       > Collection Name: clientes
       > Click 'Create Database'
+
+* Postman
+  - Instalar Postman 'https://www.postman.com/downloads/'
+  - Crear un nuevo Workspace
+    > Abrir Postman -> Dashboard | Workspaces -> Create Workspace
+      > Name: RestApisNode
+      > Summary: REST API's with NodeJS and MongoDB
+      > Visibility: Team
+      > Click 'Create Workspace'
+  - Crear una colección para las solicitudes
+    > Click 'Create collection' | Editar el nombre 'New Collection'
+    > Agregar nuevas solicitude 'Add a request'
+      > GET   localhost:5000              Click 'Send'
+        > Body -> Pretty
+          Inicio
