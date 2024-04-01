@@ -15,6 +15,9 @@ module.exports = function() {
     // Obtener un cliente (By ID)
     router.get('/clientes/:id', clienteController.mostrarCliente);
 
+    // Actualizar un cliente (By ID)
+    router.put('/clientes/:id', clienteController.actualizarCliente);
+
     // Retornar el router
     return router;
 }

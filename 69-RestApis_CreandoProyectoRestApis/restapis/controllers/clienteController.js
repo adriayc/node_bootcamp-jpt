@@ -70,3 +70,20 @@ exports.mostrarCliente = async (req, res, next) => {
         next();
     }
 };
+
+// Actualizar el cliente por su ID
+exports.actualizarCliente = async (req, res, next) => {
+    try {
+        const cliente = await Cliente.findOneAndUpdate({_id: req.params.id}, req.body, {
+            // Devuelve el doc nuevo
+            new: true
+        });
+
+        // Devolver una respuesta
+        res.json(cliente);
+
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+};
