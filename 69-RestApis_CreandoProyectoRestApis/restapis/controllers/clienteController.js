@@ -20,3 +20,18 @@ exports.nuevoCliente = async (req, res, next) => {
         next();
     }
 };
+
+// Obtener todos los cliente
+exports.mostrarClientes = async (req, res, next) => {
+    try {
+        // Obtener todos clientes
+        const clientes = await Cliente.find({});
+
+        // Devolver una respuesta
+        res.json(clientes);
+
+    } catch (error) {
+        console.log(eroor);
+        next();
+    }
+};
