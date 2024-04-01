@@ -145,3 +145,45 @@ Apps que utilizan Node.js:
 - Es utilizado para las relaciones N:N, en este tipo de relaciones se utiliza una tabla pivote, por lo tanto se realiza mediante 3 modelos.
 - Sintaxis: ```Estudiante.belongsToMany(Clase, { through: HorarioClase })```
 - En este ejemplo; Múltiples Estudiantes tendrán Múltiples Clases, por lo tanto se crear un 3er Tabla que sirve como pivote con referencias por llave foránea tanto a Estudiantes como Clases.
+
+## ¿Que es REST API, API's y Web Services?
+### ¿Que es un Web Services?
+- Permite intecambiar datos entre aplicaciones vía web utilizando HTTP.
+- En su forma más simple se dice que cuando una computadora se conecta a otra para obtener información es un Web Services.
+- Existe una gran cantidad de estándares: XML, SOAP, REST y GRAPHQL.
+
+### ¿Que es una API?
+- API (Aplication Programming Interface - Interfaz de Programación de Aplicaciones)
+- Funciones o métodos que ofrece una librería para ser utilizada por otro software y acceder a sus recursos.
+- No siempre es via web, puede ser que se accedan a los recursos por medio de un archivo.
+- Para acceder al servicio hay que enviar una petición estructurada.
+- Ejemplo: Google Maps API
+
+NOTA: Todos los Web Services son API's pero no todas las API's son web services.
+
+DIFERENCIA:La diferencia es que la API no require siempre tener conexión a una red mientras que el Web Service si.
+
+### REST
+- REST (Repressentational State Transfer)
+- Es un patrón para hacer API's.
+- Define cómo se accede a los recursos de una API existente.
+- Puede ser diseñadas en cualquier lenguaje.
+- Pueden ser consumidas en cualquier lenguaje (Móvil o Web).
+- Responden a los request de HTTP: GET, POST, PUT, PATCH y DELETE.
+
+NOTA: Cada API es diferente
+
+### Verbos HTTP, Request o Métodos de Petición
+- GET: Obtener datos del servidor.
+- POST: Enviar datos al servidor (Crear nuevos).
+- PUT: Actulizar un registro.
+- DELETE: Eliminar datos del servidor.
+- PATCH: Actualizar parcialmente un registro.
+
+### REST API's y Request
+Cada REST API contrará con endpoints (URL's) para realizar las operaciones CRUD y REST propone los siguientes:
+- GET         /clientes         Obtener todos los clientes
+- GET         /clientes/10      Obtener el cliente con el ID 10
+- POST        /clientes         Añade un nuevo cliente
+- PUT         /clientes/10      Actualiza el cliente con el ID 10
+- DELETE      /clientes/10      Eliminar el cliente con el ID 10
