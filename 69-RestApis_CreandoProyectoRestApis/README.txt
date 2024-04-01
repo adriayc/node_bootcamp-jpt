@@ -17,3 +17,14 @@
       $ npm install --save express
     + Nodemon
       $ npm install --save-dev nodemon
+
+* MongoDB Community Edition en Ubuntu
+  - Instalar MongoDB Community Edition 'https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/'
+    + Comandos MongoDB:
+      $ mongod --version        // Muestra la version
+      $ mongosh                 // Acceder a MongoDB
+        > $ show dbs            // Listar las DBs
+        > $ use name_db         // Crear una DB
+        > $ db                  // Muesta la DB donde esta actualmente
+        > $ exit                // Para salir
+  - Instalar MongoDB Compass (GUI) 'https://www.mongodb.com/try/download/compass'
