@@ -22,6 +22,10 @@ module.exports = function() {
     // Eliminar un cliente (By ID)
     router.delete('/clientes/:id', clienteController.eliminarCliente);
 
+
+    // Agrega nuevo producto
+    router.post('/productos', productoController.nuevoProducto);
+
     // Retornar el router
     return router;
 }
