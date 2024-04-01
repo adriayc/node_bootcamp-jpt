@@ -12,6 +12,9 @@ module.exports = function() {
     // Obtener todos los clientes
     router.get('/clientes', clienteController.mostrarClientes)
 
+    // Obtener un cliente (By ID)
+    router.get('/clientes/:id', clienteController.mostrarCliente);
+
     // Retornar el router
     return router;
 }

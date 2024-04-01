@@ -35,3 +35,38 @@ exports.mostrarClientes = async (req, res, next) => {
         next();
     }
 };
+
+// Obtener un cliente por ID
+exports.mostrarCliente = async (req, res, next) => {
+    /*
+    // Obtener el cliente
+    const cliente = await Cliente.findById(req.params.id);
+
+    // Validar que exista (Error de validacion)
+    if (!cliente) {
+        res.json({mensaje: 'El cliente no existe'});
+        next();
+    }
+
+    // Devolver una respuesta
+    res.json(cliente);
+    */
+
+    try {
+        // Obtener el cliente
+        const cliente = await Cliente.findById(req.params.id);
+
+        // Validar que exista
+        if (!cliente) {
+            res.json({mensaje: 'El cliente no existe'});
+            next();
+        }
+
+        // Devolver una respuesta
+        res.json(cliente);
+        
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+};
