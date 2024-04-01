@@ -29,6 +29,9 @@ module.exports = function() {
     // Obtener todos los productos
     router.get('/productos', productoController.mostrarProductos);
 
+    // Obtenner un producto (By ID)
+    router.get('/productos/:id', productoController.mostrarProducto);
+
     // Retornar el router
     return router;
 }

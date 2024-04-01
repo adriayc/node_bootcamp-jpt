@@ -76,3 +76,23 @@ exports.mostrarProductos = async (req, res, next) => {
         next();
     }
 };
+
+// Obtener un producto por ID
+exports.mostrarProducto = async (req, res, next) => {
+    try {
+        const producto = await Producto.findById(req.params.id);
+
+        // Validar que exista el producto
+        if (!producto) {
+            res.json({mensaje: 'El producto no existe'});
+            return next();
+        }
+
+        // Devolver una respuesta
+        res.json(producto);
+
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+};
