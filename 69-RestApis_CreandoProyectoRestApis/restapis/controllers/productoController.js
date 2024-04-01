@@ -126,3 +126,17 @@ exports.actualizarProducto = async (req, res, next) => {
         next();
     }
 };
+
+// Eliminar un producto por ID
+exports.eliminarProducto = async (req, res, next) => {
+    try {
+        await Producto.findOneAndDelete({_id: req.params.id});
+
+        // Devolver una respuesta
+        res.json({mensaje: 'El producto se ha eliminado correctamente'});
+        
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+};

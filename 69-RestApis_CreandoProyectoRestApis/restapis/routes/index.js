@@ -35,6 +35,9 @@ module.exports = function() {
     // Actualizar un producto (By ID)
     router.put('/productos/:id', productoController.subirArchivo, productoController.actualizarProducto);
 
+    // Eliminar un producto (By ID)
+    router.delete('/productos/:id', productoController.eliminarProducto);
+
     // Retornar el router
     return router;
 }
