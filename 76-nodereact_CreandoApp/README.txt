@@ -7,3 +7,6 @@
     $ cd client-api
     $ npm start                               // Ejecutar la App
     Abre la siguiente URL en el browser: 'http://localhost:3000/'
+  - Installar dependencias
+    + Rect Router Dom (Rutas)
+      $ npm install --save react-router-dom
