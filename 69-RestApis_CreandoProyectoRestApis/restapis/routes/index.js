@@ -46,6 +46,9 @@ module.exports = function() {
     // Obtener todos los pedidos
     router.get('/pedidos', pedidoController.mostrarPedidos);
 
+    // Obtener un pedido (By ID)
+    router.get('/pedidos/:id', pedidoController.mostrarPedido);
+
     // Retornar el router
     return router;
 }

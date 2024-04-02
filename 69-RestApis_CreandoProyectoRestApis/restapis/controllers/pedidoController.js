@@ -40,3 +40,29 @@ exports.mostrarPedidos = async (req, res, next) => {
         next();
     }
 };
+
+// Mostrar un pedido por ID
+exports.mostrarPedido = async (req, res, next) => {
+    try {
+        const pedido = await Pedido.findById(req.params.id)
+            .populate('cliente')
+            .populate({
+                path: 'pedido.producto',
+                model: 'Productos'
+            }
+        );
+
+        // Validar que exista el pedido
+        if (!pedido) {
+            res.json({'mesaje': 'El pedido no existe'});
+            return next();
+        }
+
+        // Devolver una respuesta
+        res.json(pedido);
+
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+};
