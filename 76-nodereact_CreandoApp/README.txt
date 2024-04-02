@@ -10,3 +10,5 @@
   - Installar dependencias
     + Rect Router Dom (Rutas)
       $ npm install --save react-router-dom
+    + Axios (HTTP requests)
+      $ npm install --save axios
