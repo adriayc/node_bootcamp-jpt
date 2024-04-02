@@ -66,3 +66,24 @@ exports.mostrarPedido = async (req, res, next) => {
         next();
     }
 };
+
+// Actualizar un pedido por ID
+exports.actualizarPedido = async (req, res, next) => {
+    try {
+        const pedido = await Pedido.findOneAndUpdate({_id: req.params.id}, req.body, {
+            new: true
+        })
+        .populate('cliente')
+        .populate({
+            path: 'pedido.producto',
+            model: 'Productos'
+        });
+
+        // Devolver una respuesta
+        res.json(pedido);
+        
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+};
