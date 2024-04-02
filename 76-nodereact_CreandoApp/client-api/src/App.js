@@ -1,6 +1,18 @@
+import { Fragment } from 'react';
+// Components
+import Header from './components/layout/Header';
+
 function App() {
   return (
-    <h1>Hola Mundo ReactJS!</h1>
+    // <>
+    //   {/* Call component */}
+    //   <Header />
+    // </>
+
+    <Fragment>
+      {/* Call component */}
+      <Header />
+    </Fragment>
   );
 }
 
