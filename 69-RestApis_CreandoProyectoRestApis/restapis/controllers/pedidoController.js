@@ -87,3 +87,17 @@ exports.actualizarPedido = async (req, res, next) => {
         next();
     }
 };
+
+// Eliminar un pedido por ID
+exports.eliminarPedido = async (req, res, next) => {
+    try {
+        await Pedido.findOneAndDelete({_id: req.params.id});
+
+        // Devolver una respuesta
+        res.json({mensaje: 'Se ha eliminado el pedido correctamente'});
+        
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+}; 
