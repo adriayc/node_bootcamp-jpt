@@ -16,3 +16,27 @@ exports.nuevoPedido = async (req, res, next) => {
         next();
     }
 };
+
+// Mostrar todos los pedidos
+exports.mostrarPedidos = async (req, res, next) => {
+    try {
+        const pedidos = await Pedido.find({})
+            // Obtiene la referencia del modelo cliente
+            .populate('cliente')
+            // Obtiene la referencia del modelo producto
+            .populate({
+                // Ruta del pruducto
+                path: 'pedido.producto',
+                // Modelo
+                model: 'Productos'
+            }
+        );
+
+        // Devolver una respuesta
+        res.json(pedidos);
+        
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+};

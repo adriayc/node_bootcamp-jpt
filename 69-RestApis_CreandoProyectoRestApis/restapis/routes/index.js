@@ -43,6 +43,9 @@ module.exports = function() {
     // Agregar nuevo pedido
     router.post('/pedidos', pedidoController.nuevoPedido);
 
+    // Obtener todos los pedidos
+    router.get('/pedidos', pedidoController.mostrarPedidos);
+
     // Retornar el router
     return router;
 }
