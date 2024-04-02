@@ -9,7 +9,7 @@ const pedidoSchema = new Schema({
         ref: 'Clientes'
     },
     // Relacion 1:n (Un pedido tiene 1 o muchos productos)
-    productos: [{
+    pedido: [{
        producto: {
         type: Schema.ObjectId,
         ref: 'Productos'
