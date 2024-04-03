@@ -1,8 +1,9 @@
 import { Fragment, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 // ClienteAxios
 import clienteAxios from '../../config/exios';
-import Cliente from './Cliente';
 // Components
+import Cliente from './Cliente';
 
 const Clientes = () => {
     // Hook useState - clientes: state y guardarCliente: funcion para guardar el state
@@ -27,6 +28,11 @@ const Clientes = () => {
     return (
         <Fragment>
             <h2>Clientes</h2>
+
+            <Link to={'/clientes/nuevo'} className='btn btn-verde nvo-cliente'>
+                <i className='fas fa-plus-circle'></i>
+                Nuevo Cliente
+            </Link>
 
             <ul className='listado-clientes'>
                 {clientes.map(cliente => (

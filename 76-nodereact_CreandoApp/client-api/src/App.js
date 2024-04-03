@@ -5,6 +5,7 @@ import Header from './components/layout/Header';
 import Navegacion from './components/layout/Navegacion';
 
 import Clientes from './components/clientes/Clientes';
+import NuevoCliente from './components/clientes/NuevoCliente';
 import Productos from './components/productos/Productos';
 import Pedidos from './components/pedidos/Pedidos';
 
@@ -22,6 +23,8 @@ function App() {
             {/* Routing a los diferentes componentes */}
             <Routes>
               <Route path='/' element={<Clientes />} />
+              <Route path='/cliente/nuevo' element={<NuevoCliente />} />
+
               <Route path='/productos' element={<Productos />} />
               <Route path='/pedidos' element={<Pedidos />} />
             </Routes>
