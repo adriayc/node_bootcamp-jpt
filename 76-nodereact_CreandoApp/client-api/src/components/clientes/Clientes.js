@@ -1,6 +1,8 @@
 import { Fragment, useEffect, useState } from 'react';
 // ClienteAxios
 import clienteAxios from '../../config/exios';
+import Cliente from './Cliente';
+// Components
 
 const Clientes = () => {
     // Hook useState - clientes: state y guardarCliente: funcion para guardar el state
@@ -27,9 +29,12 @@ const Clientes = () => {
             <h2>Clientes</h2>
 
             <ul className='listado-clientes'>
-                {clientes.map(cliente => {
-                    console.log(cliente);
-                })}
+                {clientes.map(cliente => (
+                    <Cliente 
+                        key={cliente._id} 
+                        cliente={cliente}
+                    />                    
+                ))}
             </ul>
         </Fragment>
     );
