@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // ClienteAxios
-import clienteAxios from '../../config/exios';
+import clienteAxios from '../../config/axios';
 // Components
 import Cliente from './Cliente';
 

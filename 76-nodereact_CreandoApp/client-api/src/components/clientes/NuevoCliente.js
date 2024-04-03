@@ -1,4 +1,6 @@
 import { Fragment, useState } from 'react';
+// ClienteAxios
+import clienteAxios from '../../config/axios';
 
 const NuevoCliente = () => {
   // Hook useState
@@ -36,11 +38,34 @@ const NuevoCliente = () => {
     return valido;
   };
 
+  // Agregar el cliente en la REST API (Backend)
+  const agregarCliente = async e => {
+    e.preventDefault();
+    // console.log('Enviando a la rest api...');
+
+    // Enviar la petición por el clienteAxios
+    await clienteAxios.post('/clientes', cliente)
+      .then(res => {
+        // console.log(res);
+
+        // Validar errores
+        if (res.data.code === 11000) {
+          console.log('Error, usuario duplicado en Mongo')
+        } else {
+          console.log(res.data);
+        }
+
+        // Redireccionar
+      });
+  };
+
   return (
     <Fragment>
       <h2>Nuevo Cliente</h2>
 
-      <form>
+      <form
+        onSubmit={agregarCliente}
+      >
         <legend>Llena todos los campos</legend>
 
         <div className="campo">
@@ -86,7 +111,7 @@ const NuevoCliente = () => {
         <div className="campo">
           <label>Teléfono:</label>
           <input 
-            type="email" 
+            type="text" 
             placeholder="Teléfono Cliente" 
             name="telefono" 
             // La funcion se llama cuando ocurre el evento
