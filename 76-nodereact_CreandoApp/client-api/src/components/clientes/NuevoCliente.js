@@ -25,6 +25,17 @@ const NuevoCliente = () => {
     // console.log(cliente);
   };
 
+  // Validar formulario
+  const validarCliente = () => {
+    // Destructuring del objeto cliente
+    const { nombre, apellido, email, empresa, telefono } = cliente;
+
+    // Validar el contenido de las propiedades
+    let valido = !nombre.length || !apellido.length || !email.length || !empresa.length || !telefono.length;
+
+    return valido;
+  };
+
   return (
     <Fragment>
       <h2>Nuevo Cliente</h2>
@@ -78,12 +89,19 @@ const NuevoCliente = () => {
             type="email" 
             placeholder="Teléfono Cliente" 
             name="telefono" 
+            // La funcion se llama cuando ocurre el evento
             onChange={actualizarState} 
           />
         </div>
 
         <div className="enviar">
-          <input type="submit" className="btn btn-azul" value="Agregar Cliente" />
+          <input 
+            type="submit" 
+            className="btn btn-azul" 
+            value="Agregar Cliente" 
+            // La funcion se llama imediatamente (No espera que ocurra algun evento)
+            disabled={validarCliente()}
+          />
         </div>
       </form>
     </Fragment>
