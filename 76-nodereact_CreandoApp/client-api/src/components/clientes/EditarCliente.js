@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from 'sweetalert2';
 // ClienteAxios
 import clienteAxios from "../../config/axios";
 
@@ -7,6 +8,8 @@ const EditarCliente = () => {
   // Obtener params ID
   const { id } = useParams();
   // console.log(id);
+
+  const navigate = useNavigate();
 
   // Hook state
   const [cliente, guadarCliente] = useState({
@@ -52,11 +55,49 @@ const EditarCliente = () => {
     return valido;
   };
 
+  // Actualizar el cliente en la REST API (Backend)
+  const actualizarCliente = e => {
+    e.preventDefault();
+
+    // Enviar la petición por el clienteAxios
+    clienteAxios.put(`/clientes/${cliente._id}`, cliente)
+      .then(res => {
+        // console.log(res);
+
+        // Validar errores
+        if (res.data.code === 11000) {
+          // console.log('Error, usuario duplicado en Mongo');
+
+          // Mostrar una alerta
+          Swal.fire({
+            title: "¡Hubo un error!",
+            text: "El cliente ya esta registrado",
+            icon: "error"
+          });
+        } else {
+          // console.log(res.data);
+
+          // Mostrar una alerta
+          Swal.fire({
+            title: "¡Cliente actualizado!",
+            // text: res.data.mensaje,
+            text: "Se ha actualizado el cliente correctamente",
+            icon: "success"
+          });
+        }
+
+        // Redireccionar
+        return navigate('/');
+      });
+  };
+
   return (
     <Fragment>
       <h2>Editar Cliente</h2>
 
-      <form>
+      <form
+        onSubmit={actualizarCliente}
+      >
         <legend>Llena todos los campos</legend>
 
         <div className="campo">
@@ -106,7 +147,7 @@ const EditarCliente = () => {
         <div className="campo">
           <label>Teléfono:</label>
           <input 
-            type="email" 
+            type="text" 
             placeholder="Teléfono Cliente" 
             name="telefono" 
             onChange={actualizarState}
