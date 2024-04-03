@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 // ClientesAxios
 import clienteAxios from '../../config/axios';
 // Components
+import Spinner from '../layout/Spinner';
 import Producto from './Producto';
 
 const Productos = () => {
@@ -22,6 +23,9 @@ const Productos = () => {
     // Llamar a la funcion
     consultarAPI();
   }, [productos]);            // [productos]: se ejecutar cuando exista un cambio en productos
+
+  // Mostrar spinner
+  if (!productos.length) return <Spinner />;
 
   return (
     <Fragment>
