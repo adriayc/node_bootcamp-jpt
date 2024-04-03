@@ -21,7 +21,7 @@ const Productos = () => {
 
     // Llamar a la funcion
     consultarAPI();
-  }, []);
+  }, [productos]);            // [productos]: se ejecutar cuando exista un cambio en productos
 
   return (
     <Fragment>
