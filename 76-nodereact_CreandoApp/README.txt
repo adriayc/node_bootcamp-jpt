@@ -12,3 +12,5 @@
       $ npm install --save react-router-dom
     + Axios (HTTP requests)
       $ npm install --save axios
+    + SweetAlert2 (Alertas)
+      $ npm install --save sweetalert2

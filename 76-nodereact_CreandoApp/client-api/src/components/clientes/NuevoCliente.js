@@ -1,8 +1,12 @@
 import { Fragment, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 // ClienteAxios
 import clienteAxios from '../../config/axios';
 
 const NuevoCliente = () => {
+  const navigate = useNavigate();
+
   // Hook useState
   const [cliente, guardarCliente] = useState({
     nombre: '',
@@ -50,12 +54,28 @@ const NuevoCliente = () => {
 
         // Validar errores
         if (res.data.code === 11000) {
-          console.log('Error, usuario duplicado en Mongo')
+          // console.log('Error, usuario duplicado en Mongo');
+
+          // Mostrar una alerta
+          Swal.fire({
+            title: "¡Hubo un error!",
+            text: "El cliente ya esta registrado",
+            icon: "error"
+          });
         } else {
-          console.log(res.data);
+          // console.log(res.data);
+
+          // Mostrar una alerta
+          Swal.fire({
+            title: "¡Cliente agregado!",
+            text: res.data.mensaje,
+            icon: "success"
+          });
         }
 
         // Redireccionar
+        return navigate('/');
+
       });
   };
 
