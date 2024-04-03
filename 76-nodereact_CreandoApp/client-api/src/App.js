@@ -23,7 +23,7 @@ function App() {
             {/* Routing a los diferentes componentes */}
             <Routes>
               <Route path='/' element={<Clientes />} />
-              <Route path='/cliente/nuevo' element={<NuevoCliente />} />
+              <Route path='/clientes/nuevo' element={<NuevoCliente />} />
 
               <Route path='/productos' element={<Productos />} />
               <Route path='/pedidos' element={<Pedidos />} />
