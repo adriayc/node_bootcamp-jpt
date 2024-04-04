@@ -8,7 +8,7 @@ const NuevoProducto = () => {
   const navigate = useNavigate();
 
   // Hook useState
-  const [producto, guardProducto] = useState({
+  const [producto, guardarProducto] = useState({
     nombre: '',
     precio: ''
   });
@@ -17,7 +17,7 @@ const NuevoProducto = () => {
   // Leer los datos (nombre y precio) del formulario
   const actualizarProductoState = e => {
     // Guardar en el state producto
-    guardProducto({
+    guardarProducto({
       // Copiar del state actual
       ...producto,
       [e.target.name]: e.target.value
