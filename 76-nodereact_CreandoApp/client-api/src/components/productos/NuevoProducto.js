@@ -1,6 +1,12 @@
 import { Fragment, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+// ClienteAxios
+import clienteAxios from '../../config/axios';
 
 const NuevoProducto = () => {
+  const navigate = useNavigate();
+
   // Hook useState
   const [producto, guardProducto] = useState({
     nombre: '',
@@ -28,11 +34,69 @@ const NuevoProducto = () => {
     guardarArchivo(e.target.files[0]);
   };
 
+  // Actualiza el producto en la REST APIs (Backend)
+  const actualizarProducto = async e => {
+    e.preventDefault();
+
+    // Crear un form-data
+    const formData = new FormData();
+    formData.append('nombre', producto.nombre);
+    formData.append('precio', producto.precio);
+    formData.append('imagen', archivo);
+
+    // Guardar en la DB
+    try {
+      const resultado = await clienteAxios.post('/productos', formData, {
+        // Config del headers
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      // console.log(resultado);
+
+      // Validar el status
+      if (resultado.status === 200) {
+        // Mostrar alerta
+        Swal.fire({
+          title: "¡Producto agregado!",
+          text: resultado.data.mensaje,
+          icon: "success"
+        });
+      }
+
+      // Redireccionar
+      return navigate('/productos');
+      
+    } catch (error) {
+      console.log(error);
+
+      // Mostrar alerta
+      Swal.fire({
+        title: "¡Errror!",
+        text: "Hubo un error. Vuelve a intentarlo",
+        icon: "error"
+      });
+    }
+  };
+
+  // Validar formulario
+  const validarCliente = () => {
+    // Destructuring del objeto cliente
+    const { nombre, precio } = producto;
+
+    // Validar el contenido de las propiedades
+    let valido = !nombre.length || !precio.length;
+
+    return valido;
+  };
+
   return (
     <Fragment>
       <h2>Nuevo Producto</h2>
 
-      <form>
+      <form
+        onSubmit={actualizarProducto}
+      >
         <legend>Llena todos los campos</legend>
 
         <div className="campo">
@@ -67,7 +131,12 @@ const NuevoProducto = () => {
         </div>
 
         <div className="enviar">
-          <input type="submit" className="btn btn-azul" value="Agregar Producto" />
+          <input 
+            type="submit" 
+            className="btn btn-azul" 
+            value="Agregar Producto" 
+            disabled={validarCliente()}
+          />
         </div>
       </form>
     </Fragment>
