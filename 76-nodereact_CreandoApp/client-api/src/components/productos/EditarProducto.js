@@ -10,6 +10,8 @@ const EditarProducto = () => {
   // Obtener el ID (Query params)
   const { id } = useParams();
 
+  const navigate = useNavigate();
+
   // Hoosk useState
   const [producto, guardarProducto] = useState({
     nombre: '',
@@ -62,13 +64,59 @@ const EditarProducto = () => {
   //   return valido;
   // };
 
+  // Actualizar los datos del producto en la REST API's (Backend)
+  const actualizarProducto = async e => {
+    e.preventDefault();
+    // console.log('Actualizando...');
+
+    // Crear el form-data (Envio de archivos)
+    const formData = new FormData();
+    formData.append('nombre', producto.nombre);
+    formData.append('precio', producto.precio);
+    formData.append('imagen', archivo);
+
+    // Guar en la DB
+    try {
+      const resultado = await clienteAxios.put(`/productos/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      // Validar el status
+      if (resultado.status === 200) {
+        // Mostrar alerta
+        Swal.fire({
+          title: "¡Producto actualizado!",
+          text: resultado.data.mensaje,
+          icon: "success"
+        });
+      }
+
+      // Redireccionar
+      return navigate('/productos');
+
+    } catch (error) {
+      console.log(error);
+
+      // Mostrar alerta
+      Swal.fire({
+        title: "¡Errror!",
+        text: "Hubo un error. Vuelve a intentarlo",
+        icon: "error"
+      });
+    }
+  };
+
   if (!producto.nombre) return <Spinner />;
 
   return (
     <Fragment>
       <h2>Editar Producto</h2>
 
-      <form>
+      <form
+        onSubmit={actualizarProducto}
+      >
         <legend>Llena todos los campos</legend>
 
         <div className="campo">
@@ -117,7 +165,7 @@ const EditarProducto = () => {
           <input 
             type="submit" 
             className="btn btn-azul" 
-            value="Agregar Producto" 
+            value="Editar Producto" 
             // disabled={validarCliente()}
           />
         </div>
