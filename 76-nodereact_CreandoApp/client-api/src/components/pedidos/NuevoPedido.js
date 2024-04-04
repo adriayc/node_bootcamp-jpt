@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 // Cliente Axios
 import clienteAxios from '../../config/axios';
 // Components
@@ -12,6 +13,7 @@ const NuevoPedido = () => {
 
   // Hook useState
   const [cliente, guardarCliente] = useState({});
+  const [busqueda, guardarBusqueda] = useState('');
 
   // Hook useEffect
   useEffect(() => {
@@ -29,13 +31,29 @@ const NuevoPedido = () => {
   }, []);
 
   // Enviar los datos del formulario
-  const buscarProducto = () => {
+  const buscarProducto = async e => {
+    e.preventDefault();
 
+    // Obtener los productos de la busqueda
+    const resultadoBusqueda = await clienteAxios.post(`/productos/busqueda/${busqueda}`);
+    // console.log(resultadoBusqueda);
+
+    // Validar que exista al menos un resultado
+    if (resultadoBusqueda.data[0]) {
+
+    } else {
+      // Mostrar alerta
+      Swal.fire({
+        title: "¡No hay resultados!",
+        text: "No existe resultados de la busqueda",
+        icon: "error"
+      });
+    }
   };
 
   // Leer datos del formulario
-  const leerDatosBusqueda = () => {
-
+  const leerDatosBusqueda = e => {
+    guardarBusqueda(e.target.value);
   };
 
   return (
