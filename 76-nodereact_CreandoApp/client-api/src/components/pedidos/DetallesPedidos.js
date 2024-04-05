@@ -1,6 +1,6 @@
 // import { Link } from 'react-router-dom';
 
-const DetallesPedido = ({pedido}) => {
+const DetallesPedido = ({pedido, eliminarProducto}) => {
   // console.log(pedido);  
 
   // Destructuring del objeto pedido
@@ -36,7 +36,11 @@ const DetallesPedido = ({pedido}) => {
           Editar Pedido
         </Link> */}
 
-        <button type="button" className="btn btn-rojo btn-eliminar">
+        <button 
+          type="button" 
+          className="btn btn-rojo btn-eliminar"
+          onClick={() => eliminarProducto(pedido._id)}
+        >
           <i className="fas fa-times"></i>
           Eliminar Pedido
         </button>
