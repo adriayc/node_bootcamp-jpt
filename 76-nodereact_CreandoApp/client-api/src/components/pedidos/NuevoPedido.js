@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import clienteAxios from '../../config/axios';
 // Components
 import FormBuscarProducto from './FormBuscarProducto';
+import FormCantidadProducto from './FormCantidadProducto';
 
 const NuevoPedido = () => {
   // Obtener el ID (Query params)
@@ -14,6 +15,7 @@ const NuevoPedido = () => {
   // Hook useState
   const [cliente, guardarCliente] = useState({});
   const [busqueda, guardarBusqueda] = useState('');
+  const [productos, guardarProductos] = useState([]);
 
   // Hook useEffect
   useEffect(() => {
@@ -40,7 +42,15 @@ const NuevoPedido = () => {
 
     // Validar que exista al menos un resultado
     if (resultadoBusqueda.data[0]) {
+      // console.log(resultadoBusqueda.data[0]);
 
+      const productoResultado = resultadoBusqueda.data[0];
+      productoResultado.producto = resultadoBusqueda.data[0]._id;
+      productoResultado.cantidad = 0;
+      // console.log(productoResultado);
+
+      // Guardar en el state
+      guardarProductos([...productos, productoResultado]);
     } else {
       // Mostrar alerta
       Swal.fire({
@@ -73,59 +83,9 @@ const NuevoPedido = () => {
       />
 
       <ul className="resumen">
-        <li>
-          <div className="texto-producto">
-            <p className="nombre">Macbook Pro</p>
-            <p className="precio">$250</p>
-          </div>
-          <div className="acciones">
-            <div className="contenedor-cantidad">
-              <i className="fas fa-minus"></i>
-              <input type="text" name="cantidad" />
-              <i className="fas fa-plus"></i>
-            </div>
-            <button type="button" className="btn btn-rojo">
-              <i className="fas fa-minus-circle"></i>
-              Eliminar Producto
-            </button>
-          </div>
-        </li>
-
-        <li>
-          <div className="texto-producto">
-            <p className="nombre">Macbook Pro</p>
-            <p className="precio">$250</p>
-          </div>
-          <div className="acciones">
-            <div className="contenedor-cantidad">
-              <i className="fas fa-minus"></i>
-              <input type="text" name="cantidad" />
-              <i className="fas fa-plus"></i>
-            </div>
-            <button type="button" className="btn btn-rojo">
-              <i className="fas fa-minus-circle"></i>
-              Eliminar Producto
-            </button>
-          </div>
-        </li>
-
-        <li>
-          <div className="texto-producto">
-            <p className="nombre">Macbook Pro</p>
-            <p className="precio">$250</p>
-          </div>
-          <div className="acciones">
-            <div className="contenedor-cantidad">
-              <i className="fas fa-minus"></i>
-              <input type="text" name="cantidad" />
-              <i className="fas fa-plus"></i>
-            </div>
-            <button type="button" className="btn btn-rojo">
-              <i className="fas fa-minus-circle"></i>
-              Eliminar Producto
-            </button>
-          </div>
-        </li>
+        {productos.map((producto, index) => (
+          <FormCantidadProducto />
+        ))}
       </ul>
 
       <div className="campo">
