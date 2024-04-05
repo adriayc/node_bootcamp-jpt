@@ -68,12 +68,33 @@ const NuevoPedido = () => {
 
   // Sustraer la cantidad de productos
   const restartCatidadProductos = index => {
-    console.log('Sustraendo...', index);
+    // console.log('Sustraendo...', index);
+
+    // Crear una copia del arreglo original
+    const productosCopia = [...productos];
+
+    // Validar la cantidad
+    if (productosCopia[index].cantidad === 0) return;
+
+    // Decrementar la cantidad
+    productosCopia[index].cantidad--;
+
+    // Actualizar el state
+    guardarProductos(productosCopia);
   };
 
   // Adicionar la cantidad de productos
   const aniadirCatidadProductos = index => {
-    console.log('Adicionando...', index)
+    // console.log('Adicionando...', index);
+
+    // Crear una copia del arreglo original
+    const productosCopia = [...productos];
+
+    // Incrementar la cantidad
+    productosCopia[index].cantidad++;
+
+    // Actualizar el state
+    guardarProductos(productosCopia);
   };
 
   return (
