@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 // Cliente Axios
 import clienteAxios from '../../config/axios';
@@ -11,6 +11,8 @@ const NuevoPedido = () => {
   // Obtener el ID (Query params)
   const { clientId } = useParams();
   // console.log(clientId);
+
+  const navigate = useNavigate();
 
   // Hook useState
   const [cliente, guardarCliente] = useState({});
@@ -134,6 +136,42 @@ const NuevoPedido = () => {
     guardarProductos(productosActualizado);
   };
 
+  // Guardar el pedido en la REST API's (Backend)
+  const realizarPedido = async e => {
+    e.preventDefault();
+
+    // Crear el objecto
+    const pedido = {
+      cliente: clientId,
+      pedido: productos,
+      total: total
+    };
+    // console.log(pedido);
+
+    // Enviar la petición por el clienteAxios
+    const resultado = await clienteAxios.post('/pedidos', pedido);
+
+    // Validar status
+    if (resultado.status === 200) {
+      // Mostrar alerta
+      Swal.fire({
+        title: "Pedigo agregado!",
+        text: resultado.data.mensaje,
+        icon: "success"
+      });
+    } else {
+      // Mostrar alerta
+      Swal.fire({
+        title: "¡Error!",
+        text: "Hubo un error",
+        icon: "error"
+      });
+    }
+
+    // Redireccionar
+    navigate('/pedidos')
+  };
+
   return (
     <Fragment>
       <h2>Nuevo Pedido</h2>
@@ -166,7 +204,9 @@ const NuevoPedido = () => {
       <p className='total'>Total a Pagar: <span>${total}</span></p>
 
       {total >0 ? (
-        <form>
+        <form
+          onSubmit={realizarPedido}
+        >
           {/* <div className="enviar">
             <input type="submit" className="btn btn-azul" value="Agregar Pedido" />
           </div> */}
