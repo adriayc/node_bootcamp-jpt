@@ -35,7 +35,7 @@ const NuevoPedido = () => {
 
     // Actualizar el total
     actualizarTotal();
-    
+
   }, [productos]);
 
   // Enviar los datos del formulario
@@ -121,6 +121,19 @@ const NuevoPedido = () => {
     guardarTotal(nuevoTotal);
   };
 
+  // Eliminar un producto del state
+  const eliminarProductoPedido = id => {
+    // console.log('Eliminando el producto del pedido...');
+    // console.log(id);
+
+    // Filtrar los productos
+    // const productosActualizado = productos.filter(producto => producto.producto !== id);
+    const productosActualizado = productos.filter(producto => producto._id !== id);
+
+    // Actualizar el state
+    guardarProductos(productosActualizado);
+  };
+
   return (
     <Fragment>
       <h2>Nuevo Pedido</h2>
@@ -145,6 +158,7 @@ const NuevoPedido = () => {
             index={index}
             restartCatidadProductos={restartCatidadProductos}
             aniadirCatidadProductos={aniadirCatidadProductos}
+            eliminarProductoPedido={eliminarProductoPedido}
           />
         ))}
       </ul>

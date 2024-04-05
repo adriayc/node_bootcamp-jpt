@@ -1,7 +1,7 @@
 // const FormCantidadProducto = ({producto, aniadirCatidadProductos, restartCatidadProductoss}) => {
 const FormCantidadProducto = (props) => {
   // Destructuring del props
-  const {producto, restartCatidadProductos, aniadirCatidadProductos, index} = props;
+  const {producto, restartCatidadProductos, aniadirCatidadProductos, index, eliminarProductoPedido} = props;
 
   return (
     <li>
@@ -22,7 +22,12 @@ const FormCantidadProducto = (props) => {
             onClick={() => aniadirCatidadProductos(index)}
           ></i>
         </div>
-        <button type="button" className="btn btn-rojo">
+        <button 
+          type="button" 
+          className="btn btn-rojo"
+          // onClick={() => eliminarProductoPedido(producto.producto)}
+          onClick={() => eliminarProductoPedido(producto._id)}
+        >
           <i className="fas fa-minus-circle"></i>
           Eliminar Producto
         </button>
