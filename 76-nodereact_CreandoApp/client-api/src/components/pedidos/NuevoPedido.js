@@ -66,6 +66,16 @@ const NuevoPedido = () => {
     guardarBusqueda(e.target.value);
   };
 
+  // Sustraer la cantidad de productos
+  const restartCatidadProductos = index => {
+    console.log('Sustraendo...', index);
+  };
+
+  // Adicionar la cantidad de productos
+  const aniadirCatidadProductos = index => {
+    console.log('Adicionando...', index)
+  };
+
   return (
     <Fragment>
       <h2>Nuevo Pedido</h2>
@@ -87,6 +97,9 @@ const NuevoPedido = () => {
           <FormCantidadProducto 
             key={producto.producto}
             producto={producto}
+            index={index}
+            restartCatidadProductos={restartCatidadProductos}
+            aniadirCatidadProductos={aniadirCatidadProductos}
           />
         ))}
       </ul>

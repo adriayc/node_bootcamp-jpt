@@ -1,4 +1,7 @@
-const FormCantidadProducto = ({producto}) => {
+// const FormCantidadProducto = ({producto, aniadirCatidadProductos, restartCatidadProductoss}) => {
+const FormCantidadProducto = (props) => {
+  // Destructuring del props
+  const {producto, restartCatidadProductos, aniadirCatidadProductos, index} = props;
 
   return (
     <li>
@@ -8,10 +11,16 @@ const FormCantidadProducto = ({producto}) => {
       </div>
       <div className="acciones">
         <div className="contenedor-cantidad">
-          <i className="fas fa-minus"></i>
+          <i 
+            className="fas fa-minus"
+            onClick={() => restartCatidadProductos(index)}
+          ></i>
           {/* <input type="text" name="cantidad" /> */}
           <p>{producto.cantidad}</p>
-          <i className="fas fa-plus"></i>
+          <i 
+            className="fas fa-plus"
+            onClick={() => aniadirCatidadProductos(index)}
+          ></i>
         </div>
         <button type="button" className="btn btn-rojo">
           <i className="fas fa-minus-circle"></i>
