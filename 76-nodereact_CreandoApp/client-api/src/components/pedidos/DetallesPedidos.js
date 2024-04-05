@@ -1,34 +1,33 @@
 // import { Link } from 'react-router-dom';
 
 const DetallesPedido = ({pedido}) => {
+  // console.log(pedido);  
+
+  // Destructuring del objeto pedido
+  const { cliente } = pedido;
+
   return (
     <li className="pedido">
       <div className="info-pedido">
-        <p className="id">ID: 0192019201291201</p>
-        <p className="nombre">Cliente: Juan Pablo De la torre</p>
+        <p className="id">ID: {cliente._id}</p>
+        <p className="nombre">Cliente: {cliente.nombre} {cliente.apellido}</p>
 
         <div className="articulos-pedido">
           <p className="productos">Artículos Pedido: </p>
           <ul>
-            <li>
-              <p>Macbook Pro</p>
-              <p>Precio: $3000</p>
-              <p>Cantidad: 4</p>
-            </li>
-            <li>
-              <p>Macbook Pro</p>
-              <p>Precio: $3000</p>
-              <p>Cantidad: 4</p>
-            </li>
-            <li>
-              <p>Macbook Pro</p>
-              <p>Precio: $3000</p>
-              <p>Cantidad: 4</p>
-            </li>
+            {pedido.pedido.map(articulo => (
+              <li
+                key={articulo._id}
+              >
+                <p>{articulo.producto.nombre}</p>
+                <p>Precio: ${articulo.producto.precio}</p>
+                <p>Cantidad: {articulo.cantidad}</p>
+              </li>
+            ))}
           </ul>
         </div>
 
-        <p className="total">Total: $3,500 </p>
+        <p className="total">Total: ${pedido.total}</p>
       </div>
 
       <div className="acciones">
