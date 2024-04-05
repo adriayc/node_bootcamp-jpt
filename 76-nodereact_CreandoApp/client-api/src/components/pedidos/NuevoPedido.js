@@ -16,6 +16,8 @@ const NuevoPedido = () => {
   const [cliente, guardarCliente] = useState({});
   const [busqueda, guardarBusqueda] = useState('');
   const [productos, guardarProductos] = useState([]);
+  // const [total, guardarTotal] = useState(0);
+  const [total, guardarTotal] = useState(1000);
 
   // Hook useEffect
   useEffect(() => {
@@ -30,7 +32,11 @@ const NuevoPedido = () => {
 
     // Llamar a la funcion
     consultaAPI();
-  }, []);
+
+    // Actualizar el total
+    actualizarTotal();
+    
+  }, [productos]);
 
   // Enviar los datos del formulario
   const buscarProducto = async e => {
@@ -97,6 +103,24 @@ const NuevoPedido = () => {
     guardarProductos(productosCopia);
   };
 
+  // Actualizar el total a pagar
+  const actualizarTotal = () => {
+    // Validar el arreglo del productos
+    if (productos.length === 0) {
+      guardarTotal(0);
+      return;
+    }
+
+    // Nuevo total
+    let nuevoTotal = 0;
+
+    // Iterar productos (Calcular el nuevo total)
+    productos.map(producto => nuevoTotal += (producto.cantidad *producto.precio));
+
+    // Guardar en el state
+    guardarTotal(nuevoTotal);
+  };
+
   return (
     <Fragment>
       <h2>Nuevo Pedido</h2>
@@ -125,14 +149,16 @@ const NuevoPedido = () => {
         ))}
       </ul>
 
-      <div className="campo">
-        <label>Total:</label>
-        <input type="number" name="precio" placeholder="Precio" readonly="readonly" />
-      </div>
-      
-      <div className="enviar">
-        <input type="submit" className="btn btn-azul" value="Agregar Pedido" />
-      </div>
+      <p className='total'>Total a Pagar: <span>${total}</span></p>
+
+      {total >0 ? (
+        <form>
+          {/* <div className="enviar">
+            <input type="submit" className="btn btn-azul" value="Agregar Pedido" />
+          </div> */}
+          <input type="submit" value="Realizar Pedido" className="btn btn-verde btn-block" />
+        </form>
+      ) : null}
     </Fragment>
   );
 }
