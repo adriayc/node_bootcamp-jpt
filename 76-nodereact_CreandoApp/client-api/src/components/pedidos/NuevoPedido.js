@@ -84,7 +84,10 @@ const NuevoPedido = () => {
 
       <ul className="resumen">
         {productos.map((producto, index) => (
-          <FormCantidadProducto />
+          <FormCantidadProducto 
+            key={producto.producto}
+            producto={producto}
+          />
         ))}
       </ul>
 
