@@ -61,7 +61,7 @@ module.exports = function() {
 
 
     // Crear usuarios
-    router.post('/crear-cuenta', usuarioController.registrarUusuario);
+    router.post('/crear-cuenta', usuarioController.registrarUsuario);
 
     // Iniciar sesion (Autenticar)
     router.post('/iniciar-sesion', usuarioController.autenticarUsuario);
