@@ -1,10 +1,15 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 // ClienteAxios
 import clienteAxios from '../../config/axios';
+// Contexts
+import CrmContext from '../../context/CrmContent';
 
 const NuevoProducto = () => {
+  // Definir el context CrmContext
+  const { auth } = useContext(CrmContext);
+
   const navigate = useNavigate();
 
   // Hook useState
@@ -49,7 +54,9 @@ const NuevoProducto = () => {
       const resultado = await clienteAxios.post('/productos', formData, {
         // Config del headers
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          // Autorizacion
+          Authorization: `Bearer ${auth.token}`
         }
       });
       // console.log(resultado);
@@ -89,6 +96,9 @@ const NuevoProducto = () => {
 
     return valido;
   };
+
+  // Validar auth
+  if (!auth.auth) return navigate('/iniciar-sesion');
 
   return (
     <Fragment>

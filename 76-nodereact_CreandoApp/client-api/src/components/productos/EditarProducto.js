@@ -1,14 +1,19 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 // ClienteAxios
 import clienteAxios from '../../config/axios';
+// Contexts
+import CrmContext from '../../context/CrmContent';
 // Components
 import Spinner from '../layout/Spinner';
 
 const EditarProducto = () => {
   // Obtener el ID (Query params)
   const { id } = useParams();
+
+  // Definir el context CrmContext
+  const { auth } = useContext(CrmContext);
 
   const navigate = useNavigate();
 
@@ -24,7 +29,11 @@ const EditarProducto = () => {
   useEffect(() => {
     // Obtener el produto por el ID
     const consultarAPI = async () => {
-      const productoConsulta = await clienteAxios.get(`/productos/${id}`);
+      const productoConsulta = await clienteAxios.get(`/productos/${id}`, {
+        headers: {
+          Authorization: `Bearer ${auth.token}`
+        }
+      });
       // console.log(productoConsulta.data);
 
       // Guardar en el state
@@ -79,7 +88,9 @@ const EditarProducto = () => {
     try {
       const resultado = await clienteAxios.put(`/productos/${id}`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          // Autorizacion
+          Authorization: `Bearer ${auth.token}`
         }
       });
 
@@ -107,6 +118,9 @@ const EditarProducto = () => {
       });
     }
   };
+
+  // Validar auth
+  if (!auth.auth) return navigate('/iniciar-sesion');
 
   if (!producto.nombre) return <Spinner />;
 

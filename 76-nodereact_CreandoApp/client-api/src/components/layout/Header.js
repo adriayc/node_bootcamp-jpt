@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Contexts
 import CrmContext from "../../context/CrmContent";
 
@@ -53,7 +53,13 @@ const Header = () => {
               <i className="far fa-times-circle"></i>
               Cerrar Sesión
             </button>
-          ) : null}
+          // ) : null}
+          ) : (
+            <Link to={'/iniciar-sesion'} className="btn btn-verde">
+              <i className="far fa-user-circle"></i>
+              Iniciar Sesión
+            </Link>
+          )}
         </div>
       </div>
     </header>

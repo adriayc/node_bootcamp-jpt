@@ -1,10 +1,18 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 // ClienteAxios
 import clienteAxios from '../../config/axios';
+// Contexts
+import CrmContext from '../../context/CrmContent';
 
 const Producto = ({producto}) => {
   // console.log(producto);
+
+  // Definir el context CrmContext
+  const { auth } = useContext(CrmContext);
+
+  const navigate = useNavigate();
 
   // Destructuring del objeto producto
   const { _id, nombre, precio, imagen } = producto;
@@ -25,7 +33,11 @@ const Producto = ({producto}) => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Enviar la petición por el clienteAxios
-        clienteAxios.delete(`/productos/${id}`)
+        clienteAxios.delete(`/productos/${id}`, {
+          headers: {
+              Authorization: `Bearer ${auth.token}`
+          }
+        })
           .then(res => {
             // console.log(res);
 
@@ -42,6 +54,9 @@ const Producto = ({producto}) => {
       }
     });
   };
+
+  // Validar auth
+  if (!auth.auth) return navigate('/iniciar-sesion');
 
   return (
     <li className="producto">
