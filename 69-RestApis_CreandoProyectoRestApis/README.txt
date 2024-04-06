@@ -99,3 +99,11 @@
     $ git commit -m "Deployment de la app a Heroku"
     $ git remote add origin url_repositorio_github
     $ git push -u origin master
+  - Instalar Heroku CLI 'https://devcenter.heroku.com/articles/heroku-cli'
+  - Deployando a Heroku
+    $ heroku create --remote production     (Crea el proyecto en heroku)
+    $ git push production master            (Subir la app a heroku)
+    > Agregar las variables de entorno (Desde heroku o la app)
+      > Click en el proyecto  -> Settings | Click 'Reved Config Vars'
+        * BD_URL: mongodb+srv://<user>:<password>@<dominio>/<db_name>?retryWrites=true&w=majority&appName=Cluster0    (MongoDb atlas)
+        Click 'Add'
