@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 // Cliente axios
 import clienteAxios from '../../config/axios';
+// Contexts
+import CrmContext from '../../context/CrmContent';
 
 const Login = () => {
+  // Definir el context CrmContext
+  // const { auth, guardarAuth } = useContext(CrmContext);
+  const {guardarAuth } = useContext(CrmContext);
+  // console.log(auth);
+
   const navigate = useNavigate();
 
   // Hook useState
@@ -37,6 +44,12 @@ const Login = () => {
 
       // Almacenarlo en LocalStorage
       localStorage.setItem('token', token);
+
+      // Almacernarlo en el state del context
+      guardarAuth({
+        token,
+        auth: true
+      });
 
       // Mostrar alerta
       Swal.fire({
