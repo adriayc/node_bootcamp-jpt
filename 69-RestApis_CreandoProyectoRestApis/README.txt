@@ -63,3 +63,25 @@
       > GET   localhost:5000              Click 'Send'
         > Body -> Pretty
           Inicio
+
+* Exportar la Base de Datos (Local)
+  - Abrir la terminal, crear un directorio de bkps y ejecutar los siguientes comandos (Para cada documento de la DB):
+    $ mongoexport -d restapis_db -c clientes -o clientes.json
+    $ mongoexport -d restapis_db -c pedidos -o pedidos.json
+
+* Importar la Base de Datos (Mongo Atlas)
+  - Crear e inicia sesion 'https://www.mongodb.com/atlas/database'
+    > Click 'Database' -> Click 'Build Database' (Crear nuevo cluster)
+      * M0 (Free)
+      * Y todo por defecto
+      * Click 'Create Deployment'
+    > Security | Click 'Database Access' -> EDIT (user: root) (Editar el password del usuario root)
+      * Password Authentication: root123
+      * Click 'Update User'
+    > Click 'Database' -> click 'Connect' -> click 'Drivers' -> Copiar 'Connection string' (String de conexion a mongodb)
+      > mongodb+srv://<user>:<password>@<dominio>/<db_name>?retryWrites=true&w=majority&appName=Cluster0
+    > Crear una nueva base de datos desde MongoDB Atlas o MongoDB Compass
+    > Click 'Database' -> click '...' (Cluster0) | 'Command Line Tools' -> 'Data Import and Export Tools' | Copiar: 'mongoImport'
+      + Abrir la terminal y ejecutar el siguiente comando:
+        EX: mongoimport --uri mongodb+srv://root:<PASSWORD>@cluster0.h7hq0lp.mongodb.net/<DATABASE> --collection <COLLECTION> --type <FILETYPE> --file <FILENAME>
+        $ mongoimport --uri mongodb+srv://<user>:<password>@cluster0.h7hq0lp.mongodb.net/name_db --collection clientes --type json --file clientes.json

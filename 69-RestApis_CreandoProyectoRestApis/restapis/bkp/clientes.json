@@ -1,0 +1,2 @@
+{"_id":{"$oid":"660acc609c1a6b04608664b6"},"nombre":"Adriano","apellido":"Ayala","empresa":"aacsoft","email":"adriano@correo.com","telefono":"70782048","__v":0}
+{"_id":{"$oid":"660accd59c1a6b04608664b8"},"nombre":"Diana","apellido":"Rodriguez","empresa":"facebook","email":"diana@correo.com","telefono":"77567834","__v":0}
