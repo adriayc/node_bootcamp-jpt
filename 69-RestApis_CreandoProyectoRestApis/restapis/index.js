@@ -18,8 +18,24 @@ const app = express();
 app.use(bodyParser.json());                             // Parse application/json
 app.use(bodyParser.urlencoded({extended: true}));       // Parse application/x-www-form-urlencoded
 
+// Definir la lista de dominio(s) habilitados (Lista blanca)
+const whitelist = ['http://localhost:3000'];
+const corsOptions = {
+  origin: (origin, callback) => {
+    console.log(origin);
+
+    // Validar la peticion del servidor (whitelist)
+    const existe = whitelist.some(dominio => dominio === origin);
+    if (existe) {
+      callback(null, true);
+    } else {
+      callback(new Error('No permitido por CORS'), false);
+    }
+  }
+};
+
 // Habilitar el CORS
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Habilitar el directorio publico (Archivos estaticos)
 app.use(express.static('uploads'));
