@@ -19,10 +19,11 @@ app.use(bodyParser.json());                             // Parse application/jso
 app.use(bodyParser.urlencoded({extended: true}));       // Parse application/x-www-form-urlencoded
 
 // Definir la lista de dominio(s) habilitados (Lista blanca)
+// const whitelist = 'http://localhost:3000';
 const whitelist = ['http://localhost:3000'];
 const corsOptions = {
   origin: (origin, callback) => {
-    console.log(origin);
+    // console.log(origin);
 
     // Validar la peticion del servidor (whitelist)
     const existe = whitelist.some(dominio => dominio === origin);
