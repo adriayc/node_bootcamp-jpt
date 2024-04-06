@@ -1,12 +1,20 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // ClienteAxios
 import clienteAxios from '../../config/axios';
+// Contexts
+// import { CrmContext } from '../../context/CrmContent';
+import CrmContext from '../../context/CrmContent';
 // Components
 import Spinner from '../layout/Spinner';
 import Cliente from './Cliente';
 
 const Clientes = () => {
+    // Definir el context CrmContext
+    // const [auth, guardarAuth] = useContext(CrmContext);
+    const { auth, guardarAuth } = useContext(CrmContext);
+    console.log(auth);
+
     // Hook useState - clientes: state y guardarCliente: funcion para guardar el state
     const [clientes, guardarClientes] = useState([]);
 
