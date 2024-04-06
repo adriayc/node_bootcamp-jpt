@@ -27,6 +27,8 @@
       $ npm install --save jsonwebtoken
     + BCrypt (Hashedo PW)
       $ npm install --save bcrypt
+    + Dotenv (Variables de entorno)
+      $ npm install --save dotenv
 
 * MongoDB Community Edition en Ubuntu
   - Instalar MongoDB Community Edition 'https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/'

@@ -5,9 +5,13 @@ const cors = require('cors');
 // Routes config
 const routes = require('./routes/index');
 
+// Config dotenv
+require('dotenv').config({path: 'variables.env'});
+
 // Conectar mongodb
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/restapis_db', {
+// mongoose.connect('mongodb://localhost:27017/restapis_db', {
+mongoose.connect(process.env.DB_URL, {
     // useNewUrlParser: true       // Deprecated
 });
 
@@ -20,7 +24,8 @@ app.use(bodyParser.urlencoded({extended: true}));       // Parse application/x-w
 
 // Definir la lista de dominio(s) habilitados (Lista blanca)
 // const whitelist = 'http://localhost:3000';
-const whitelist = ['http://localhost:3000'];
+// const whitelist = ['http://localhost:3000'];
+const whitelist = [process.env.FRONTEND_URL];
 const corsOptions = {
   origin: (origin, callback) => {
     // console.log(origin);
