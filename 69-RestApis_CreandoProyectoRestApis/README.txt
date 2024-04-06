@@ -85,3 +85,17 @@
       + Abrir la terminal y ejecutar el siguiente comando:
         EX: mongoimport --uri mongodb+srv://root:<PASSWORD>@cluster0.h7hq0lp.mongodb.net/<DATABASE> --collection <COLLECTION> --type <FILETYPE> --file <FILENAME>
         $ mongoimport --uri mongodb+srv://<user>:<password>@cluster0.h7hq0lp.mongodb.net/name_db --collection clientes --type json --file clientes.json
+
+*  Crear un Respositorio en GitHub
+  - Crear y iniciar session
+    > Click 'New
+     > Repository name: crm_backend
+     > Descripcion: Deployment del CRM con Node + MongoDB
+     > Public
+     > Click 'Create respository'
+  - Comandos git desde la App
+    $ git inti
+    $ git add .
+    $ git commit -m "Deployment de la app a Heroku"
+    $ git remote add origin url_repositorio_github
+    $ git push -u origin master
