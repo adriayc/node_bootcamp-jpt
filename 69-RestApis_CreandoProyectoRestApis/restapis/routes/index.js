@@ -1,4 +1,6 @@
 const express = require('express');
+// Middlewares
+const auth = require('../middlewares/auth');
 // Controllers
 const clienteController = require('../controllers/clienteController');
 const productoController = require('../controllers/productoController');
@@ -13,7 +15,7 @@ module.exports = function() {
     router.post('/clientes', clienteController.nuevoCliente);
 
     // Obtener todos los clientes
-    router.get('/clientes', clienteController.mostrarClientes)
+    router.get('/clientes', auth, clienteController.mostrarClientes)
 
     // Obtener un cliente (By ID)
     router.get('/clientes/:id', clienteController.mostrarCliente);

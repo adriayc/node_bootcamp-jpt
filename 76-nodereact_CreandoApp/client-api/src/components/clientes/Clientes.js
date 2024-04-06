@@ -26,7 +26,12 @@ const Clientes = () => {
         const consultarAPI = async () => {
             // console.log('Consultado...');
 
-            const clientesConsulta = await clienteAxios.get('/clientes');
+            // const clientesConsulta = await clienteAxios.get('/clientes');
+            const clientesConsulta = await clienteAxios.get('/clientes', {
+                headers: {
+                    Authorization: `Bearer MYTOKEN`
+                }
+            });
             // console.log(clientesConsulta.data);
 
             guardarClientes(clientesConsulta.data);
