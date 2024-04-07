@@ -1,5 +1,6 @@
 // Models
 const Cliente = require('../models/Cliente');
+const Producto = require('../models/Producto');
 
 // Agregar un nuevo cliente
 exports.nuevoCliente = async (req, res, next) => {

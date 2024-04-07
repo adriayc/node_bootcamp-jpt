@@ -19,6 +19,8 @@
       $ npm install --save-dev nodemon
     + Mongoose (ORM de mongo)
       $ npm install --save mongoose
+    + Shortid (Generador de IDs) y Multer (Subir archivos)
+      $ npm install --save shortid multer
 
 * MongoDB Community Edition en Ubuntu
   - Instalar MongoDB Community Edition 'https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/'

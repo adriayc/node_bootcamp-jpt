@@ -1,6 +1,7 @@
 const express = require('express');
 // Controllers
 const clienteController = require('../controllers/clienteController');
+const productoController = require('../controllers/productoController');
 
 // Inicializar el router
 const router = express.Router();
@@ -20,6 +21,22 @@ module.exports = function() {
 
     // Eliminar un cliente (By ID)
     router.delete('/clientes/:id', clienteController.eliminarCliente);
+
+
+    // Agrega nuevo producto (Subir archivos)
+    router.post('/productos', productoController.subirArchivo, productoController.nuevoProducto);
+
+    // Obtener todos los productos
+    router.get('/productos', productoController.mostrarProductos);
+
+    // Obtenner un producto (By ID)
+    router.get('/productos/:id', productoController.mostrarProducto);
+
+    // Actualizar un producto (By ID)
+    router.put('/productos/:id', productoController.subirArchivo, productoController.actualizarProducto);
+
+    // Eliminar un producto (By ID)
+    router.delete('/productos/:id', productoController.eliminarProducto);
 
     // Retornar el router
     return router;
