@@ -70,7 +70,7 @@ exports.mostrarProductos = async (req, res, next) => {
 
         // Devolver una respuesta
         res.json(productos);
-        
+
     } catch (error) {
         console.log(error);
         next();
@@ -134,9 +134,26 @@ exports.eliminarProducto = async (req, res, next) => {
 
         // Devolver una respuesta
         res.json({mensaje: 'El producto se ha eliminado correctamente'});
-        
+
     } catch (error) {
         console.log(error);
         next();
     }
 };
+
+// Buscar productos por la query
+exports.buscarProductos = async (req, res, next) => {
+    try {
+      // Obtener la query
+      const { query } = req.params;
+
+      const productos = await Producto.find({nombre: new RegExp(query, 'i')});
+
+      // Devolver una respuesta
+      res.json(productos);
+
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+}

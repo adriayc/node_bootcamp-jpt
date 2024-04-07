@@ -39,6 +39,9 @@ module.exports = function() {
     // Eliminar un producto (By ID)
     router.delete('/productos/:id', productoController.eliminarProducto);
 
+    // Buscar productos
+    router.post('/productos/busqueda/:query', productoController.buscarProductos)
+
 
     // Agregar nuevo pedido
     router.post('/pedidos', pedidoController.nuevoPedido);
