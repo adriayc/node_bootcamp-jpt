@@ -187,3 +187,34 @@ Cada REST API contrará con endpoints (URL's) para realizar las operaciones CRUD
 - POST        /clientes         Añade un nuevo cliente
 - PUT         /clientes/10      Actualiza el cliente con el ID 10
 - DELETE      /clientes/10      Eliminar el cliente con el ID 10
+
+## ¿Qué es React?
+- librería JavaScript para crear interfaces de usuario de sitios y aplicacines web.
+- Desarrollada por Facebook.
+- Corre en el cliente (Independiente del servidor).
+- EN un MVC tradicional, react reemplazaría las vistas.
+
+### Ventajas de React
+- Puede consumir los datos de otra aplicación web independientemente del lenguaje.
+- Una gran comunidad, ejemplo y herramientas.
+- Prioriza el desarrollo por componentes.
+
+NOTA:
+- No tengas miedo de crear componentes muy pequeños.
+- Si tienes un componente muy grande, piensa en como es posible dividirlo
+
+### Quien utiliza React
+- Udemy
+- Airbnb
+- Facebook
+- Twitter
+- Microsoft
+- Spotify
+- Asana
+- Dropbox
+- Marvel
+
+### El enfoque de la app de React
+- En React existen muchas formas de realizar lo mismo: classes, redux, context, hooks.
+- Incluso se puede mezclar unas con otras.
+- El enfoque que utilizaremos será: React Hooks.
