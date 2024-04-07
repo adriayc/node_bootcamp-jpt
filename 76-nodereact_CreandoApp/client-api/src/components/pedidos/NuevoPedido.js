@@ -1,8 +1,10 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 // Cliente Axios
 import clienteAxios from '../../config/axios';
+// Contexts
+import CrmContext from '../../context/CrmContent';
 // Components
 import FormBuscarProducto from './FormBuscarProducto';
 import FormCantidadProducto from './FormCantidadProducto';
@@ -11,6 +13,9 @@ const NuevoPedido = () => {
   // Obtener el ID (Query params)
   const { clientId } = useParams();
   // console.log(clientId);
+
+  // Definir el context CrmContext
+  const { auth } = useContext(CrmContext);
 
   const navigate = useNavigate();
 
@@ -25,7 +30,11 @@ const NuevoPedido = () => {
   useEffect(() => {
     // Obtener cliente de la API
     const consultaAPI = async () => {
-      const clienteConsulta = await clienteAxios.get(`/clientes/${clientId}`);
+      const clienteConsulta = await clienteAxios.get(`/clientes/${clientId}`, {
+        headers: {
+            Authorization: `Bearer ${auth.token}`
+        }
+      });
       // console.log(clienteConsulta.data);
 
       // Guardar en el state
@@ -45,7 +54,11 @@ const NuevoPedido = () => {
     e.preventDefault();
 
     // Obtener los productos de la busqueda
-    const resultadoBusqueda = await clienteAxios.post(`/productos/busqueda/${busqueda}`);
+    const resultadoBusqueda = await clienteAxios.post(`/productos/busqueda/${busqueda}`, {
+      headers: {
+          Authorization: `Bearer ${auth.token}`
+      }
+    });
     // console.log(resultadoBusqueda);
 
     // Validar que exista al menos un resultado
@@ -149,7 +162,11 @@ const NuevoPedido = () => {
     // console.log(pedido);
 
     // Enviar la petición por el clienteAxios
-    const resultado = await clienteAxios.post('/pedidos', pedido);
+    const resultado = await clienteAxios.post('/pedidos', pedido, {
+      headers: {
+          Authorization: `Bearer ${auth.token}`
+      }
+    });
 
     // Validar status
     if (resultado.status === 200) {

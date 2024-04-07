@@ -1,6 +1,14 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+// Contexts
+import CrmContext from "../../context/CrmContent";
 
 const Navegacion = () => {
+  // Definir el context CrmContext
+  const { auth } = useContext(CrmContext);
+
+  if (!auth.auth) return null;
+
   return (
     <aside className="sidebar col-3">
       <h2>Administración</h2>

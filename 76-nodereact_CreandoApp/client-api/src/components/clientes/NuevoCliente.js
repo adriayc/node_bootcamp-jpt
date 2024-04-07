@@ -1,10 +1,15 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 // ClienteAxios
 import clienteAxios from '../../config/axios';
+// Contexts
+import CrmContext from '../../context/CrmContent';
 
 const NuevoCliente = () => {
+  // Definir el context CrmContext
+  const { auth } = useContext(CrmContext);
+
   const navigate = useNavigate();
 
   // Hook useState
@@ -47,37 +52,59 @@ const NuevoCliente = () => {
     e.preventDefault();
     // console.log('Enviando a la rest api...');
 
-    // Enviar la petición por el clienteAxios
-    await clienteAxios.post('/clientes', cliente)
-      .then(res => {
-        // console.log(res);
+    if (auth.auth !== '') {
+      try {
+        // Enviar la petición por el clienteAxios
+        await clienteAxios.post('/clientes', cliente, {
+          headers: {
+              Authorization: `Bearer ${auth.token}`
+          }
+        })
+        .then(res => {
+          // console.log(res);
 
-        // Validar errores
-        if (res.data.code === 11000) {
-          // console.log('Error, usuario duplicado en Mongo');
+          // Validar errores
+          if (res.data.code === 11000) {
+            // console.log('Error, usuario duplicado en Mongo');
 
-          // Mostrar una alerta
-          Swal.fire({
-            title: "¡Hubo un error!",
-            text: "El cliente ya esta registrado",
-            icon: "error"
-          });
-        } else {
-          // console.log(res.data);
+            // Mostrar una alerta
+            Swal.fire({
+              title: "¡Hubo un error!",
+              text: "El cliente ya esta registrado",
+              icon: "error"
+            });
+          } else {
+            // console.log(res.data);
 
-          // Mostrar una alerta
-          Swal.fire({
-            title: "¡Cliente agregado!",
-            text: res.data.mensaje,
-            icon: "success"
-          });
+            // Mostrar una alerta
+            Swal.fire({
+              title: "¡Cliente agregado!",
+              text: res.data.mensaje,
+              icon: "success"
+            });
+          }
+
+          // Redireccionar
+          return navigate('/');
+
+        });
+      } catch (error) {
+        // console.log(error);
+
+        if (error.response.status === 500) {
+          // Redireccionar
+          navigate('/iniciar-sesion');
         }
-
-        // Redireccionar
-        return navigate('/');
-
-      });
+      }
+    } else {
+      // Redireccionar
+      navigate('/iniciar-sesion');
+    }
   };
+
+  // Validar auth
+  // if (!auth.auth || localStorage.getItem('token') !== auth.token) return navigate('/iniciar-sesion');
+  if (!auth.auth) return navigate('/iniciar-sesion');
 
   return (
     <Fragment>

@@ -23,6 +23,10 @@
       $ npm install --save shortid multer
     + CORS (Intercambio de recursos de origen cruzado)
       $ npm install --save cors
+    + JSON Web Token
+      $ npm install --save jsonwebtoken
+    + BCrypt (Hashedo PW)
+      $ npm install --save bcrypt
 
 * MongoDB Community Edition en Ubuntu
   - Instalar MongoDB Community Edition 'https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/'

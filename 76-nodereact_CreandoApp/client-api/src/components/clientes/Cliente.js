@@ -1,9 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 // ClienteAxios
 import clienteAxios from '../../config/axios';
+// Contexts
+import CrmContext from '../../context/CrmContent';
+import { useContext } from "react";
 
 const Cliente = ({cliente}) => {
+    // Definir el context CrmContext
+    const { auth } = useContext(CrmContext);
+
+    const navigate = useNavigate();
+
     // console.log(cliente);
     // Destructuring del cliente
     const { _id, nombre, apellido, empresa, email, telefono } = cliente;  
@@ -25,7 +33,11 @@ const Cliente = ({cliente}) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // Enviar la petición por el clienteAxios
-                clienteAxios.delete(`/clientes/${id}`)
+                clienteAxios.delete(`/clientes/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${auth.token}`
+                    }
+                })
                     .then(res => {
                         // console.log(res);
 
@@ -39,6 +51,9 @@ const Cliente = ({cliente}) => {
             }
           });
     }
+
+    // Validar token
+    if (!auth.auth) return navigate('/iniciar-sesion');
 
     return (
       <li className="cliente">

@@ -1,13 +1,18 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from 'sweetalert2';
 // ClienteAxios
 import clienteAxios from "../../config/axios";
+// Contexts
+import CrmContext from '../../context/CrmContent';
 
 const EditarCliente = () => {
   // Obtener params ID
   const { id } = useParams();
   // console.log(id);
+  
+  // Definir el context CrmContext
+  const { auth } = useContext(CrmContext);
 
   const navigate = useNavigate();
 
@@ -22,7 +27,11 @@ const EditarCliente = () => {
 
   // Obtener el cliente a partir del ID
   const consultarAPI = async () => {
-    const clienteConsulta = await clienteAxios.get(`/clientes/${id}`);
+    const clienteConsulta = await clienteAxios.get(`/clientes/${id}`, {
+      headers: {
+          Authorization: `Bearer ${auth.token}`
+      }
+    });
     // console.log(clienteConsulta.data);
 
     // Agregar al state
@@ -60,7 +69,11 @@ const EditarCliente = () => {
     e.preventDefault();
 
     // Enviar la petición por el clienteAxios
-    clienteAxios.put(`/clientes/${cliente._id}`, cliente)
+    clienteAxios.put(`/clientes/${cliente._id}`, cliente, {
+      headers: {
+          Authorization: `Bearer ${auth.token}`
+      }
+    })
       .then(res => {
         // console.log(res);
 
@@ -90,6 +103,9 @@ const EditarCliente = () => {
         return navigate('/');
       });
   };
+
+  // Validar auth
+  if (!auth.auth) return navigate('/iniciar-sesion');
 
   return (
     <Fragment>

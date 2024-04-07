@@ -1,27 +1,54 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 // Cliente axios
 import clienteAxios from '../../config/axios';
+// Contexts
+import CrmContext from '../../context/CrmContent';
 // Components
 import DetallesPedido from './DetallesPedidos';
 
 const Pedidos = () => {
+  // Definir el context CrmContext
+  const { auth } = useContext(CrmContext);
+
+  const navigate = useNavigate();
+
   // Hook useState
   const [pedidos, guardarPedidos] = useState([]);
 
   // Hook useEffect
   useEffect(() => {
-    const consultarAPI = async () => {
-      // Obtener los pedidos
-      const resultado = await clienteAxios.get('/pedidos');
-      // console.log(resultado.data);
+    if (auth.auth !== '') {
+      const consultarAPI = async () => {
+        try {
+          // Obtener los pedidos
+          const resultado = await clienteAxios.get('/pedidos', {
+            headers: {
+                Authorization: `Bearer ${auth.token}`
+            }
+          });
+          // console.log(resultado.data);
+    
+          // Guardar en el state
+          guardarPedidos(resultado.data);
 
-      // Guardar en el state
-      guardarPedidos(resultado.data);
-    };
+        } catch (error) {
+          // console.log(error);
 
-    // Llamar la funcion
-    consultarAPI();
+          if (error.response.status === 500) {
+            // Redireccionar
+            navigate('/iniciar-sesion');
+          }
+        }
+      };
+  
+      // Llamar la funcion
+      consultarAPI();
+    } else {
+      // Redireccionar
+      navigate('/iniciar-sesion');
+    }
 
   }, [pedidos])
 
