@@ -15,9 +15,10 @@ exports.nuevoCliente = async (req, res, next) => {
 
         // Devolver una respuesta
         res.json({mensaje: 'Se ha agregado el cliente correctamente'});
-        
+
     } catch (error) {
-        console.log(error);
+        // console.log(error);
+        res.send(error);
         next();
     }
 };
@@ -65,7 +66,7 @@ exports.mostrarCliente = async (req, res, next) => {
 
         // Devolver una respuesta
         res.json(cliente);
-        
+
     } catch (error) {
         console.log(error);
         next();
@@ -84,7 +85,8 @@ exports.actualizarCliente = async (req, res, next) => {
         res.json(cliente);
 
     } catch (error) {
-        console.log(error);
+        // console.log(error);
+        res.send(error);
         next();
     }
 };
@@ -96,7 +98,7 @@ exports.eliminarCliente = async (req, res, next) => {
 
         // Devolver una respuesta
         res.json({mensaje: 'Se ha eliminado el cliente correctamente'});
-        
+
     } catch (error) {
         console.log(error);
         next();
