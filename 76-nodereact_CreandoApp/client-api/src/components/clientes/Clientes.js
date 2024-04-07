@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 // ClienteAxios
 import clienteAxios from '../../config/axios';
 // Components
+import Spinner from '../layout/Spinner';
 import Cliente from './Cliente';
 
 const Clientes = () => {
@@ -35,6 +36,8 @@ const Clientes = () => {
     // }, []);                     // [] - Ejecuta solo una vez
     }, [clientes]);             // [clientes] - Ejecuta cada vez que clientes cambia
 
+    // Mostrar spinner
+    if (!clientes.length) return <Spinner />;
 
     return (
         <Fragment>

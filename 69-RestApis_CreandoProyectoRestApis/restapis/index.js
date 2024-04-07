@@ -21,6 +21,9 @@ app.use(bodyParser.urlencoded({extended: true}));       // Parse application/x-w
 // Habilitar el CORS
 app.use(cors());
 
+// Habilitar el directorio publico (Archivos estaticos)
+app.use(express.static('uploads'));
+
 // Habilitar el routes
 app.use('/', routes());
 
