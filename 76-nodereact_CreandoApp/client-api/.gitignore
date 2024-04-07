@@ -24,3 +24,5 @@ yarn-error.log*
 
 # AAC
 package-lock.json
+.env.development
+.env.production

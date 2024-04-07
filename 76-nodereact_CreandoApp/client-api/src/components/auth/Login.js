@@ -62,14 +62,24 @@ const Login = () => {
       navigate('/')
       
     } catch (error) {
-      console.log(error);
+      // console.log(error);
 
-      // Mostrar alerta
-      Swal.fire({
-        title: "¡Error!",
-        text: error.response.data.mensaje,
-        icon: "error"
-      });
+      // Validar
+      if (error.response) {
+        // Mostrar alerta
+        Swal.fire({
+          title: "¡Error!",
+          text: error.response.data.mensaje,
+          icon: "error"
+        }); 
+      } else {
+        // Mostrar alerta
+        Swal.fire({
+          title: "¡Error!",
+          text: 'Hubo un error',
+          icon: "error"
+        }); 
+      }
     }
   };
 

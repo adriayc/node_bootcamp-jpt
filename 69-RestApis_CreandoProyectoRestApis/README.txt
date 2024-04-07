@@ -27,6 +27,8 @@
       $ npm install --save jsonwebtoken
     + BCrypt (Hashedo PW)
       $ npm install --save bcrypt
+    + Dotenv (Variables de entorno)
+      $ npm install --save dotenv
 
 * MongoDB Community Edition en Ubuntu
   - Instalar MongoDB Community Edition 'https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/'
@@ -61,3 +63,49 @@
       > GET   localhost:5000              Click 'Send'
         > Body -> Pretty
           Inicio
+
+* Exportar la Base de Datos (Local)
+  - Abrir la terminal, crear un directorio de bkps y ejecutar los siguientes comandos (Para cada documento de la DB):
+    $ mongoexport -d restapis_db -c clientes -o clientes.json
+    $ mongoexport -d restapis_db -c pedidos -o pedidos.json
+
+* Importar la Base de Datos (Mongo Atlas)
+  - Crear e inicia sesion 'https://www.mongodb.com/atlas/database'
+    > Click 'Database' -> Click 'Build Database' (Crear nuevo cluster)
+      * M0 (Free)
+      * Y todo por defecto
+      * Click 'Create Deployment'
+    > Security | Click 'Database Access' -> EDIT (user: root) (Editar el password del usuario root)
+      * Password Authentication: root123
+      * Click 'Update User'
+    > Click 'Database' -> click 'Connect' -> click 'Drivers' -> Copiar 'Connection string' (String de conexion a mongodb)
+      > mongodb+srv://<user>:<password>@<dominio>/<db_name>?retryWrites=true&w=majority&appName=Cluster0
+    > Crear una nueva base de datos desde MongoDB Atlas o MongoDB Compass
+    > Click 'Database' -> click '...' (Cluster0) | 'Command Line Tools' -> 'Data Import and Export Tools' | Copiar: 'mongoImport'
+      + Abrir la terminal y ejecutar el siguiente comando:
+        EX: mongoimport --uri mongodb+srv://root:<PASSWORD>@cluster0.h7hq0lp.mongodb.net/<DATABASE> --collection <COLLECTION> --type <FILETYPE> --file <FILENAME>
+        $ mongoimport --uri mongodb+srv://<user>:<password>@cluster0.h7hq0lp.mongodb.net/name_db --collection clientes --type json --file clientes.json
+
+*  Crear un Respositorio en GitHub
+  - Crear y iniciar session
+    > Click 'New
+     > Repository name: crm_backend
+     > Descripcion: Deployment del CRM con Node + MongoDB
+     > Public
+     > Click 'Create respository'
+  - Comandos git desde la App
+    $ git inti
+    $ git add .
+    $ git commit -m "Deployment de la app a Heroku"
+    $ git remote add origin url_repositorio_github
+    $ git push -u origin master
+  - Instalar Heroku CLI 'https://devcenter.heroku.com/articles/heroku-cli'
+  - Deployando a Heroku
+    $ heroku create --remote production     (Crea el proyecto en heroku)
+    $ git push production master            (Subir la app a heroku)
+    > Agregar las variables de entorno (Desde heroku o la app)
+      > Click en el proyecto  -> Settings | Click 'Reved Config Vars'
+        * BD_URL: mongodb+srv://<user>:<password>@<dominio>/<db_name>?retryWrites=true&w=majority&appName=Cluster0    (MongoDb atlas)
+        * FRONTEND_URL: https://<dominio>.netlify.app/
+        Click 'Add'
+      > Click en el proyecto -> click 'Open app' y Copiar la URL de la App del browser

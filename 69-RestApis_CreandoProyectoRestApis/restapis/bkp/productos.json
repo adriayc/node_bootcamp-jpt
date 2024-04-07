@@ -1,0 +1,5 @@
+{"_id":{"$oid":"660b240293d40ddb01ed7e29"},"nombre":"Camisa VueJS","precio":40,"imagen":"HhX3E7ocl.jpeg","__v":0}
+{"_id":{"$oid":"660b24bf93d40ddb01ed7e2d"},"nombre":"Camisa ReactJS","precio":35,"imagen":"t4uYClXKD.jpeg","__v":0}
+{"_id":{"$oid":"660e228dcc9ba9f6514b4030"},"nombre":"Camiseta NodeJS","precio":45,"imagen":"9Rk0SUFsp.jpeg","__v":0}
+{"_id":{"$oid":"660e22decc9ba9f6514b4c1e"},"nombre":"Camiseta Redux","precio":25,"imagen":"ypoqV96bl.jpeg","__v":0}
+{"_id":{"$oid":"6611a9157611a0e40df777fa"},"nombre":"Camiseta TypeScript","precio":34,"imagen":"pKo9e1WIS.jpeg","__v":0}
