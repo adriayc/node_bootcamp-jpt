@@ -106,4 +106,6 @@
     > Agregar las variables de entorno (Desde heroku o la app)
       > Click en el proyecto  -> Settings | Click 'Reved Config Vars'
         * BD_URL: mongodb+srv://<user>:<password>@<dominio>/<db_name>?retryWrites=true&w=majority&appName=Cluster0    (MongoDb atlas)
+        * FRONTEND_URL: https://<dominio>.netlify.app/
         Click 'Add'
+      > Click en el proyecto -> click 'Open app' y Copiar la URL de la App del browser

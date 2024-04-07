@@ -159,7 +159,7 @@ const EditarProducto = () => {
 
         <div className='campo'>
           {producto.imagen ? (
-              <img src={`http://localhost:5000/${producto.imagen}`} alt='' width="200" />
+              <img src={`${process.env.REACT_APP_BACKEND_URL}/${producto.imagen}`} alt='' width="200" />
             ) : null}
         </div>
     

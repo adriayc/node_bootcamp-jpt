@@ -18,6 +18,9 @@ mongoose.connect(process.env.DB_URL, {
 // Inicializar el servidor
 const app = express();
 
+// Habilitar el directorio publico (Archivos estaticos)
+app.use(express.static('uploads'));
+
 // Habilitar bodyParser (Envio de solicitudes POST)
 app.use(bodyParser.json());                             // Parse application/json
 app.use(bodyParser.urlencoded({extended: true}));       // Parse application/x-www-form-urlencoded
@@ -43,8 +46,8 @@ const corsOptions = {
 // Habilitar el CORS
 app.use(cors(corsOptions));
 
-// Habilitar el directorio publico (Archivos estaticos)
-app.use(express.static('uploads'));
+// // Habilitar el directorio publico (Archivos estaticos)
+// app.use(express.static('uploads'));
 
 // Habilitar el routes
 app.use('/', routes());

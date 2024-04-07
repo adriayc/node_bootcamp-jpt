@@ -21,6 +21,8 @@ function App() {
   // Definir useContext
   // const [auth, guardarAuth] = useContext(CrmContext); 
 
+  // console.log(process.env.REACT_APP_BACKEND_URL);
+
   return (
     <Router>
       <Fragment>
